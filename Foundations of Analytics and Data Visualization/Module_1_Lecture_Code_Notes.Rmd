@@ -51,3 +51,42 @@ mode(y_int)
 y_int_2 <- as.integer(y/2)
 print(y_int_2)
 typeof(y_int_2)
+
+# Return as a character
+as.character(123)
+
+
+# Concat strings with paste() function!
+
+concat_1 <- "Dave"
+concat_2 <- "Lotito"
+
+paste(concat_1, concat_2, sep = "_")
+
+# Return strings in specified format using sprintf() function!
+day = "Saturday"
+hour = "09:00"
+sprint_f_test <- sprintf("This is a test at %s on %s", hour, day)
+sprint_f_test
+
+# Find the number of characters
+nchar(day)
+
+# Get substring of string "saturday" to just grab "day"
+substr(day, start=6, stop=8)
+
+# Substitute value in string
+sub("test", "test_sub", sprint_f_test)
+
+# For the student test scores in exam 1, use logical expressions to produce only the test scores that were 90 or above!
+
+x[x > 90]
+
+# For the student test scores in exam 1, use logical expressions to produce only the test scores that are multiples of 4
+
+x[x %% 4 == 0]
+
+# Using the ‘paste’ function, convert the set of student test scores from exam 1 into the format “Student#: score” where the # will represent the position of the score in the vector. DO NOT ASSUME THAT YOU KNOW THE NUMBER OF SCORES OR STUDENTS IN THE CLASS. Show the R commands. E.g- Student1: 72, Student2: 22, etc...
+
+paste0("Student", 1:length(x), ": ", x) # paste0 doesn't apply the default "space" sep
+
