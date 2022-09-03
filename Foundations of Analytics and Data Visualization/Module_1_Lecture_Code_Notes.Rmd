@@ -1,0 +1,53 @@
+# Module 1 Lecture Notes
+
+# The following are student exam scores, lets get the average!
+exam_mean <- mean(c(72, 22, 85, 89, 96, 77, 69, 78, 83, 92, 94))
+print(exam_mean)
+
+# The following are student exam scores, lets get the middle number!
+exam_median <- median(c(72, 22, 85, 89, 96, 77, 69, 78, 83, 92, 94))
+print(exam_median)
+
+# The following are student exam scores, lets find the variance
+exam_score_variance <- var(c(72, 22, 85, 89, 96, 77, 69, 78, 83, 92, 94))
+print(exam_score_variance)
+
+# The following are student exam scores, lets find the standard deviation!
+std <- sd(c(72, 22, 85, 89, 96, 77, 69, 78, 83, 92, 94))
+print(std)
+
+# The following are student exam scores, lets find the five num summary
+students_five_num <- fivenum(c(72, 22, 85, 89, 96, 77, 69, 78, 83, 92, 94))
+print(students_five_num)
+
+# Student test scores dataset
+x <- c(72, 22, 85, 89, 96, 77, 69, 78, 83, 92, 94)
+
+# Compute fivenum summary
+f <- fivenum(x)
+
+# Find Outlier: Outlier is 22 from the dataset
+x[x < f[2] - 1.5 * (f[4] - f[2])]
+x[x > f[4] + 1.5 * (f[4] - f[2])]
+
+# Alternative is to get the summary - this computes all the above in one line of code
+summary(x)
+
+# Find the standarized variables of the exam scores from above ^ (x)
+(x - mean(x)) / sd(x)
+
+### DATA TYPES ###
+
+y = 3.5
+typeof(y)
+mode(y)
+
+# Create integer objects #
+y_int <- as.integer(y)
+print(y_int)
+typeof(y_int)
+mode(y_int)
+
+y_int_2 <- as.integer(y/2)
+print(y_int_2)
+typeof(y_int_2)

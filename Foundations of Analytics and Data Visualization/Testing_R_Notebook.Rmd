@@ -1,6 +1,0 @@
-testing <- c("test")
-print(testing)
-
-list_test <- list(1,2,3,4,5)
-list_test
-
