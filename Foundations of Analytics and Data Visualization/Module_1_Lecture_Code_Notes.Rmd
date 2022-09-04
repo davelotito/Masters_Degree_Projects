@@ -90,3 +90,39 @@ x[x %% 4 == 0]
 
 paste0("Student", 1:length(x), ": ", x) # paste0 doesn't apply the default "space" sep
 
+# The functions as.numeric, as.character, as.logical, as.integer, and as.complex are used for converting the given data into the required type. If the data cannot be converted, the value NA is returned
+test_var <- 123
+test_null <- NA
+
+as.numeric(test_var)
+
+as.character(test_var)
+
+as.logical(test_var)
+
+as.integer(test_var)
+
+# In mathematics, a complex number is an element of a number system that extends the real numbers with a specific element denoted i.
+as.complex(test_var)
+
+# Check if value is null, returns boolean TRUE/FALSE
+is.na(test_null)
+
+is.numeric(test_var)
+
+is.character(test_var)
+
+is.logical(test_var)
+
+is.integer(test_var)
+
+# In mathematics, a complex number is an element of a number system that extends the real numbers with a specific element denoted i.
+is.complex(test_var)
+
+as.logical(x)
+
+# Convert a vector of numerics to characters
+char_x <- as.character(x)
+char_x
+
+
