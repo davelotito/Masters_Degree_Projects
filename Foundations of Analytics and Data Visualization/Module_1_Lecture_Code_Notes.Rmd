@@ -306,10 +306,32 @@ x # show results
 scores[1,1] <- 1000 # A single entry in the matrix may be modified by assigning a new value to the indexed row and column.
 scores
 
+scores[2,] <- 0 # modify the entire 2nd row to have all zeros
+scores
 
+scores["Dave",] <- c(100,100,100,100) # assign entire new vector(row) for specific person
+scores
 
+## The following scenario modifies all the entries with a single value.
 
+scores[,] <- 99
+scores
 
+### Change Bob's 3rd quiz score to a 90. Change all of Daves's scores to 80. Show the R commands when accessing by index value, and by name
+
+scores[1,3] <- 90
+
+scores["Dave",] <- 18
+scores
+
+scores["Bob", "Quiz4"] <- 1
+scores
+
+scores[3, ] <- rep(80, 4)
+scores
+
+scores["Dave", 1] <- rep(12) #replace first value in col 1 with 12
+scores
 
 
 
