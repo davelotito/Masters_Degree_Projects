@@ -202,5 +202,34 @@ rep(rep_test, times=10)
 
 rep(rep_test, each=10)
 
-The contents of a vector may be modified one at a time by assigning a new value to the specified index of the vector. Multiple elements of the vector may also be modified at once by assigning a vector of new values to the vector of indices.
+# Section 3.9 - Modifying Vectors
+
+mod_vec <- 1:10
+
+mod_vec[1] <- 1000 # Change the first element to 1000 instead of 1
+mod_vec
+
+mod_vec[c(2,5)] <- c(50,20) # Change element 2 & 5 to 50 and 20 respectively
+mod_vec
+
+mod_vec[length(mod_vec)] <- 0 # Change the last element to 0 assuming I don't know the length
+mod_vec
+
+# Section 3.10 - Named Vectors
+
+## The names function assigns character strings as the names of the elements of the vector
+names(ages) <- c("Mike", "dave", "David", "Doreen")
+ages
+
+ages["dave"] # Values of the vector can be accessed
+
+ages[c("dave", "Mike")] # combine multiple values
+
+names(ages)
+
+### The contents of named vectors, like the contents of regular vectors, may be modified using the name indices or the numeric indices
+
+names(ages)[2] <- "Derek"
+names(ages)
+
 
