@@ -255,6 +255,60 @@ scores[1,3] # Grab first row, third column
 
 scores[,4] # Grab all of the 4th column
 
+# Section 3.13 - Named Matrices
+
+dimnames(scores) <- list(c("Bob", "Dave", "Ryan"),
+                        c("Quiz1", "Quiz2", "Quiz3", "Quiz4")) # The row and column dimensions may be named using the #dimnames function. The function takes a list with the first argument being the vector for the row names and the second argument being the vector for the column names.
+                        
+scores # SHow new matrix with column names and row(index) names
+
+## The matrix can now be indexed using the row and column names. Specifying both the values returns the corresponding entry from the matrix. Specifying only the row name returns the entire row as a named vector. Similarly, specifying only the column name will return the corresponding column as a named vector
+
+scores["Bob",] # Ge all of bobs quiz scores
+
+scores[,"Quiz1"] # Get all of quiz 1 scores for all students
+
+scores[c("Bob", "Ryan"), ] # Combine Bob and Ryans quiz scores into one matrix
+
+### The row names and column names for a named matrix can be accessed
+
+rownames(scores) # show all row names
+
+colnames(scores)# show all column names
+
+#### The is.matrix function returns TRUE if the object is a matrix. The dim function returns a vector of the dimensions of the matrix. The nrow and ncol functions return the corresponding dimension values individually
+
+is.matrix(scores) # check if matrix
+
+dim(scores) # check number of dimensions
+
+nrow(scores) # check number of rows
+
+ncol(scores) # check number of columns
+
+##### The as.vector function converts the matrix into a vector. The data is combined column-wise.
+
+as.vector(scores)
+
+###### Use dimnames and some of the previously explored commands to name the columns "Test 1" - "Test 5", and the rows "Dave" and "Matt"
+
+x <- matrix(c(25, 55, 78, 14, 65, 90, 100, 43, 8, 1), nrow=2, ncol=5) # Create matrix
+
+row_names <- c("Dave", "Matt") # Create vector with names
+
+col_names <- paste("Test", seq(1:5)) # Use paste function to create column names test with numbers 1 to 5 with seq() function
+
+dimnames(x) <- list(row_names, col_names) # Create matrix with list of rows and columns
+x # show results
+
+# Section 3.14 - Modifying Matrix Entries
+
+scores[1,1] <- 1000 # A single entry in the matrix may be modified by assigning a new value to the indexed row and column.
+scores
+
+
+
+
 
 
 
