@@ -333,6 +333,30 @@ scores
 scores["Dave", 1] <- rep(12) #replace first value in col 1 with 12
 scores
 
+# Section 3.15 - Data Frames
+
+athlete.names <- c("Conor McGregor", "Tabatha Ricci", "Francis Ngannou", "Macy Barber")
+
+athlete.gender <- c("Male", "Female", "Male", "Female")
+
+athlete.salary <- c("25 million", "200 thousand", "2 million", "300 thousand")
+
+athlete.age <- c(35, 28, 30, 22)
+
+athlete.info <- data.frame(athlete.names, athlete.gender, athlete.salary, athlete.age)
+
+athlete.info # By default, the names of the argument objects are used as the column names for the data frame.
+
+## Explicit names for the columns can also be specified while creating the data frame.
+
+athlete.info <- data.frame(Name = athlete.names, Gender = athlete.gender, Salary = athlete.salary,
+Age = athlete.age)
+
+athlete.info # Show results
+
+colnames(athlete.info) # The colnames function returns the column names for the given data frame.
+
+colnames(athlete.info) <- rep("Name", "Names")
 
 
 
