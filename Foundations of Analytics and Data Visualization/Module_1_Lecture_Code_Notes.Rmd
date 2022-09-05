@@ -232,4 +232,31 @@ names(ages)
 names(ages)[2] <- "Derek"
 names(ages)
 
+# Section 3.12 - Matrices
+
+data <- c(85, 15, 67, 43,
+          34, 54, 23, 28,
+          1, 21, 90, 100) # In this example, the vector data has 12 values. 
+          # A matrix with 3 rows and 4 columns is constructed with the data interpreted row-wise
+
+scores <- matrix(data, nrow=3, ncol=4, byrow=TRUE)
+scores
+
+
+scores[1,2] # The contents of the matrix can be accessed using the numerical indices
+
+scores[1,] # Everything from first row
+
+scores[c(4:12)] # Combine all values from row 4 to 12 in one vector
+
+## Use the same exam scores from above to create a 2 x 5 matrix. Show the R commands for accessing the element at first row, third column. Show the R commands for accessing the fourth column
+
+scores[1,3] # Grab first row, third column
+
+scores[,4] # Grab all of the 4th column
+
+
+
+
+
 
