@@ -511,10 +511,24 @@ list.data
 test.scores[[2]][2] <- 100
 test.scores
 
+# Section 3.25 - Named Lists
 
+## The components of the list can be named and referenced using the names instead of the indices
 
+team.names <- c("Patriots", "Red Sox", "Bruins")
 
+player.names <- c("Brady", "Lugo", "Marchand")
 
+favorites <- list(Team_Names = team.names, Players = player.names)
+favorites
 
+### The contents of the list components can now be accessed using the numeric index or the named index.
+
+favorites[[2]][1:2]
+
+#### The contents of the list can also be modified using the named access as shown
+
+favorites[[2]][1] <- "Dave"
+favorites
 
 
