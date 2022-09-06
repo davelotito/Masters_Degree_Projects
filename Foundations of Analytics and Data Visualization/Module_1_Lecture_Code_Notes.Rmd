@@ -412,6 +412,23 @@ athlete.info[athlete.info$Name == "Tabatha Ricci", ] # Get entire row for specif
 
 athlete.info[athlete.info$Age <= 28, ] # Get all players who are aged less than or equal to 28.
 
+# Section 3.20 - Subset of a Data Frame
+
+subset(athlete.info, Age <= 28)
+subset(athlete.info, Age <= 28 & Salary == "200 thousand")
+## In the above scenarios, all the columns are included in the returned data frame. The required columns can also be selected explicitly
+subset(athlete.info, Age <= 28 & Salary == "200 thousand", select = c(Name, Gender))
+
+
+
+
+
+
+
+
+
+
+
 
 
 
