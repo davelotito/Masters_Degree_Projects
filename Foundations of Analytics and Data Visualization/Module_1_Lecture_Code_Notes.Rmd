@@ -356,7 +356,37 @@ athlete.info # Show results
 
 colnames(athlete.info) # The colnames function returns the column names for the given data frame.
 
-colnames(athlete.info) <- rep("Name", "Names")
+
+# Section 3.16 - Accessing Data Frame Data
+
+## The column data of the data frame may be accessed using the numeric index or the name of the column enclosed in [[]]. The character data is returned as a factored vector. The column data can also be accessed using the $ notation.
+
+athlete.info[[1]] # Access first column
+athlete.info[, 1]
+athlete.info[, "Name"]
+
+athlete.info$Salary # Access entire column -> Salary
+
+summary(athlete.info$Age)
+
+### Individual values from the data frame may be accessed in different ways as shown below.
+
+athlete.info[athlete.info$Name == "Tabatha Ricci", "Age"]
+
+athlete.info[Name == "Macy Barber", "Age"]
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
