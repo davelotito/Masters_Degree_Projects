@@ -375,6 +375,16 @@ athlete.info[athlete.info$Name == "Tabatha Ricci", "Age"]
 
 athlete.info[Name == "Macy Barber", "Age"]
 
+# Section 3.17 - Slicing Data Frame Columns
+
+athlete.info[1] # The columns of the data frame may be sliced to produce new data frames.
+athlete.info["Name"]
+
+## Multiple columns may be sliced to get new data frames by specifying a vector of column indices or names.
+athlete.info[c(1,4)] # Combine columns 1 & 4
+athlete.info[c(1,2,3)] # Combine columns 1, 2, 3
+athlete.info[c("Name", "Age")]
+
 
 
 
