@@ -476,6 +476,35 @@ f_order
 
 # 3.23 - Lists
 
+num.data <- c(3, 5, 7)
+char.data <- c("a1", "b2", "c4", "d28")
+
+list.data <- list("Hello", num.data, char.data, 20)
+list.data
+
+## The components of a list are accessed (sliced) using the [] notation. The index can be a single value or a vector of indices.
+
+list.data[2]
+
+list.data[[2]]
+
+list.data[c(2, 4)]
+
+### Create a list holding both Bob and Sally's test scores as individual vectors
+
+test.scores <- list(c("bob", 99), c("sally", 56))
+test.scores
+
+
+
+
+
+
+
+
+
+
+
 
 
 
