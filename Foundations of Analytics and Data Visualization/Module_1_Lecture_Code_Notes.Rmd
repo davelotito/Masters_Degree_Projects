@@ -419,13 +419,24 @@ subset(athlete.info, Age <= 28 & Salary == "200 thousand")
 ## In the above scenarios, all the columns are included in the returned data frame. The required columns can also be selected explicitly
 subset(athlete.info, Age <= 28 & Salary == "200 thousand", select = c(Name, Gender))
 
+# Section 3.21 - Modifying a Data Frame
 
+## A new column can be added to the data frame using a vector of explicit values or as a result of a calculation using the existing columns.
 
+data.org <- athlete.info
 
+athlete.info$Age_Minus_Two <- athlete.info$Age - 2
+athlete.info
 
+### The individual entries in the data frame can be modified by accessing the target position using the row and column index or the row and column name
 
+athlete.info["First", "Salary"] <- "25M"
+athlete.info
 
+#### A column can be removed entirely from the data frame by assigning the value NULL for that column.
 
+athlete.info$Age_Minus_Two <- NULL
+athlete.info
 
 
 
