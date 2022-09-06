@@ -438,14 +438,43 @@ athlete.info
 athlete.info$Age_Minus_Two <- NULL
 athlete.info
 
+# Section 3.22 - Factors
 
+## Factors are variables that have a limited number of different values. Factors are usually used for categorical data. The data can be a numeric vector or a character vector. The factor function creates levels for each of the distinct values. The factors are stored internally as integer values and displayed using a corresponding set of character values.
 
+voted <- c("yes", "no", "yes", "yes", "no")
+voted
 
+f1 <- factor(voted) # The factor function converts the data using the distinct levels present in the data
+f1
 
+levels(f1) # Shows the different values associated
 
+### The factored data can be assigned explicit labels as shown below. The no and yes levels are mapped to the levels bad and good respectively
 
+f2 <-factor(voted, ordered=TRUE, labels = c("bad", "good"))
+f2
 
+levels(f2)
 
+#### In the default ordering, the levels are ordered by alphabetical order. If that is not the case, the levels argument is specified with the correct ordering for the levels.
+
+o2 <- ordered(f2, levels = c("good", "bad"))
+o2
+
+##### Use the factor() function to show the levels of the following vector: c("High", "Medium", "Low", "Medium", "Low")
+
+x <- c("High", "Medium", "Low", "Medium", "Low")
+f <- factor(x)
+f
+levels(f)
+
+###### Order the factor levels as Low < Medium < High
+
+f_order <- ordered(f, levels = c("Low", "Medium", "High"))
+f_order
+
+# 3.23 - Lists
 
 
 
