@@ -495,11 +495,21 @@ list.data[c(2, 4)]
 test.scores <- list(c("bob", 99), c("sally", 56))
 test.scores
 
+# Section 3.24 - Modifying Lists
 
+## A list can be modified by explicitly assigning a value to the index of the subcomponent. In the following example, the first value of the second component of the list is modified.
 
+list.data[[2]][1] <- 30
+list.data
 
+### A subcomponent of the list can be replaced with new data
 
+list.data[[2]] <- 1:10
+list.data
 
+#### Change Sally's test score to a 100
+test.scores[[2]][2] <- 100
+test.scores
 
 
 
