@@ -1,0 +1,39 @@
+# CS544 Module 1 Assignment
+## Student: David J Lotito
+
+### Instructions ###
+## The following sample data shows the scores of the students in an exam: 58, 46, 50, 90, 42, 52, 62, 44, 96, 92, 54, 82
+
+## Do the following using R code with only a single expression for each case unless specified otherwise. The solutions should be generic and work for any length of given data. You can assume there will be an even number of values in the given data.
+
+
+##### Q1 ######
+
+#### a) Assign the above data as a vector in the same order to the variable scores. Use this variable scores for the remaining problems.
+
+scores <- c(58, 46, 50, 90, 42, 52, 62, 44, 96, 92, 54, 82)
+
+#### b) Using the length function, compute how many students took the exam? Store the expression in the variable n. Use this variable for the remaining problems where required.
+
+n <- length(scores)
+n
+#### c) Using indexing, write the expression for accessing the first two items. Store the expression in the variable first_and_second.
+
+first_and_second <- scores[1:2]
+first_and_second
+#### d) Using indexing, write the expression for accessing the first and last items. Store the expression in the variable first_and_last.
+
+first_and_last <- scores[c(1,12)]
+first_and_last
+#### e) Using indexing, write the expression for accessing the middle two items. Store the expression in the variable middle_two.
+
+middle_two <- scores[6:7]
+middle_two
+
+##### Q2 ######
+
+
+
+
+
+
