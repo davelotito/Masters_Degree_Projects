@@ -385,9 +385,11 @@ athlete.info[c(1,4)] # Combine columns 1 & 4
 athlete.info[c(1,2,3)] # Combine columns 1, 2, 3
 athlete.info[c("Name", "Age")]
 
+# Section 3.18 - Naming Data Frame Rows
+rownames(athlete.info) # By default row names are named numeric based on index
 
-
-
+rownames(athlete.info) <- c("First", "Second", "Third", "Fourth") # Create a new vector and assign it to rownames() function for the data frame.
+athlete.info
 
 
 
