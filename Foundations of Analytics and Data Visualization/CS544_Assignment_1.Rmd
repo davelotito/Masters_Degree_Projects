@@ -57,3 +57,20 @@ count_below_median
 count_above_median <- sum(scores > median_score)
 count_above_median
 
+##### Q3 ######
+
+#### a) Using logical indexing and the results from Q2), write the R expression for all the scores that are less than or equal to the median value of the data. Store the expression in the variable scores_below_median.
+
+scores_below_median <- scores[scores <= median_score]
+scores_below_median
+
+#### b) Similarly, write the R expression for all the scores that are greater than the median. Store the expression in the variable scores_above_median.
+
+scores_above_median <- scores[scores > median_score]
+scores_above_median
+
+
+
+
+
+
