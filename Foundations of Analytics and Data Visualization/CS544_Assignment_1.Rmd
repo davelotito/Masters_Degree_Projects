@@ -1,7 +1,8 @@
 # CS544 Module 1 Assignment
 ## Student: David J Lotito
 
-### Instructions ###
+                                                ### Instructions ###
+
 ## The following sample data shows the scores of the students in an exam: 58, 46, 50, 90, 42, 52, 62, 44, 96, 92, 54, 82
 
 ## Do the following using R code with only a single expression for each case unless specified otherwise. The solutions should be generic and work for any length of given data. You can assume there will be an even number of values in the given data.
