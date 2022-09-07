@@ -81,9 +81,18 @@ odd_index_values
 even_index_values <- scores[seq(from = 2, to = length(scores), by = 2)]
 even_index_values
 
+##### Q5 ######
 
+#### a) Using the paste function with LETTERS, write the expression for the following output. Store the expression in the variable format_scores_version1.
+#You can assume there are no more than 26 values.
 
+format_scores_version1 <- paste(LETTERS, sep='=', scores)
+format_scores_version1
 
+#### b) Similarly, using the paste function with LETTERS, write the expression for the following output. Store the expression in the variable format_scores_version2.
+
+format_scores_version2 <- rev(paste(sort(LETTERS, decreasing=FALSE), sep="=", rev(scores)))
+format_scores_version2
 
 
 
