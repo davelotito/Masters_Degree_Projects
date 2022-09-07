@@ -13,15 +13,6 @@
 
 scores <- c(58, 46, 50, 90, 42, 52, 62, 44, 96, 92, 54, 82)
 
-x <- matrix(c(25, 55, 78, 14, 65, 90, 100, 43, 8, 1), nrow=4, ncol=5) # Create matrix
-
-row_names <- c("Dave", "Matt", "John", "Mike") # Create vector with names
-
-col_names <- paste("Test", seq(1:5)) # Use paste function to create column names test with numbers 1 to 5 with seq() function
-
-dimnames(x) <- list(row_names, col_names) # Create matrix with list of rows and columns
-x # show results
-
 #### b) Using the length function, compute how many students took the exam? Store the expression in the variable n. Use this variable for the remaining problems where required.
 
 n <- length(scores)
