@@ -114,7 +114,7 @@ scores_matrix
 
 #### b) Write the expression for displaying the first and last columns of the above matrix. The code should work for any size matrix. Store the expression in the variable first_and_last_version1.
 
-first_and_last_version1 <- scores_matrix[c(1,2), c(1, ncol(scores_matrix))]
+first_and_last_version1 <- scores_matrix[, c(1,ncol(scores_matrix))]
 first_and_last_version1
 
 ##### Q7 ######
@@ -139,13 +139,7 @@ named_matrix
 
 #### b) Show the result for displaying the first and last columns of the named_matrix. The code should work for any size matrix. Store the expression in the variable first_and_last_version2.
 
-first_and_last_version2 <- named_matrix[c(1,2), c(1,ncol(named_matrix))]
+first_and_last_version2 <- named_matrix[, c(1,ncol(named_matrix))]
 first_and_last_version2
-
-mat_1 <- x[ , ncol(x), drop = FALSE]
-
-mat_2 <- x[ , 1, drop = FALSE]
-
-
 
 
