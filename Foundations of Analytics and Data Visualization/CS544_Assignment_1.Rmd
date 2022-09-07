@@ -69,6 +69,19 @@ scores_below_median
 scores_above_median <- scores[scores > median_score]
 scores_above_median
 
+##### Q4 ######
+
+#### a) Using numeric indexing, write the R expression for the odd indexed values from the scores. Store the expression in the variable odd_index_values.
+
+odd_index_values <-  scores[seq(from = 1, to = length(scores), by = 2)]
+odd_index_values
+
+#### b) Similarly, write the R expression for the even indexed values from the scores. Store the expression in the variable even_index_values.
+
+even_index_values <- scores[seq(from = 2, to = length(scores), by = 2)]
+even_index_values
+
+
 
 
 
