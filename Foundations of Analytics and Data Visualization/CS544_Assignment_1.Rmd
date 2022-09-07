@@ -32,8 +32,28 @@ middle_two
 
 ##### Q2 ######
 
+#### a) Use median(scores) to compute the median of the data. Store the expression in the variable median_score.
 
+median_score <- median(scores)
+median_score
 
+#### b) Using comparison operators, write the R expression for scores less than or equal to the median of the data. Store the expression in the variable below_median.
 
+below_median <- scores <= median_score 
+below_median
 
+#### c) Using comparison operators, write the R expression for scores greater than the median of the data. Store the expression in the variable above_median.
+
+above_median <- scores > median_score
+above_median
+
+#### d) Using the sum function, write the R expression for the number of scores less than or equal to the median of the data. Store the expression in the variable count_below_median.
+
+count_below_median <- sum(scores <= median_score)
+count_below_median
+
+#### e) Using the sum function, write the R expression for the number of scores greater than the median of the data. Store the expression in the variable count_above_median.
+
+count_above_median <- sum(scores > median_score)
+count_above_median
 
