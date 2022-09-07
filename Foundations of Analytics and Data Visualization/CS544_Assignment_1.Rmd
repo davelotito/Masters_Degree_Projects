@@ -13,7 +13,14 @@
 
 scores <- c(58, 46, 50, 90, 42, 52, 62, 44, 96, 92, 54, 82)
 
-scores_test <- c(58, 46, 50, 90, 42, 52, 62, 44, 96, 92, 54, 82, 900, 100,90)
+x <- matrix(c(25, 55, 78, 14, 65, 90, 100, 43, 8, 1), nrow=4, ncol=5) # Create matrix
+
+row_names <- c("Dave", "Matt", "John", "Mike") # Create vector with names
+
+col_names <- paste("Test", seq(1:5)) # Use paste function to create column names test with numbers 1 to 5 with seq() function
+
+dimnames(x) <- list(row_names, col_names) # Create matrix with list of rows and columns
+x # show results
 
 #### b) Using the length function, compute how many students took the exam? Store the expression in the variable n. Use this variable for the remaining problems where required.
 
@@ -132,8 +139,13 @@ named_matrix
 
 #### b) Show the result for displaying the first and last columns of the named_matrix. The code should work for any size matrix. Store the expression in the variable first_and_last_version2.
 
-first_and_last_version2 <- named_matrix[c(1,2), c(1,6)]
+first_and_last_version2 <- named_matrix[c(1,2), c(1,ncol(named_matrix))]
 first_and_last_version2
 
-named_matrix[length(named_matrix)])
+mat_1 <- x[ , ncol(x), drop = FALSE]
+
+mat_2 <- x[ , 1, drop = FALSE]
+
+
+
 
