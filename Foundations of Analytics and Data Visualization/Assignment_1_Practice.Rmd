@@ -21,3 +21,31 @@
 ## e) Using indexing, write the expression for accessing the middle two items. Store the expression in the variable middle_two.
 
 (middle_two <- scores[c(length(scores)/2, length(scores)/2+1)])
+
+# Q2
+
+## a) Use median(scores) to compute the median of the data. Store the expression in the variable median_score.
+(median_score <- median(scores))
+
+## b) Using comparison operators, write the R expression for scores less than or equal to the median of the data. Store the expression in the variable below_median.
+
+(below_median <- scores <= median_score)
+
+## c) Using comparison operators, write the R expression for scores greater than the median of the data. Store the expression in the variable above_median.
+
+(above_median <- scores > median_score)
+
+## d) Using the sum function, write the R expression for the number of scores less than or equal to the median of the data. Store the expression in the variable count_below_median.
+
+(count_below_median <- sum(scores <= median_score))
+
+## e) Using the sum function, write the R expression for the number of scores greater than the median of the data. Store the expression in the variable count_above_median.
+
+(count_above_median <- sum(scores > median_score))
+
+
+
+
+
+
+
