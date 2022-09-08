@@ -1,0 +1,23 @@
+# CS544 Module 1 Review (Practice)
+
+# Q1
+
+## a) Assign the above data as a vector in the same order to the variable scores. Use this variable scores for the remaining problems.
+
+(scores <- c(58, 46, 50, 90, 42, 52, 62, 44, 96, 92, 54, 82))
+
+## b) Using the length function, compute how many students took the exam? Store the expression in the variable n. Use this variable for the remaining problems where required.
+
+(n <- length(scores))
+
+## c) Using indexing, write the expression for accessing the first two items. Store the expression in the variable first_and_second.
+
+(first_and_second <- scores[1:2])
+
+## d) Using indexing, write the expression for accessing the first and last items. Store the expression in the variable first_and_last.
+
+(first_and_last <- scores[c(1, length(scores))])
+
+## e) Using indexing, write the expression for accessing the middle two items. Store the expression in the variable middle_two.
+
+(middle_two <- scores[c(length(scores)/2, length(scores)/2+1)])
