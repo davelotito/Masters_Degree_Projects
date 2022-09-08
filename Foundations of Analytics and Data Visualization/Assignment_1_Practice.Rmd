@@ -75,9 +75,17 @@
 
 (format_scores_version2 <- rev(paste(sort(LETTERS, decreasing=FALSE), sep="=", rev(scores))))
 
+# Q6
 
+## a) Create a matrix with two rows using the scores data. The first half of the values belong to the first row of the matrix. Store the expression in the variable scores_matrix.
+#The code should work for any size input data.
+#You can assume that there are even number of values in scores.
 
+(scores_matrix <- matrix(scores, nrow=2, byrow=TRUE))
 
+## b) Write the expression for displaying the first and last columns of the above matrix. The code should work for any size matrix. Store the expression in the variable first_and_last_version1.
+
+(first_and_last_version1 <- scores_matrix[, c(1, ncol(scores_matrix))])
 
 
 
