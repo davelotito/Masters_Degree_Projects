@@ -87,6 +87,42 @@
 
 (first_and_last_version1 <- scores_matrix[, c(1, ncol(scores_matrix))])
 
+# Q7
+
+## a) Copy scores_matrix to the variable named_matrix.
+# Assign column names for the named_matrix as Student_1, Student_2,... and row names as Quiz_1, Quiz_2, ... The code should work for any size matrix, i.e., for any number of columns in the matrix and any number of rows. The code can contain multiple statements.
+
+
+(named_matrix <- scores_matrix)
+
+(size <- dim(named_matrix))
+
+(col_names <- paste0('Student_', seq(size[2])))
+
+(row_names <- paste0('Quiz_', seq(size[1])))
+
+dimnames(named_matrix) <- list(row_names,col_names)
+named_matrix
+
+## b) Show the result for displaying the first and last columns of the named_matrix. The code should work for any size matrix. Store the expression in the variable first_and_last_version2.
+
+(first_and_last_version2 <- named_matrix[,c(1,ncol(named_matrix))])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
