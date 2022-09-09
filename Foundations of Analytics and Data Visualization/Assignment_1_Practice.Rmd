@@ -18,7 +18,12 @@
 
 (first_and_last <- scores[c(1, length(scores))])
 
+
+(first_and_last <- scores[c(1, length(scores))])
+
 ## e) Using indexing, write the expression for accessing the middle two items. Store the expression in the variable middle_two.
+
+(middle_two <- scores[c(length(scores)/2, length(scores)/2+1)])
 
 (middle_two <- scores[c(length(scores)/2, length(scores)/2+1)])
 
@@ -75,6 +80,8 @@
 
 (format_scores_version2 <- rev(paste(sort(LETTERS, decreasing=FALSE), sep="=", rev(scores))))
 
+(format_scores_version2 <- rev(paste(sort(LETTERS, decreasing=FALSE), sep="=", rev(scores))))
+
 # Q6
 
 ## a) Create a matrix with two rows using the scores data. The first half of the values belong to the first row of the matrix. Store the expression in the variable scores_matrix.
@@ -108,7 +115,7 @@ named_matrix
 
 (first_and_last_version2 <- named_matrix[, c(1, ncol(named_matrix))])
 
-
+(first_and_last_version2 <- named_matrix[, c(1, ncol(named_matrix))])
 
 
 
