@@ -106,7 +106,8 @@ named_matrix
 
 ## b) Show the result for displaying the first and last columns of the named_matrix. The code should work for any size matrix. Store the expression in the variable first_and_last_version2.
 
-(first_and_last_version2 <- named_matrix[,c(1,ncol(named_matrix))])
+(first_and_last_version2 <- named_matrix[, c(1, ncol(named_matrix))])
+
 
 
 
