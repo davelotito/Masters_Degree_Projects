@@ -18,6 +18,7 @@
 
 (first_and_last <- scores[c(1, length(scores))])
 
+(first_and_last <- scores[c(1, length(scores))])
 
 (first_and_last <- scores[c(1, length(scores))])
 
@@ -26,6 +27,11 @@
 (middle_two <- scores[c(length(scores)/2, length(scores)/2+1)])
 
 (middle_two <- scores[c(length(scores)/2, length(scores)/2+1)])
+
+(middle_two <- scores[c(length(scores)/2, length(scores)/2+1)])
+
+(middle_two <- scores[c(length(scores)/2, length(scores)/2+1)])
+
 
 # Q2
 
@@ -66,7 +72,12 @@
 
 (odd_index_values <- scores[seq(from = 1, by = 2, to = length(scores))])
 
-(odd_index_values <- scores[seq(from = 1, to = length(scores), by = 2)])
+(odd_index_values <- scores[seq(from = 1, by = 2, to = length(scores))])
+
+(odd_index_values <- scores[seq(from = 1, by = 2, to = length(scores))])
+
+(odd_index_values <- scores[seq(from = 1, by = 2, to = length(scores))])
+
 
 ## b) Similarly, write the R expression for the even indexed values from the scores. Store the expression in the variable even_index_values.
 
@@ -74,7 +85,9 @@
 
 (even_index_values <- scores[seq(from = 2, by = 2, to = length(scores))])
 
-(even_index_values <- scores[seq(from = 2, to = length(scores), by = 2)])
+(even_index_values <- scores[seq(from = 2, by = 2, to = length(scores))])
+
+(even_index_values <- scores[seq(from = 2, by = 2, to = length(scores))])
 
 # Q5
 
