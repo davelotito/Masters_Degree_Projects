@@ -22,13 +22,14 @@
 
 (first_and_second <- scores[1:2])
 
+
 #### d) Using indexing, write the expression for accessing the first and last items. Store the expression in the variable first_and_last.
 
-(first_and_last <- scores[c(1,length(scores))])
+(first_and_last <- scores[c(1,n)])
 
 #### e) Using indexing, write the expression for accessing the middle two items. Store the expression in the variable middle_two.
 
-(middle_two <- scores[c(length(scores)/2,(length(scores)/2+1))])
+(middle_two <- scores[c(n/2,(n/2+1))])
 
 ##### Q2 ######
 
