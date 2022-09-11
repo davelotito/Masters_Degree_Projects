@@ -2,3 +2,30 @@
 
 # Probability
 
+## Compute the probability of rolling two dice and having the sum of the dice be greater than 6.
+
+## The outcomes are {(1,6), (2,5),(2,6), (3,4),(3,5),(3,6), (4,3),(4,4),(4,5),(4,6), (5,2), (5,3),(5,4),(5,5),(5,6), (6,1),(6,2),(6,3),(6,4),(6,5),(6,6)}
+
+                  ### So, there are 21 possible outcomes out of 36. Hence, the probability is 21/36 = 0.58
+                  
+## Compute the probability of rolling two dice and getting exactly one 5 in the roll.
+
+## The outcomes are {(5,1),(5,2),(5,3),(5,4),(5,6), (1,5),(2,5),(3,5),(4,5),(6,5)}
+
+                  ### So, there are 10 possible outcomes out of 36. Hence, the probability is 10/36 = 0.28 ###
+                  
+## Compute the probability that from a standard deck of cards, you will draw a J, Q, K, or a Heart on the first draw. Assume no Jokers in the deck.
+
+## The total number of outcomes are 3 * 4 + 10 = 22 (J, Q, K from the 4 suits Clubs, Diamonds, Hearts, and Spades + {A, 2, 3, ..., 10} from the Hearts). 
+
+                ### Hence, the probability is 22/52 = 0.42 ###
+                
+# Install Required Packages
+
+install.packages("combinat")
+install.packages("https://cran.r-project.org/src/contrib/Archive/prob/prob_0.9-2.tar.gz",
+                   repos = NULL, dependencies = TRUE)
+                   
+library(prob)
+Prob <- prob::prob
+
