@@ -1,6 +1,6 @@
 # Module 2 Lecture Notes
 
-# Probability
+# Section #1 - Probability
 
 ## Compute the probability of rolling two dice and having the sum of the dice be greater than 6.
 
@@ -28,4 +28,35 @@ install.packages("https://cran.r-project.org/src/contrib/Archive/prob/prob_0.9-2
                    
 library(prob)
 Prob <- prob::prob
+
+# Section #2 - Sample Space
+
+## The tosscoin function sets up the sample space for the experiment of tossing the coin repeatedly. The function returns a data frame object. The columns for the data frame are named toss1, toss2, .... The sample spaces for a single toss, two tosses, and three tosses are shown below.
+
+tosscoin(1)
+
+tosscoin(2)
+
+tosscoin(3)
+
+## The rolldie function sets up the sample space for the experiment of rolling a die repeatedly. The default for the number of sides of the die is 6. The function returns a data frame object. The columns for the data frame are named X1, X2, ...
+
+## The following shows the sample spaces for a single roll of a 6-sided die and a 4-sided die respectively. The first argument is the number of rolls.
+
+rolldie(1)
+
+rolldie(1, nsides=4)
+
+## Show the R commands for the space of outcomes of tossing 4 coins, and rolling 2 six-sided dice
+
+tosscoin(4)
+
+rolldie(2)
+
+
+
+
+
+
+
 
