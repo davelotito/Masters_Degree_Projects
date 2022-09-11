@@ -53,7 +53,81 @@ tosscoin(4)
 
 rolldie(2)
 
+# Section #3 - Sampling from an Urn
 
+## Suppose the urn has three balls labeled 1, 2, and 3 or colored red, green and blue. The following examples show the possible outcomes for a sample size 2 when sampling is done by default, i.e., unordered and done without replacement.
+
+urnsamples(1:3, size = 2)
+
+urnsamples(c("r", "g", "b"), size = 2)
+
+## With replacement, the possible unordered outcomes are shown below.
+
+urnsamples(1:3, size = 2, replace = TRUE)
+
+urnsamples(c("r", "g", "b"), size = 2, replace = TRUE)
+
+## With ordering and replacement, the outcomes are shown below. For example, (2, 1) and (1, 2) are separate outcomes.
+
+urnsamples(1:3, size = 2, replace = TRUE, ordered = TRUE)
+
+urnsamples(c("r", "g", "b"), size = 2, replace = TRUE, ordered = TRUE)
+
+## The last scenario shows ordered sampling without replacement.
+
+urnsamples(1:3, size = 2, replace = FALSE, ordered = TRUE)
+
+urnsamples(c("r", "g", "b"), size = 2, replace = FALSE, ordered = TRUE)
+
+## Many probability problems can be simulated by drawing proverbial objects from an urn.
+
+# Use the following vector to answer the following questions. Show all R commands seq(1:10)
+(x <- seq(1:10))
+
+# Use urnsamples() to draw 3 elements from the vector, with replacement, where the order does not matter.
+
+urnsamples(x, size=3, replace = TRUE, ordered = FALSE)
+
+# Draw 2 elements from the vector, without replacement, where the order does matter.
+
+urnsamples(x, size=2, replace=FALSE, ordered=TRUE)
+
+# Draw 5 elements, without replacement, where the order does not matter.
+
+urnsamples(x, size=5, replace=FALSE, ordered=FALSE)
+
+# Draw 4 elements, with replacement, where the order does matter.
+
+urnsamples(x, size=4, replace=TRUE, ordered=TRUE)
+
+## Which of these samples has the greatest number of possible outcomes?
+
+# Drawing 4, ordered, with replacement, produces the largest outcome space!
+
+# Section #4 - Counting Tools
+
+## The nsamp function calculates the above values, which is the number of rows in a sample space created by urnsamples, without explicitly generating the probability space. For an urn with 3 distinguishable elements, the number of ways for selecting 2 elements with the possible options for replacement and ordering are shown below. The default values are FALSE for replace and ordered arguments.
+
+# Without replacement
+nsamp(n = 3, k = 2, replace = FALSE, ordered = FALSE)
+# With replacement
+nsamp(n = 3, k = 2, replace = TRUE, ordered = FALSE)
+
+# With ordering
+nsamp(n = 3, k = 2, replace = FALSE, ordered = TRUE)
+
+# With ordering & replacement
+nsamp(n = 3, k = 2, replace = TRUE, ordered = TRUE)
+
+## From the previous problem, we saw instances where the sample space, or outcome space, was very large. Sometimes, we only care about the size of the space, rather than each individual element. Use the nsamp() function to illustrate the size of the sample spaces seen in the previous problem. Show all R commands.
+
+nsamp(n=10, k=3, replace=TRUE, ordered=FALSE)
+
+nsamp(n=10, k=2, replace=FALSE, ordered=TRUE)
+
+nsamp(n=10, k=5, replace=FALSE, ordered=FALSE)
+
+nsamp(n=10, k=4, replace=TRUE, ordered=TRUE)
 
 
 
