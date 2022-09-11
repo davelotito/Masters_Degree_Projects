@@ -83,12 +83,13 @@
 #### a) Using the paste function with LETTERS, write the expression for the following output. Store the expression in the variable format_scores_version1.
 #You can assume there are no more than 26 values.
 
-(format_scores_version1 <- paste(LETTERS, sep='=', scores))
+(format_scores_version1 <- paste(LETTERS[1:n], scores, sep='='))
 
 
 #### b) Similarly, using the paste function with LETTERS, write the expression for the following output. Store the expression in the variable format_scores_version2.
 
-(format_scores_version2 <- rev(paste(sort(LETTERS, decreasing=FALSE), sep="=", rev(scores))))
+(format_scores_version2 <- paste(LETTERS[n:1], sep="=", scores))
+
 
 ##### Q6 ######
 
