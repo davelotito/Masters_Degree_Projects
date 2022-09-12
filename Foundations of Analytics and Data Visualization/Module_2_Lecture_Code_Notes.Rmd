@@ -279,6 +279,57 @@ probspace(outcomes, probs = p)
 
 # Section #7 - The Prob Function
 
+## The Prob function calculates the probability of the specified event. Consider the sample space from the deck of cards.
+
+(S <- cards(makespace = TRUE))
+
+## The probability of drawing a Queen can be determined as follows: (Let A be the event for the outcomes representing drawing a Queen.)
+
+(A <- subset(S, rank == "Q"))
+
+## Since there are four Queen cards, the probability is 4/52 = 0.0769.
+Prob(A)
+
+Prob(S, rank == "Q")
+
+## Let B be the event that the card is a Heart.
+
+(B <- subset(S, suit == "Heart"))
+
+## Since there are 13 cards, the probability of drawing a Heart is 13/52 = 0.25.
+Prob(B)
+
+Prob(S, suit == "Heart")
+
+## The probability of the intersection of the events A and B (Queen of Hearts) is shown below.
+
+Prob(intersect(A, B))
+
+## The probability of the union of the events A and B (a Queen or a Heart or both) is shown below.
+
+Prob(union(A, B))
+
+## Use the Prob() function and cards() function to answer the following questions. Assume no jokers in the deck.
+
+#What is the probability of the union of the two events above?
+
+# What is the probability of drawing a Queen or King from a deck of cards?
+(deck <- cards(makespace=TRUE))
+
+(event1 <- subset(deck, rank %in% c('Q', 'K')))
+prob(event1)
+
+# What is the probability of drawing a number between 3 and 5 inclusive that it is also a Heart?
+
+(event2 <- subset(deck, rank %in% c(3,4,5) & suit == 'Heart'))
+prob(event2)
+# What is the probability of the union of the two events above?
+Prob(union(event1, event2))
+
+# Section #8 - Conditional Probability
+
+
+
 
 
 
