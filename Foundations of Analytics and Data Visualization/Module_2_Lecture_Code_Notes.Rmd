@@ -194,9 +194,90 @@ subset(S, isin(S, c(4,6), ordered = TRUE)
 
 ## The cards() function sets the sample space for the standard deck of cards. The default option for jokers argument is FALSE. The function returns a data frame with 52 rows. The two columns of the data frame are named rank and suit.
 
+(S <- cards(makespace = TRUE))
+nrow(S)
+
+head(S, n = 2)
+
+## The following subsets show the 13 cards for each suit.
+
+subset(S, suit == "Club")
+
+subset(S, suit == "Diamond")
+
+subset(S, suit == "Heart")
+
+subset(S, suit == "Spade")
+
+## The outcomes where the rank of the selected card is 2, 3, or 4 can be filtered as shown below.
+
+subset(S, rank %in% 2:4) ## The probability that the selected card is 2, 3, or 4 is 12/52 = 0.23.
+
+## The outcomes where the selected card is a King or a Queen can be filtered as shown below.
+
+subset(S, rank %in% c('K', 'Q')) # The probability that the selected card is a King or a Queen is 8/52 = 0.15
+
+## The set operations union, intersect, and setdiff perform the union, the intersection, and the difference of the given outcomes.
+## For the card deck sample space S, let the event A represent the selected card suit is a Heart and the event B represent the selected card rank is either a 10 or a Queen.
+
 S <- cards(makespace = TRUE)
+A <- subset(S, suit == "Heart")
+B <- subset(S, rank %in% c(10, "Q"))
 
+## The possible outcomes for the events A and B are shown below.
 
+A
+B
+
+## The union of the events A and B consists of all the outcomes that are in A or B or both.
+
+union(A, B)
+
+## The intersection of the events A and B consists of all the outcomes that are in both A and B.
+
+intersect(A, B)
+
+## The difference of the events A and B consists of all the outcomes that are in A but not in B.
+
+setdiff(A, B)
+
+## The set difference operation is not commutative. The following shows the different results for the difference of the events B and A.
+
+setdiff(B, A)
+
+## The complement of an event A, written as A , is the difference between the sample space, S, and the event A. setdiff(S, A) will result in all outcomes that are either Clubs, Diamonds, or Spades.
+
+setdiff(S, A)
+
+# Section #6 - Setting up The Probability Space
+
+## The following code shows an alternate approach for assigning probabilities for the experiment of rolling a die. The outcomes are generated as shown below.
+
+(outcomes <- rolldie(1))
+
+## Since there are 6 outcomes, 6 probability values are needed. The following shows a vector of equal values.
+
+(p <-rep(1/6, times = 6))
+
+## The probspace function assigns the probabilities to each of the corresponding outcomes.
+
+probspace(outcomes, probs = p)
+## The above is equivalent to the rolldie invocation with makespace argument as TRUE.
+rolldie(1, makespace= TRUE)
+
+## Suppose that the die is not fair, with some faces having a better chance than the rest. The following example shows a vector of different probabilities used to set up the sample probability space.
+
+p <- c(0.2, 0.15, 0.15, 0.15, 0.15, 0.2)
+probspace(outcomes, probs = p)
+
+## Use probspace() to set up a probability space for rolling a loaded die, where the probability of rolling of a 3 or a 4 are 0.2, and the remaining numbers have an equal probability.
+
+(outcomes <- seq(1:6))
+(1 - 2*(0.2)) / 4
+(p <- c(0.15, 0.15, 0.2, 0.2, 0.15, 0.15))
+(space <- probspace(outcomes, p))
+
+# Section #7 - The Prob Function
 
 
 
