@@ -736,4 +736,87 @@ y
 
 z
 
+# Section #14 - Control Structures
+
+## Some of the control structures provided in R are if-else, for, while, and repeat.
+
+## The following example compares two objects and computes the maximum/minimum of the two. The objects x and y are assumed to be scalars (vectors of unit length).
+
+if (x < y) {
+  max <- y
+  min <- x
+} else {
+  max <- x
+  min <- y }
+
+## The if-else always returns the last expression from the if part or the else part. The following example shows the assignment of y or x to max based on the outcome of the test.
+
+max <- if (x < y) y else x
+
+## The for loop has the following syntax.
+## -> for (name in values) expr
+
+## The following example shows the loop using a vector of values.
+
+x <- c(10, 20, 30)
+
+for (i in x) {
+  cat("Square of ", i, " = ", i*i, "\n")
+}
+
+## The variable i retains the last value as a side effect.
+
+i
+
+## The loop can be used with any generated sequence of values.
+
+for (i in seq(1,10, by = 2)) {
+  cat("Square of ", i, " = ", i*i, "\n")
+}
+
+## An example of the while loop for adding the first n numbers is shown below. The loop continues as long as the test is true.
+
+n <- 10
+sum <- 0
+i <- 1
+
+while (i <= n) {
+  sum < sum + i
+  i < i+1
+}
+cat("Sum of first ", n, " numbers = ", sum)
+
+## The break statement may be used to abort the loop. The following example calculates how many numbers add up to the limit and aborts the loop thereafter.
+
+limit <- 55
+sum <- 0
+i <- 0
+
+while (TRUE) {
+  i <- i+1
+  sum <- sum + i
+  if (sum >= limit) break
+}
+
+cat("Sum of first ", i, " numbers = ", sum)
+
+## An example of the repeat statement is shown below. An explicit break is required to come out of the loop.
+
+i <= 1
+
+repeat {
+  cat("Square of ", i, " = ", i*i, "\n")
+  i <- i+2
+  if (i > 10) break
+}
+
+
+
+
+
+
+
+
+
+
 
