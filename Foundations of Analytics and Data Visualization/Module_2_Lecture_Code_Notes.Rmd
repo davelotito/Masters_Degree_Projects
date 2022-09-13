@@ -502,6 +502,50 @@ Prob(B)
 
 1 - Prob(B)
 
+## Section #10 - Independent Events, Repeated Experiments
+
+## The following example shows the sample space for an unbalanced coin that is tossed three times. The coin is biased, favoring heads. Since the outcomes are independent, the probability for all three heads is: 0.216
+
+iidspace(c('H', 'T'), ntrials = 3, probs = c(0.6, 0.4))
+
+## When the individual probabilities are not specified, all outcomes have equal probability as shown below.
+
+iidspace(c('H', 'T'), ntrials = 3)
+
+## Consider rolling two fair 6-sided dice. Intuitively, we understand that the two die rolls are independent events. Let A be the event that the first roll is a 2, let B be the event that the second roll is also a 2. Show the R commands to illustrate the independence of the die rolls, specifically, show that P(A and B) == P(A) * P(B)
+
+(S <- rolldie(2, makespace=TRUE))
+
+(A <- subset(S, X1 == 2))
+
+(B <- subset(S, X2 == 2))
+
+C <- intersect(A,B)
+
+Prob(A)
+Prob(B)
+
+Prob(A) * Prob(B)
+
+Prob(C)
+
+## Using the iidspace() function, simulate the rolling of 5 fair 6-sided dice. Show the R commands for the probability of all rolls being greater than 3, the first roll is a 2, and the sequence: 1, 2, 3, 4, 5
+
+S <- iidspace(c(1, 2, 3, 4, 5, 6), ntrials=5)
+
+prob(S, X1 > 3 & X2 > 3 & X3 > 3 & X4 > 3 & X5 > 3)
+
+prob(S, X1 == 2)
+
+prob(S, X1 == 1 & X2 == 2 & X3 == 3 & X4 == 4 & X5 == 5)
+
+# Section #11 - Bayes' Rule
+
+
+
+
+
+
 
 
 
