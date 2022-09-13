@@ -328,11 +328,63 @@ Prob(union(event1, event2))
 
 # Section #8 - Conditional Probability
 
+## Consider two rolls of a six-sided die. The sample space, S = {(1, 1), (1, 2), ... , (6, 6)}. The size of the sample space is #(S) = 6 * 6 = 36.
 
+## The sample space generated in R is shown below. The first two and the last two outcomes along with the individual probabilities are also shown.
 
+(S <- rolldie(2, makespace= TRUE))
+head(S, n = 2)
 
+tail(S, n = 2)
 
+## Let A denote the event where both the rolls have the same value. The possible outcomes for this event are: A = {(1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6)}
+## Hence, P(A) = 6/36 = 1/6 = 0.167
+## The event A is computed in R as shown below.
 
+(A <- subset(S, X1 == X2))
+Prob(A)
 
+## Let B be the event where the sum of the two outcomes is equal to 8. The possible outcomes for this event are: B = {(6, 2), (5, 3), (4, 4), (3, 5), (2, 6)}.
+## Hence, P(B) = 5/36 = 0.139
+## The event B is computed in R as shown below.
+
+(B <- subset(S, X1 + X2 == 8))
+Prob(B)
+
+## The event A # B in this example has only one outcome {(4, 4)}. Hence, P(A # B) = 1/36.
+## The conditional probabilities in this example are
+## P(A!B) = P(A # B)/P(B) = (1/36)/(5/36) = 1/5 = 0.2, and P(B!A) = P(A # B)/P(A) = (1/36)/(6/36) = 1/6 = 0.167 Using R, the conditional probabilities are computed as shown below.
+
+Prob(A, given = B)
+
+Prob(B, given = A)
+
+## The same could be done in R in a few steps without explicitly defining the subsets A and B, as follows:
+
+Prob(S, X1 == X2, given = (X1 + X2 == 8))
+
+Prob (S, X1 + X2 == 8, given = (X1 == X2))
+
+## Consider two tosses of a coin. The sample space, S = {(H, H), (H, T), (T, H), (T, T)}. The size of the sample space is #(S) = 4. The sample space generated in R is shown below. The four outcomes along with the individual probabilities are also shown.
+
+(S <- tosscoin(2, makespace = TRUE))
+
+## Let A be the event that a head occurs. The possible subset outcomes for this event are: A = {(H, H), (H, T), (T, H)}
+## Hence, P(A) = 3/4 = 0.75
+## The event A is computed in R as shown below.
+
+(A <- subset(S, isin(S, c('H'))))
+
+# Let B be the event that a head and a tail occurs. The possible outcomes for this event are: B = {(H, T), (T, H)}.
+# Hence, P(B) = 2/4 = 0.5
+# The event B is computed in R as shown below.
+
+(B <- subset(S, isin(S, c('H', 'T'))))
+
+# Using R, the conditional probabilities are computed as shown below.
+
+Prob(A , given = B)
+
+Prob(B, given = A)
 
 
