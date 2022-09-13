@@ -551,11 +551,11 @@ bayes <- function (prior, liklihood) {
   return (numerators / sum(numerators))
 }
 
-(prior2 <- c(0.07, 0.93))
+(prior <- c(0.07, 0.93))
 
-(like2 <- c(0.9, 0.25))
+(likelihood <- c(0.9, 0.25))
 
-bayes(prior, like)
+bayes(prior, likelihood)
 
 ## A survey was taken of individuals aged 22-30. 40% of the individuals surveyed received a college degree. Of the individuals who had a college degree, 90% of them had parents who also received a college degree. Of the individuals who did not receive a college degree, only 20% of them had parents who received a college degree. First, compute the prior probabilities and the likelihood probabilities. Using the bayes() function defined below, compute the probability that randomly selected parents with a college degree have a child without a college degree. Show the R commands
 
@@ -579,6 +579,93 @@ bayes <- function (prior, liklihood) {
 prior = c(0.4, 0.6)
 likelihood = c(0.9, 0.2)
 bayes(prior, likelihood)
+
+# Section #12 - Functions and Function Arguments
+
+inc.1 <- function (x) {
+  return (x+1) 
+}
+
+inc.1(10)
+
+inc.1(c(10,20,30))
+
+## A function with two arguments is shown below. When the function is invoked, the parameter names can be explicitly assigned the input values. If the input values are named, then the inputs can be provided in any order.
+
+inc.2 <- function (x, y) { 
+  return (x - y)
+}
+
+inc.2(10,20)
+
+inc.2(x = 10, y = 20)
+
+inc.2(y = 20, x = 10)
+
+## The following example shows the mapping of the input values when only one of the arguments is named.
+
+inc.2(10, y = 20)
+
+inc.2(y = 20, 10)
+
+
+## The above function definitions expect two arguments to be provided when the function is invoked. If one or more inputs are missing, the function invocation throws an error. The error messages show that the arguments have no defaults, and hence expect a value to be provided.
+
+inc.2(10)
+
+inc.2(y = 20)
+
+
+## The function arguments can be provided default values as shown below. In the following function definition, the value for x is required. The value for y is optional, the default being 100.
+
+inc.3 <- function (x, y=100) {
+  return (x + y)
+}
+
+inc.3(10)
+
+inc.3(10, 20) #providing 20 will override the default value of 100 in the function
+
+## The following function definition has default values for both the arguments. When the function is invoked with no arguments, the defaults are used for both the arguments. In the last case, when a new value for y is provided, it has been explicitly named.
+
+inc.4 <- function (x = 5, y = 7) {
+  return (x + y)
+}
+
+inc.4()
+
+inc.4(100)
+
+inc.4(60, 50)
+
+inc.4(2,3)
+
+inc.4(y =3)
+
+## The following example shows a function with one required parameter and two optional parameters.
+
+inc.5 <- function (x, y = 10, z = 100) {
+  return (x - y - z)
+}
+
+inc.5(1000)
+
+inc.5(1000, 500)
+
+inc.5(1000, 500, 200)
+
+## The function is invoked with different combinations as shown below.
+
+inc.5(1000, z = 200)
+
+inc.5(1000, z = 200, y = 500)
+
+
+
+
+
+
+
 
 
 
