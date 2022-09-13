@@ -422,8 +422,75 @@ Prob(S, all(rank == "A"))
 
 Prob(S, all(suit == "Club"))
 
+## Section #8 (continued) - Conditional Probability - Red and Blue Balls
 
+## Consider a box with three red balls and two blue balls inside it. For the given problem of selecting two successive balls, we are interested in finding the probability that both the balls selected will be red. Let A be the event that the first ball is red, and B be the event that the second ball is also red.
 
+## The problem can be modeled in R as follows: (The data now consists of one dimension, the color of the balls. The data is generated using
+## the rep function with the red repeated three times and the blue repeated twice.)
+
+(L <-rep(c("red", "blue"), times = c(3,2)))
+
+## The urnsamples function can be used to generate all outcomes for selecting two balls randomly from the above list. With a size of two, the function returns all possible pairs of rows. Also, the ordered argument is set to TRUE, as the ordering of the balls is considered. The sample space for our problem is this list M.
+
+M <- urnsamples(L, size = 2, ordered = TRUE)
+
+## All possible outcomes of selecting two ordered pairs out of five balls are shown above. The probability space for the data along with the first two rows is computed as shown below.
+
+S <- probspace(M)
+
+head(S, n = 2)
+
+## Now, for the event that both the balls are red, all the rows with X1 == “red” & X2 == “red” satisfy the criteria. An alternative is the isrep function in the prob package. isrep(S, “red”, 2) tests each row of the sample space to determine whether the value red appears two times. The probabilities of both balls being red and both balls being blue are computed as shown below.
+
+Prob(S, isrep(S, "red", 2))
+
+Prob(S, isrep(S, "blue", 2))
+
+## The probability of the first ball being red and the second ball being blue can be calculated as shown below.
+
+Prob(S, isin(S, c("red", "blue"), ordered = TRUE))
+
+## Consider rolling a six-sided die 3 times. Let Event A represent the case where the sum of the values of three rolls is less than 10. Let Event B represent the case where the second roll is a 3. Using the rolldie() and prob() functions and whatever other functions needed, compute the probability of A, B, and A and B (intersection). Show the R commands
+
+(S <- rolldie(3, makespace=TRUE))
+
+(A <- subset(S, X1 + X2 + X3 < 10))
+Prob(A)
+
+(B <- subset(S, X2 == 3))
+Prob(B)
+
+(C <- intersect(A, B))
+Prob(C)
+
+## Using the probabilities from above, compute the conditional probability of B, given A, and the conditional probability of A, given B. Show the R commands.
+
+Prob(B, given=A)
+
+Prob(A, given=B)
+
+## Consider drawing from a deck of cards (no Jokers). Use the cards() and urnsamples() function to simulate drawing 2 cards without replacement. Let A be the event that you have at least one Ace, let B the event you have two cards of the same rank. Compute the probability of A, B, and A and B (intersection). Then compute the conditional probability of A, given B and the conditional probability of B, given A. Show the R commands.
+
+(cards <- cards())
+
+(hand <- urnsamples(cards, size=2, replace=FALSE, ordered=FALSE))
+
+S <- probspace(hand)
+
+A <- subset(S, 'A' %in% rank)
+Prob(A)
+
+B <- subset(S, rank[1] == rank[2])
+Prob(B)
+
+C <- intersect(A, B)
+
+Prob(A, given = B)
+
+Prob(B, given = A)
+
+## Section #9 - Independent Events (Coin Toss)
 
 
 
