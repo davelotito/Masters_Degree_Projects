@@ -660,12 +660,80 @@ inc.5(1000, z = 200)
 
 inc.5(1000, z = 200, y = 500)
 
+## Section 13 - Scope of Variables
 
+## The following example demonstrates the scope of a single variable x. The variable x is defined in the global environment.
+x <- 10
 
+foo <- function() {
+  cat("#2 In foo ", x, "\n");
+  x <- 20
+  cat("#3 In foo ", x, "\n");
+  bar()
+  cat("#6 In foo ", x, "\n");
+}
 
+bare <- function() {
+  cat("#4 In bar ", x, "\n");
+  x <- 30
+  cat("#5 In bar ", x, "\n");
+}
 
+## The following example shows the function with two arguments. The local scope for the function includes the two function parameters (a and b) and the three variables defined locally (x, y, and z).
 
+rm(z)
 
+x <- 10
+y <- 20
 
+test.1 <- function(a,b) {
+  x <- a
+  y <- b
+  z <- a + b
+  return(z)
+}
+## After the function is invoked, x and y refer to the global scope; the object z defined within the function is no longer accessible.
+
+test.1(1,2)
+
+x
+
+y
+
+z
+
+## The following example shows the access of variables from the local scope (a) and the global scope (x).
+
+x <- 20
+
+test.2 <- function(a) {
+  z <- a + x
+  return (z)
+}
+
+test.2(1)
+
+## Within a function, the <<- operator can be used to change the value in the global scope. If the variable doesn’t exist in the global scope, the <<- operator creates the variable in the global scope.
+
+## In the following example, the function changes the value of x in the global scope and inserts the variable z in the global scope.
+
+x <- 100
+y <- 200
+
+test.3 <- function(a, b) {
+  x <<- a
+  y <- b
+  z <<- x + y
+  return (z)
+}
+## After the function returns, the modified values of x and z are available.
+
+test.3(1,2)
+
+x
+
+y
+
+z
 
 
