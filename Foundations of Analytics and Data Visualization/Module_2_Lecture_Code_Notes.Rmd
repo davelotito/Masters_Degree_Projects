@@ -365,6 +365,8 @@ Prob(S, X1 == X2, given = (X1 + X2 == 8))
 
 Prob (S, X1 + X2 == 8, given = (X1 == X2))
 
+## Section #8 (continued) - Conditional Probability Example – Coin Toss Twice
+
 ## Consider two tosses of a coin. The sample space, S = {(H, H), (H, T), (T, H), (T, T)}. The size of the sample space is #(S) = 4. The sample space generated in R is shown below. The four outcomes along with the individual probabilities are also shown.
 
 (S <- tosscoin(2, makespace = TRUE))
@@ -387,4 +389,4 @@ Prob(A , given = B)
 
 Prob(B, given = A)
 
-
+## Section #8 (continued) - Conditional Probability Example - Card Deck
