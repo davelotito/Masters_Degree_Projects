@@ -541,12 +541,44 @@ prob(S, X1 == 1 & X2 == 2 & X3 == 3 & X4 == 4 & X5 == 5)
 
 # Section #11 - Bayes' Rule
 
+bayes <- function (prior, likelihood) {
+  numerators <- prior * likelihood
+  return (numerators / sum(numerators)) 
+}
 
+bayes <- function (prior, liklihood) {
+  numerators <- prior * liklihood
+  return (numerators / sum(numerators))
+}
 
+(prior2 <- c(0.07, 0.93))
 
+(like2 <- c(0.9, 0.25))
 
+bayes(prior, like)
 
+## A survey was taken of individuals aged 22-30. 40% of the individuals surveyed received a college degree. Of the individuals who had a college degree, 90% of them had parents who also received a college degree. Of the individuals who did not receive a college degree, only 20% of them had parents who received a college degree. First, compute the prior probabilities and the likelihood probabilities. Using the bayes() function defined below, compute the probability that randomly selected parents with a college degree have a child without a college degree. Show the R commands
 
+bayes <- function (prior, liklihood) {
+  numerators <- prior * liklihood
+  return (numerators / sum(numerators))
+}
+
+# Let A be the event an individual has a college degree
+# P(A) = 0.4
+# P(~A) = 0.6
+
+# Let B be the event the individual has parents with a college degree
+# P(B | A) = 0.9
+# P(B | ~A) = 0.2
+
+# We want to compute P(~A | B) = P(~A) * P(B | ~A) / (P(~A) * P(B | ~A) +
+# P(A) / P(A) * P(B | A)
+# Substitute known values: 0.6 * 0.2 / (0.6 * 0.2 + 0.4 * 0.9)
+
+prior = c(0.4, 0.6)
+likelihood = c(0.9, 0.2)
+bayes(prior, likelihood)
 
 
 
