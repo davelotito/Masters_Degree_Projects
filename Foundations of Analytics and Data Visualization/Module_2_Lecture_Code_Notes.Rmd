@@ -492,9 +492,15 @@ Prob(B, given = A)
 
 ## Section #9 - Independent Events (Coin Toss)
 
+## The probability of having at least one head in the five coin tosses then is
 
+(S <- tosscoin(5, makespace=TRUE))
 
+(B <- subset(S, isrep(S, "T", 5)))
+## The probability of all tails and the probability of at least one head are
+Prob(B)
 
+1 - Prob(B)
 
 
 
