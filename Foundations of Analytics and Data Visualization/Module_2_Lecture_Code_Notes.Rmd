@@ -810,13 +810,86 @@ repeat {
   if (i > 10) break
 }
 
+## Section 15 - Reading & Writing Data
+
+## The scan() function is useful for reading data from the console (or from a file or a network location). For reading numeric data from the console, the function may be used without any arguments. The reading terminates when a new line is entered on the console. The data read is returned as a vector.
+
+x <- scan()
+
+## The white space delimiter separates the individual values. If any other delimiter is used, the sep argument is provided with the required delimiter.
+
+x <- scan(sep = ",")
+
+## If the input is character data, the what argument is needed to specify the type of the data being read (default being double()).
+
+x <- scan(what = character())
+
+## A logical vector can be created by reading the true/false values as shown below.
+
+x <- scan(what = logical())
+
+## A list can also be created with the same number of values for each component. The name and the type for each component is specified using the list option for the what argument. The data for the number of components is entered line by line.
+
+x <- scan(what = list(age = numeric(), name = character()))
+
+## The file argument may be used with the scan function for reading the data from a file. The default value for this argument is the empty string that is interpreted as reading from the console. For reading from a file, if the full path is not specified, the current working directory is used for resolving the specified file name. The getwd function shows the current working directory.
+
+getwd()
+
+## If the data files are to be read from a specific directory, the setwd function can be used to change the working directory to the desired directory.
+
+setwd("/Users/davelotito/Desktop/CS544 - Foundations of Analytics and Data Visualization/Code_Samples/CS544_Module2Code")
+
+## The dir function lists the contents of the current working directory.
+
+dir()
+
+## The file athletedata.txt contains the following information regarding five athletes. The first row contains the names of the columns of the data.
+
+## The scan function can either read the data as a vector or as a list. Reading the entire contents as character data produces the vector as shown below.
+
+x <- scan("athletedata.txt", what=character())
+
+x
+is.vector(x)
+
+## For reading the data as a list, the skip option is used to skip the first line containing the column names. The components of the list are named with the corresponding data type.
+
+x <- scan("athletedata.txt", skip = 1, what = list(Name = character(), Salary = numeric(), Endorsements = numeric(),
+     port = character()))
+
+## If the data is desired in the form of the data frame, the list is then converted to a data frame.
+
+as.data.frame(x)
+
+## The read.table function provides a convenient mechanism to read tabular data from a file into a data frame. The default value for the header argument is FALSE. Since the data has the header, the option is set to TRUE in the following example.
+
+(athlete.info <- read.table("athletedata.txt", header = TRUE))
+
+## The row names for the data frame may be assigned, if needed, after the data is read, or can be directly specified while reading the data as shown below.
 
 
+(athlete.info <- read.table("athletedata.txt", header = TRUE, row.names = c("First", "Second", "Third", "Fourth", "Fifth")))
 
+## For data sets available in CSV (comma-separated values) format, the read.csv function is used instead. The default value for the header argument is TRUE.
 
+(athlete.info <- read.csv("athletedata.csv", header = TRUE))
 
+## The functions are also useful for reading data files from the internet. The first argument is the URL for the data set.
 
+(athlete.info <- read.table("http://kalathur.com/cs544/data/athletedata.txt", header = TRUE))
 
+(athlete.info <- read.csv("http://kalathur.com/cs544/data/athletedata.csv", header = TRUE))
+
+## The data frames can be written to the local file system using the write.table or the write.csv functions. The row names are written by default, hence using the FALSE value for the row.names argument suppresses them. If the row names are also written, reading the data back preserves the row names.
+
+## The character data is enclosed in double quotes by default. If quotes are not needed, they can be omitted using the quote option.
+
+write.table(athlete.info, file="test.txt", row.names = FALSE, quote = FALSE)
+
+write.csv(athlete.info, file="test.csv", row.names = FALSE, quote = FALSE)
+
+## The data is written to the current working directory
 
 
 
