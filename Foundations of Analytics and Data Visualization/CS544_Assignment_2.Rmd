@@ -1,0 +1,19 @@
+# CS544 Module 2 Assignment
+## Student: David J Lotito
+
+# Part2) Random Variables
+
+# Consider a game which involves rolling three dice. Write the R code for the following.
+# Using the rollDie function from the prob library, setup the sample space for this experiment with the probability space.
+# For each of the following scenarios from a) through e), show the corresponding outcomes and the probability of that event. The sample outputs for b) are shown as example.
+
+(S <- rolldie(3, makespace=TRUE))
+
+# a) The sum of the rolls is greater than 6 but less than 10.
+(A <- subset(S, (X1 + X2 + X3 > 6) & (X1 + X2 + X3 < 10) ))
+prob(S, (X1 + X2 + X3 > 6) & (X1 + X2 + X3 < 10))
+
+# b) All the three rolls are identical.
+(B <- subset(S, (X1 == X2 & X2 == X3)))
+prob(S, (X1 == X2 & X2 == X3))
+
