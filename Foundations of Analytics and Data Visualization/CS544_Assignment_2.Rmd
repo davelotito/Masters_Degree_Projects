@@ -86,6 +86,29 @@ sprintf("The minimum Tesla value of %d is at row %d on %s", max(tsla$Close), as.
 (close_greater_than_open <- close_greater_than_open[c("Open","Close")])
 
 (prob_close_greater_than_open <- nrow(close_greater_than_open) / nrow(tsla))
+# The probability of Tesla's closing price on any given day being greater than the opening price is 0.5 or 50%.
+
+# e) Based on the dataset, what is the probability that on any given day, the Tesla trading volume would be greater than 20 million shares?
+
+(volume_greater_than_20m <- subset(tsla, Volume > 20000000))
+(volume_greater_than_20m <- volume_greater_than_20m[c('Volume')])
+
+(prob_volume_greater_than_20m <- nrow(volume_greater_than_20m) / nrow(tsla))
+# The probability of Tesla's Volume on any given day being greater than the 20 million shares is 0.7142857 or 71.4%.
+
+# f) Based on the dataset, what is the probability that on any given day, the Tesla closing price would be higher than the opening price, given that the trading volume is greater than 20 million shares?
+
+P(A!B) = P(A # B)/P(B) 
+
+(126/252)/(180/252)
+# 0.7 or 70%
+
+# g) Suppose you bought 1 share of Tesla stock on each day in the dataset at its low price on that day. How much gain you would have if you sold all those shares at closing price of the last day in the dataset.
+
+((nrow(tsla) * tail(tsla[,c("Close")], n=1)) - sum(tsla$Low)) / sum(tsla$Low)
+# We would have a gain of 0.3858545 or 38.6%
+
+
 
 
 
