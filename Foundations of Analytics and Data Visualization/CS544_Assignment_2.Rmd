@@ -39,8 +39,8 @@ nrow(E)
 # 22 +42 +62 +82 +102 =220
 
 sum_of_first_N_even_square <- function(n) {
-  for (i in seq(1,10, by = 2)) {
-    sum = (2 * n) * (n + 1) * (2 * n + 1) / i * 3
+  for (i in 1:n) {
+    sum = (2 * n) * (n + 1) * (2 * n + 1) / 3
   }
   return (sum)
 }
@@ -60,10 +60,32 @@ sum_of_first_N_even_square_v2(2)
 sum_of_first_N_even_square_v2(5)
 sum_of_first_N_even_square_v2(10)
 
+# Part4) R
 
+# Initialize the Tesla stock data for the year 2021 using the read.csv function as shown below: 
 
+tsla <- read.csv("https://people.bu.edu/kalathur/datasets/TSLA.csv")
+# The first 6 rows of the dataset are as shown below:
+head(tsla)
 
+# a) Store the result of the summary function for the Close attribute as the variable sm. Change the names of this variable so that the output appears as shown below.
+(sm <- summary(tsla$Close))
+(names(sm) <- c("Min", "Q1", "Q2", "Mean", "Q3", "Max"))
 
+# b) Produce the output for the minimum price of the Tesla closing value in the dataset as shown below:
+
+c(sprintf("The minimum Tesla value of %d is at row %d on %s", min(tsla$Close), as.numeric(rownames(tsla[which(tsla$Close == min(tsla$Close)), ])[1]), tsla[which(tsla$Close == min(tsla$Close)), 1][1]), sprintf("The minimum Tesla value of %d is at row %d on %s", min(tsla$Close), as.numeric(rownames(tsla[which(tsla$Close == min(tsla$Close)), ])[2]), tsla[which(tsla$Close == min(tsla$Close)), 1][2]))
+
+## c) Produce the output for the maximum price of the Tesla closing value in the dataset as shown below:
+
+sprintf("The minimum Tesla value of %d is at row %d on %s", max(tsla$Close), as.numeric(rownames(tsla[which(tsla$Close == max(tsla$Close)), ])[1]), tsla[which(tsla$Close == max(tsla$Close)), 1][1])
+
+# d) Based on the dataset, what is the probability that on any given day, the Tesla closing price would be greater than the opening price?
+
+(close_greater_than_open <- subset(tsla, Close > Open))
+(close_greater_than_open <- close_greater_than_open[c("Open","Close")])
+
+(prob_close_greater_than_open <- nrow(close_greater_than_open) / nrow(tsla))
 
 
 
