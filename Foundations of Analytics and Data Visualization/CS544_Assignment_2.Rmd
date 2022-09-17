@@ -20,7 +20,7 @@ prob(S, (X1 == X2 & X2 == X3))
 # c) Only two of the three rolls are identical.
 
 (C <- subset(S, (X1 == X2 & X3 != X1 & X3 != X2) | (X1 == X3 & X2 != X1 & X2 != X3) | (X2 == X3 & X1 != X2 & X1 != X3)))
-nrow(C)
+
 
 # d) None of the three rolls are identical.
 (D <- subset(S, (X1 != X2 & X2 != X3)))
@@ -40,7 +40,7 @@ nrow(E)
 
 sum_of_first_N_even_square <- function(n) {
   for (i in 1:n) {
-    sum = (2 * n) * (n + 1) * (2 * n + 1) / 3
+    sum = (i * 2) * (i + 1) * (i * 2 + 1) / 3
   }
   return (sum)
 }
@@ -65,20 +65,23 @@ sum_of_first_N_even_square_v2(10)
 # Initialize the Tesla stock data for the year 2021 using the read.csv function as shown below: 
 
 tsla <- read.csv("https://people.bu.edu/kalathur/datasets/TSLA.csv")
+aapl <- read.csv("https://people.bu.edu/kalathur/datasets/AAPL.csv")
 # The first 6 rows of the dataset are as shown below:
 head(tsla)
 
 # a) Store the result of the summary function for the Close attribute as the variable sm. Change the names of this variable so that the output appears as shown below.
 (sm <- summary(tsla$Close))
 (names(sm) <- c("Min", "Q1", "Q2", "Mean", "Q3", "Max"))
+sm
 
 # b) Produce the output for the minimum price of the Tesla closing value in the dataset as shown below:
 
-c(sprintf("The minimum Tesla value of %d is at row %d on %s", min(tsla$Close), as.numeric(rownames(tsla[which(tsla$Close == min(tsla$Close)), ])[1]), tsla[which(tsla$Close == min(tsla$Close)), 1][1]), sprintf("The minimum Tesla value of %d is at row %d on %s", min(tsla$Close), as.numeric(rownames(tsla[which(tsla$Close == min(tsla$Close)), ])[2]), tsla[which(tsla$Close == min(tsla$Close)), 1][2]))
+c(sprintf("The minimum Tesla value of %g is at row %d on %s", min(tsla$Close), as.numeric(rownames(tsla[which(tsla$Close == min(tsla$Close)), ])[1]), tsla[which(tsla$Close == min(tsla$Close)), 1][1]), sprintf("The minimum Tesla value of %g is at row %d on %s", min(tsla$Close), as.numeric(rownames(tsla[which(tsla$Close == min(tsla$Close)), ])[2]), tsla[which(tsla$Close == min(tsla$Close)), 1][2]))
 
 ## c) Produce the output for the maximum price of the Tesla closing value in the dataset as shown below:
 
-sprintf("The minimum Tesla value of %d is at row %d on %s", max(tsla$Close), as.numeric(rownames(tsla[which(tsla$Close == max(tsla$Close)), ])[1]), tsla[which(tsla$Close == max(tsla$Close)), 1][1])
+sprintf("The minimum Tesla value of %g is at row %d on %s", max(tsla$Close), as.numeric(rownames(tsla[which(tsla$Close == max(tsla$Close)), ])[1]), tsla[which(tsla$Close == max(tsla$Close)), 1][1])
+
 
 # d) Based on the dataset, what is the probability that on any given day, the Tesla closing price would be greater than the opening price?
 
@@ -98,9 +101,10 @@ sprintf("The minimum Tesla value of %d is at row %d on %s", max(tsla$Close), as.
 
 # f) Based on the dataset, what is the probability that on any given day, the Tesla closing price would be higher than the opening price, given that the trading volume is greater than 20 million shares?
 
-P(A!B) = P(A # B)/P(B) 
+# Formula: P(A!B) = P(A # B)/P(B) 
 
-(126/252)/(180/252)
+(nrow((subset(tsla, Close > Open))) / nrow(tsla)) / (nrow(subset(tsla, Volume > 20000000)) / nrow(tsla))
+
 # 0.7 or 70%
 
 # g) Suppose you bought 1 share of Tesla stock on each day in the dataset at its low price on that day. How much gain you would have if you sold all those shares at closing price of the last day in the dataset.
