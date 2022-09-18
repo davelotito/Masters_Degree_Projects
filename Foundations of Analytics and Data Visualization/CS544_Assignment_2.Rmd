@@ -7,19 +7,23 @@
 # Using the rollDie function from the prob library, setup the sample space for this experiment with the probability space.
 # For each of the following scenarios from a) through e), show the corresponding outcomes and the probability of that event. The sample outputs for b) are shown as example.
 
+
 (S <- rolldie(3, makespace=TRUE))
 
 # a) The sum of the rolls is greater than 6 but less than 10.
-(A <- subset(S, (X1 + X2 + X3 > 6) & (X1 + X2 + X3 < 10) ))
-prob(S, (X1 + X2 + X3 > 6) & (X1 + X2 + X3 < 10))
+(A <- subset(S, (X1 + X2 + X3) %in% 7:9))
+prob(S, (X1 + X2 + X3) %in% 7:9)
+
 
 # b) All the three rolls are identical.
 (B <- subset(S, (X1 == X2 & X2 == X3)))
 prob(S, (X1 == X2 & X2 == X3))
 
+
 # c) Only two of the three rolls are identical.
 
 (C <- subset(S, (X1 == X2 & X3 != X1 & X3 != X2) | (X1 == X3 & X2 != X1 & X2 != X3) | (X2 == X3 & X1 != X2 & X1 != X3)))
+prob(S, (X1 == X2 & X3 != X1 & X3 != X2) | (X1 == X3 & X2 != X1 & X2 != X3) | (X2 == X3 & X1 != X2 & X1 != X3))
 
 
 # d) None of the three rolls are identical.
@@ -28,8 +32,8 @@ prob(S, (X1 != X2 & X2 != X3))
 
 # e) Only two of the three rolls are identical given that the sum of the rolls is greater than 6 but less than 10.
 
-(E <- subset(S, (X1 != X2 & X2 != X3 & X1 == X3) & (X1 + X2 + X3 > 6 & X1 + X2 + X3 < 10)))
-nrow(E)
+(E <- subset(A, (X1 == X2 & X3 != X1 & X3 != X2 & X1 + X2 + X3 > 6 & X1 + X2 + X3 < 10) | (X1 == X3 & X2 != X1 & X2 != X3 & X1 + X2 + X3 > 6 & X1 + X2 + X3 < 10) | (X2 == X3 & X1 != X2 & X1 != X3 & X1 + X2 + X3 > 6 & X1 + X2 + X3 < 10)))
+prob(E, given = A)
 
 
 # Part3) Functions
@@ -40,8 +44,9 @@ nrow(E)
 # 22 +42 +62 +82 +102 =220
 
 sum_of_first_N_even_square <- function(n) {
+  sum <- 0
   for (i in 1:n) {
-    sum = (i * 2) * (i + 1) * (i * 2 + 1) / 3
+    sum <- sum+i*i*2^2
   }
   return (sum)
 }
@@ -61,6 +66,7 @@ sum_of_first_N_even_square_v2(2)
 sum_of_first_N_even_square_v2(5)
 sum_of_first_N_even_square_v2(10)
 
+
 # Part4) R
 
 # Initialize the Tesla stock data for the year 2021 using the read.csv function as shown below: 
@@ -70,47 +76,51 @@ tsla <- read.csv("https://people.bu.edu/kalathur/datasets/TSLA.csv")
 # The first 6 rows of the dataset are as shown below:
 head(tsla)
 
+# get number of rows
+(n <- nrow(tsla))
+
 # a) Store the result of the summary function for the Close attribute as the variable sm. Change the names of this variable so that the output appears as shown below.
 (sm <- summary(tsla$Close))
 (names(sm) <- c("Min", "Q1", "Q2", "Mean", "Q3", "Max"))
 sm
 
+## use sm for following questions
+
 # b) Produce the output for the minimum price of the Tesla closing value in the dataset as shown below:
 
-c(sprintf("The minimum Tesla value of %g is at row %d on %s", min(tsla$Close), as.numeric(rownames(tsla[which(tsla$Close == min(tsla$Close)), ])[1]), tsla[which(tsla$Close == min(tsla$Close)), 1][1]), sprintf("The minimum Tesla value of %g is at row %d on %s", min(tsla$Close), as.numeric(rownames(tsla[which(tsla$Close == min(tsla$Close)), ])[2]), tsla[which(tsla$Close == min(tsla$Close)), 1][2]))
+c(sprintf("The minimum Tesla value of %g is at row %d on %s", sm["Min"], as.numeric(rownames(tsla[which(tsla$Close == min(tsla$Close)), ])[]), tsla[which(tsla$Close == min(tsla$Close)), 1][]))
 
 ## c) Produce the output for the maximum price of the Tesla closing value in the dataset as shown below:
 
-sprintf("The minimum Tesla value of %g is at row %d on %s", max(tsla$Close), as.numeric(rownames(tsla[which(tsla$Close == max(tsla$Close)), ])[1]), tsla[which(tsla$Close == max(tsla$Close)), 1][1])
+sprintf("The minimum Tesla value of %g is at row %d on %s", sm["Max"], as.numeric(rownames(tsla[which(tsla$Close == max(tsla$Close)), ])[]), tsla[which(tsla$Close == sm["Max"]), 1][])
 
 
 # d) Based on the dataset, what is the probability that on any given day, the Tesla closing price would be greater than the opening price?
 
 (close_greater_than_open <- subset(tsla, Close > Open))
-(close_greater_than_open <- close_greater_than_open[c("Open","Close")])
 
-(prob_close_greater_than_open <- nrow(close_greater_than_open) / nrow(tsla))
+(prob_close_greater_than_open <- nrow(close_greater_than_open) / n)
 # The probability of Tesla's closing price on any given day being greater than the opening price is 0.5 or 50%.
 
 # e) Based on the dataset, what is the probability that on any given day, the Tesla trading volume would be greater than 20 million shares?
 
 (volume_greater_than_20m <- subset(tsla, Volume > 20000000))
-(volume_greater_than_20m <- volume_greater_than_20m[c('Volume')])
 
-(prob_volume_greater_than_20m <- nrow(volume_greater_than_20m) / nrow(tsla))
+(prob_volume_greater_than_20m <- nrow(volume_greater_than_20m) / n)
 # The probability of Tesla's Volume on any given day being greater than the 20 million shares is 0.7142857 or 71.4%.
 
 # f) Based on the dataset, what is the probability that on any given day, the Tesla closing price would be higher than the opening price, given that the trading volume is greater than 20 million shares?
 
 # Formula: P(A|B) = P(A # B)/P(B) 
 
-(nrow((subset(tsla, Close > Open))) / nrow(tsla)) / (nrow(subset(tsla, Volume > 20000000)) / nrow(tsla))
+(f <- subset(volume_greater_than_20m, Close > Open))
+nrow(f) / nrow(volume_greater_than_20m)
 
-# 0.7 or 70%
+# 0.5388889 or 54%
 
 # g) Suppose you bought 1 share of Tesla stock on each day in the dataset at its low price on that day. How much gain you would have if you sold all those shares at closing price of the last day in the dataset.
 
-((nrow(tsla) * tail(tsla[,c("Close")], n=1)) - sum(tsla$Low)) / sum(tsla$Low)
+((n * tail(tsla[,c("Close")], n=1)) - sum(tsla$Low)) / sum(tsla$Low)
 # We would have a gain of 0.3858545 or 38.6%
 
 
