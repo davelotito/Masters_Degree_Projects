@@ -28,8 +28,9 @@ prob(S, (X1 != X2 & X2 != X3))
 
 # e) Only two of the three rolls are identical given that the sum of the rolls is greater than 6 but less than 10.
 
-(E <- subset(S, (X1 != X2 & X2 != X3 & X1 == X3) & (X1 + X3 > 6) & (X1 + X3 < 10)))
+(E <- subset(S, (X1 != X2 & X2 != X3 & X1 == X3) & (X1 + X2 + X3 > 6 & X1 + X2 + X3 < 10)))
 nrow(E)
+
 
 # Part3) Functions
 
@@ -65,7 +66,7 @@ sum_of_first_N_even_square_v2(10)
 # Initialize the Tesla stock data for the year 2021 using the read.csv function as shown below: 
 
 tsla <- read.csv("https://people.bu.edu/kalathur/datasets/TSLA.csv")
-aapl <- read.csv("https://people.bu.edu/kalathur/datasets/AAPL.csv")
+
 # The first 6 rows of the dataset are as shown below:
 head(tsla)
 
@@ -101,7 +102,7 @@ sprintf("The minimum Tesla value of %g is at row %d on %s", max(tsla$Close), as.
 
 # f) Based on the dataset, what is the probability that on any given day, the Tesla closing price would be higher than the opening price, given that the trading volume is greater than 20 million shares?
 
-# Formula: P(A!B) = P(A # B)/P(B) 
+# Formula: P(A|B) = P(A # B)/P(B) 
 
 (nrow((subset(tsla, Close > Open))) / nrow(tsla)) / (nrow(subset(tsla, Volume > 20000000)) / nrow(tsla))
 
