@@ -891,5 +891,3 @@ write.csv(athlete.info, file="test.csv", row.names = FALSE, quote = FALSE)
 
 ## The data is written to the current working directory
 
-
-
