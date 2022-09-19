@@ -122,12 +122,299 @@ pie(Y)
 
 # For the variables that hold numerical data, the common summaries of the variables are described using the measures of center and spread. The common measures of central tendency are the mean, the median, and the mode.
 
+# Consider the following dataset showing the grades of 11 students in an exam. The data is already in the sorted order.
+
+(x <- c(71,72,73,73,74,75,77,81,83,87,91))
+
+# The mean of the above variable is computed as shown below.
+mean(x)
+
+# In scenarios where the ends of the data contain extremely low and extremely high values, the mean of the trimmed dataset can be computed as shown below. In the following case, 10% of the data is trimmed from both the ends when computing the mean for illustration only.
+mean(x, trim=0.1)
+
+# The median of the variable is computed as shown below.
+median(x)
+
+# The mode of the variable is computed indirectly as there is no direct function in R. The table function shows the frequencies of the unique values in the given data. The maximum value is the mode.
+table(x)
+
+(which(table(x) == max(table(x))))
+
+# The value 73 occurs twice, which is the maximum occurrence. The second value shown by the which function is the index of the value in the tabular representation.
+# The common measures of spread are the range, the variance, the standard deviation, and the interquartile range. The range of the variable is the difference between the maximum and the minimum value. The function, range, returns the values as a pair.
+range(x)
+diff(range(x))
+
+# The variance and the standard deviation of the variable are computed as shown below.
+var(x)
+
+sd(x)
+
+# The interquartile range represents the middle 50% of the data. This value is computed as the difference between the third quartile (75 percentile) and the first quartile (25 percentile). The function fivenum gives the five-number summary of the data (minimum, first quartile/lower hinge, median, third quartile/upper hinge, maximum). The summary function gives the mean in addition to the above five numbers.
+fivenum(x)
+
+summary(x)
+
+quantile(x, c(0, 0.25, 0.5, 0.75, 1))
+
+IQR(x)
+# The above value is the difference between the third quartile, 82, and the first quartile, 73.
+
+# The z-scores of the data show the number of standard deviations the value is from the mean of the data set. The above data has a mean value 77.91 and a standard deviation of 6.67. The scale function computes the z-scores of the given data.
+
+scale(x)
+
+# The z-scores of a given dataset have a mean of 0 and a standard deviation of 1.
+
+# In the above example, which had an odd number of values, the fivenum and summary functions produced the same results. However, these two functions behave differently when computing the quartiles for even number of values as shown below.
+
+(x <- c(71,72,73,73,74,75,77,81,83,87,90,91))
+fivenum(x)
+
+summary(x)
+
+quantile(x, c(0,0.25, 0.5, 0.75, 1))
+
+# The quartiles shown in the summary function correspond to the values directly computed using the quantile function. The interquartile range function also uses these values.
+
+IQR(x)
+
+############################
+#### Test Yourself 3.6 ####
+############################
+
+# Assign the 'approval' column to a new variable. What is the mean approval? What is the median approval? What is the variance of the approval? Produce a summary using the summary() function. Show all R commands.
+
+(approval <- data$approval)
+
+mean(approval)
+median(approval)
+summary(approval)
+var(approval)
+
+######################################################################
+##### Section #5 - Numerical Data ####################################
+##### Sub-Section: Graphical Representations of Numerical Data #######
+######################################################################
+
+# The following dataset variable (central.park from the UsingR package) shows the minimum temperatures observed in Central Park (New York City) during May 2003.
+
+central.park$MIN
+
+# The summary function shows the various measures of the data.
+
+summary(central.park$MIN)
+
+# A barplot showing the daily minimum temperatures is plotted as shown below.
+?attach()
+
+attach(central.park)
+
+barplot(MIN, names = 1:31, xlab = "Day", ylab = "Min Temp", col = "cyan", las = 2)
+
+# The dotchart is sometimes used as a substitute for the barplot. The values of the variable are shown as dots horizontally over the range of the data.
+
+dotchart(MIN, labels = 1:31, xlab = "Min Temp")
+
+# The table function may also be used with the numeric data for finding the frequencies of the unique values in the data.
+table(MIN)
+
+# A barplot showing these frequencies is seen below. The heights of the bars show how many days in the month had that particular minimum temperature.
+
+barplot(table(MIN), col = "cyan", ylim=c(0,6), xlab = "Min Temp", ylab = "# of Days")
+
+############################
+#### Test Yourself 3.7 ####
+############################
+
+# Produce a dot plot of the approvals. Show the R commands
+
+(data <- BushApproval)
+(approval <- data$approval)
+
+dotchart(approval)
+
+############################
+#### Test Yourself 3.8 ####
+############################
+
+# Produce a barplot showing the frequency of the approvals. Show the R commands
+
+barplot(table(approval), ylab = "Frequency", xlab = "Approval", ylim = c(0, 20))
+
+####################
+#### Stem Plots ####
+####################
+
+# The stem and leaf plot is useful for small datasets as it shows the values and the shape of the distribution compactly. The stem is the number on the left of the bar. The number on the right of the bar is the leaf.
+
+(x <- c(72,73,71,73,74,75,77,81,83,87,91,92))
+
+stem(x)
+
+############################
+#### Test Yourself 3.9 ####
+############################
+
+# Produce a stem plot of the approvals. The stem should be value in the tens place while the leaves represent the values in the ones place (e.g- 71 would be 7 | 1). Adjust the stem() function's scale and width arguments to get the desired plot. Show the R commands.
+
+(data <- BushApproval)
+(approval <- data$approval)
+
+stem(approval, scale = 0.5)
+
+#################################
+#### Histograms and Boxplots ####
+#################################
+
+# The histogram shows the frequency of the data for a particular interval, whereas the barplot is used for a category. The alltime.movies dataset (from the UsingR package) shows the gross receipts (in millions) for the top 79 movies as of the year 2003. The data is already sorted in descending order.
+
+head(alltime.movies, n = 2)
+
+# The histogram for the data is shown below.
+attach(alltime.movies)
+
+hist(Gross, col=hcl(0), ylim=c(0,35))
+
+# The above plot shows that 31 movies had gross receipts of less than 200 million dollars and one movie greater than 600 million dollars. The intervals (also known as bins or buckets) for the histogram bars can be examined by assigning to a variable as shown below. The breaks variable of the histogram shows the ranges for each interval. The counts variable shows the number of values that lie within each of these intervals. Note that the length of counts is one less than the length of breaks.
+(x <- hist(Gross))
+
+names(x)
+
+x$breaks
+
+x$counts
+
+# The sequence of breaks can be explicitly specified for the histogram. Another option is to specify the number of breaks for the histogram. Both these options are shown below.
+
+(x1 <- hist(Gross, breaks = seq(170,620,25), col = hcl(0), ylim = c(0,35)))
+
+(x2 <- hist(Gross, breaks = 5, col = hcl(0), ylim = c(0,35)))
+
+# The shape of the histogram differs depending upon how the intervals are established.
+
+# The breaks and the counts for the above two options are as follows.
+
+x1$breaks
+
+x1$counts
+
+x2$breaks
+
+x2$counts
+
+# A boxplot (also known as box and whisker plot) is used to display the five-number summary of the data and allows the visual inspection of the center of the data, the spread of the data, and the skew of the data. The boxplot function, by default, shows the plot vertically. In the following example, the boxplot is drawn horizontally.
+
+(x <- c(71,72,73,74,75,77,81,83,87,91,92))
+boxplot(x, horizontal = TRUE)
 
 
+# If there are no outliers in the data, the whiskers at the ends show the minimum and maximum values of the data. The left end of the box shows the lower hinge (or the first quartile) while the right end of the box shows the upper hinge (or the third quartile). The box is essentially the middle 50% of the data, the interquartile range. The thick line within the box shows the median of the data. The lower 50% of the data occurs to the left of the median, while the upper 50% of the data occurs to the right of the median. Similarly, the lower 25% of the data lies between the left whisker and the left edge of the box, while the upper 25% of the data lies between the right edge of the box and the right whisker.
 
+# The five-number summary of the data is shown below.
+fivenum(x)
 
+# The default labels for the x-axis can be suppressed and labeled with the five-number summary values as shown below.
 
+boxplot(x, horizontal = TRUE, xaxt = "n")
+axis(side = 1, at = fivenum(x), labels = TRUE)
 
+# If there are outliers in the data, the boxplot is modified to show the outliers. Any data that is greater than (3rd quartile + 1.5 ! IQR) or less than (1st quartile– 1.5 ! IQR) is considered an outlier and is plotted using the circle dots as shown below. If there are outliers, the whiskers at those ends mark the data point that doesn’t lie in the outlier range.
+
+# The following data has two outliers on the lower end of the data.
+
+(y <- c(35, 40,50,65,72,73,73,74,75,81,83,87,92))
+boxplot(y, horizontal = TRUE, xaxt = "n")
+axis(side = 1, at = fivenum(y), labels = TRUE)
+
+## The lower and upper ends of the outlier ranges can be calculated as follows.
+
+(f <- fivenum(y))
+
+c(f[2] - 1.5*(f[4] - f[2]), f[4] + 1.5*(f[4] - f[2]))
+
+# For the above dataset, any values that are less than 41 and greater than 105 are considered outliers. So, the values 35 and 40 are outliers. The whisker at the left is drawn at the next value 50.
+
+# The following data has two outliers on the lower end and one outlier on the upper end of the data.
+
+(z <- c(35, 40,55, 65,66,70,72,72,73,73,74,74,79,90))
+boxplot(z, horizontal = TRUE, xaxt = "n")
+axis(side = 1, at = fivenum(z), labels = TRUE, las=2)
+
+# The lower and upper ends of the outlier ranges for the above data can be calculated as follows.
+
+(f <- fivenum(z))
+
+c(f[2] - 1.5*(f[4] - f[2]), f[4] + 1.5*(f[4] - f[2]))
+
+# Hence, the values 35, 40, and 90 are marked as outliers. The whisker at the left is shown for the input value 55 whereas the whisker on the right corresponds to the input value 79.
+
+# The boxplot for the gross receipts of the movies dataset is shown below.
+
+attach(alltime.movies)
+
+boxplot(Gross, col=hcl(0), xlab = "Gross Sales", horizontal = TRUE)
+
+# The five-number summary values along with the text labels can be added to the plot as shown below.
+
+boxplot(Gross, col=hcl(0), xaxt = "n", xlab = "Gross Sales", horizontal = TRUE)
+
+axis(side = 1, at = fivenum(Gross), labels = TRUE, las=2)
+
+text(fivenum(Gross), rep(1.2,5), srt = 90, adj = 0, labels = c("Min", "Lower Hinge", "Median", "Upper Hinge", "Max"))
+
+# The boxplot shows that there are five outlier values at the upper end of the data. The titles of these movies and their gross receipts can be explicitly calculated as shown below.
+(f <- fivenum(Gross))
+
+(titles <- rownames(alltime.movies))
+
+titles[Gross > f[4] + 1.5*(f[4] - f[2])]
+
+Gross[Gross > f[4] + 1.5*(f[4] - f[2])]
+
+############################
+#### Test Yourself 3.10 ####
+############################
+
+# Produce a boxplot of the approvals. Label the plot at the five number summary positions. Show the R commands.
+
+(data <- BushApproval)
+(approval <- data$approval)
+
+boxplot(approval, yaxt='n')
+axis(side=2, at=fivenum(approval), labels=TRUE)
+
+############################
+#### Test Yourself 3.11 ####
+############################
+
+# Produce a histogram of the approvals. Make sure the range you select is appropriate and encompasses all approval values. Try 3 different bucket sizes. Show the R commands.
+
+(data <- BushApproval)
+(approval <- data$approval)
+
+hist(approval, breaks=5)
+hist(approval, breaks=10)
+hist(approval, breaks=20)
+
+############################
+#### Test Yourself 3.12 ####
+############################
+
+# Add two values, 8 and 99 to the vector of approvals. Produce a boxplot. Are either of the new data points outliers? Show the R commands.
+
+(data <- BushApproval)
+(approval <- data$approval)
+
+(x <- c(approval, 8, 99))
+
+boxplot(approval)
+
+# Yes, the two new data points are both outliers
+
+########################################
+##### Section #5 - Bivariate Data #####
+########################################
 
 
 
