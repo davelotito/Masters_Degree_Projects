@@ -616,11 +616,71 @@ prop.table(y)
 #### Graphical Summarization of Two-way Tables ####
 ###################################################
 
+# The mosaic plot is one option for creating a graphical representation of the contingency table. The counts in the table are represented by rectangles. The mosaic plot of the seat belt data can be plotted in R as shown below
+x
 
+mosaicplot(x, color=c("red", "blue"))
 
+# Similarly, the mosaic plot of the grade data is shown below.
 
+mosaicplot(table(grades), color="cyan")
 
+# The bar plot can also be used for the graphical presentation of the two-way data. The first argument is the two-way table. The first variable of the table is used for the categories of the bar plot. The bars for each level are stacked by default and the heights show the proportions of the second variable. In the following example, the variable x stores the seat belt dataset.
 
+barplot(x, xlab = "Parent", main = "Child Seat-Belt Usage", ylim=c(0,60), col=c("red", "blue"))
+
+# If the bars for the second variable are to be plotted side by side, the option beside=TRUE is specified. A legend can also be added to the plot as shown.
+
+barplot(x, xlab = "Parent", main = "Child Seat-Belt Usage", beside = TRUE, legend.text = TRUE, ylim=c(0,60), col=c("red", "blue"))
+
+# The above plots show the distribution of the child variable. However, if the parent distribution is desired, the table is first transposed and then the plot is done as shown below.
+
+t(x)
+
+barplot(t(x), xlab = "Child", beside = TRUE, legend.text = TRUE, main = "Parent Seat-Belt Usage", ylim=c(0,60), col=c("red", "blue"))
+
+# Similarly, the bar plot for the grades dataset is shown below. The colors for the nine categories of grades can be explicitly specified, or the rainbow function can be used to create a vector of the required number of colors.
+
+barplot(table(grades), xlab = "Prev Grade", beside = TRUE, legend.text = TRUE, main = "Current Grade", border=FALSE, args.legend = list(x = "center"), ylim=c(0,20), col = rainbow(9))
+
+############################
+#### Test Yourself 3.17 ####
+############################
+
+# Before continuing, let's replace our table with some different values. Replace the contents of the table produced in the previous problems with the values seen below:
+
+# You may do this however you like but a recommendation is to assign the rows or columns of the matrix to these new values so as to maintain the dimension names and labels of your data. Show the R commands.
+
+(data[1, ] <- c(10, 1, 0, 0))
+(data[2, ] <- c(6, 9, 20, 0))
+(data[3, ] <- c(1, 3, 5, 1))
+(data[4, ] <- c(0, 1, 8, 4))
+
+############################
+#### Test Yourself 3.18 ####
+############################
+
+# Now that we have our new table, produce a mosaic plot of the table, use 4 different colors. Show the R commands.
+
+mosaicplot(data, color = c("green", "yellow", "red", "blue"))
+
+############################
+#### Test Yourself 3.19 ####
+############################
+
+# Show a barplot of the data where the x-axis indicates the patient's disease status before treatment. You may use a stacked barplot or set beside=TRUE. In any case, you must label your axes and include a legend. Show the R commands.
+
+barplot(data, xlab="Status.After.Treatment", beside = TRUE, main = "Patient disease status before/after treatment", col = c('green', 'yellow', 'red', 'black'), legend.text=TRUE)
+
+# Load the iris data set using data('iris'). Produce a scatter plot of the Sepal Length vs. the Sepal Width. Label the axes. Show the R commands.
+
+data('iris')
+
+plot(iris$Sepal.Length, iris$Sepal.Width)
+
+######################################################
+##### Section #6 - Relationships in Numeric Data #####
+######################################################
 
 
 
