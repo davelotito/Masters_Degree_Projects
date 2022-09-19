@@ -728,38 +728,70 @@ plot(f$height, f$height, ylim=c(0,160))
 ##### Section #7 - Multivariate Date #####
 ##########################################
 
+# Multivariate datasets have data populated with more than two variables. The data can either be in the summarized form or in the original form. For categorical data, the table function may be used to summarize the data given in the original form. But, the table function shows only the relationship between two variables at once. For examining three or more variables, more than one table is used to show the relationships.
 
+# The student.expenses dataset (from the UsingR package) shows the survey results for ten students asked whether they incurred any expenses in the specified five categories. The categories and the first two rows of the data are shown below.
 
+names(student.expenses)
 
+head(student.expenses, n =2)
 
+# Examining the relationship between two variables using the table function is straightforward. The following code shows the relationship between having cable TV and cable modem.
 
+attach(student.expenses)
 
+table(cable.tv, cable.modem)
+cable.tv
+# Similarly, the relationship between having cable TV and car is shown below.
 
+table(cable.tv, car)
+car
 
+# Three-way or (n-way) contingency tables show the relationships among three (or n) variables using multiple two-way tables. The table function is invoked with the desired variables. The first two variables are fixed in the table output while the number of values for the extra variables determines the number of tables produced.
 
+# In the following code, the effect of having a car is investigated with respect to the cable TV and the cable modem. Since the car variable has two values, two tables are shown one with the car variable equal to N and the other with the car variable equal to Y.
 
+table(cable.tv, cable.modem, car)
 
+# The above output can be flattened using the ftable function. The flatten table function is invoked on the table by specifying the desired columns using the col.vars argument.
 
+ftable(table(cable.tv, cable.modem, car), col.vars = c("car", "cable.modem"))
 
+# Similarly, the flattened table with four variables is shown below.
 
+ftable(table(cable.tv, cable.modem, cell.phone, car), col.vars = c("car", "cable.modem", "cell.phone"))
 
+cable.tv
 
+############################
+#### Test Yourself 3.21 ####
+############################
 
+# Load the motor trends data set using data(‘mtcars’). How many variables does each entry contain?
 
+data("mtcars")
 
+mtcars
+## 11 variables
+ncol(mtcars)
 
+############################
+#### Test Yourself 3.22 ####
+############################
 
+# Using the mtcars data set, slice the data frame such that the resulting data frame contains only the columns 'cyl', 'disp', 'hp', 'gear'. Make sure the resulting data frame has the same row names as that of mtcars. Using mtcars and the table() function to produce two-way tables of the 'cyl' vs the other three variables above. Show all R commands.
 
+attach(mtcars)
 
+(data <- cbind(cyl, disp, hp, gear))
+(rownames(data) <- rownames(mtcars))
+table(cyl, disp)
+table(cyl, hp)
+table(cyl, gear)
 
-
-
-
-
-
-
-
-
+############################################
+##### Section #8 - Independent Samples #####
+############################################
 
 
 
