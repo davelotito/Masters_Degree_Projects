@@ -583,6 +583,7 @@ margin.table(y, 2)
 
 (data.with.margins <- addmargins(y))
 
+
 #####################################################
 #### Conditional Distributions of Two-way Tables ####
 #####################################################
@@ -610,10 +611,12 @@ prop.table(x)
 
 # The proportions for the grades dataset along the rows are shown below. For each row, the percentages show the effect of the previous grade on the current grade.
 
+# Prob of getting a letter grade conditional of prev letter grade
 prop.table(y,1)
 
 # The proportions for the grades dataset along the columns are shown below. For each column, the percentages show the effect of the current grade on the previous grade.
 
+# Prob of getting a prev letter grade conditional of the current grade
 prop.table(y,2)
 
 # The options function was used to set the number of digits in the decimal part for display purpose.
@@ -948,21 +951,52 @@ col = c("green", "red"),
 main=paste("Dept",LETTERS[i],sep=" "))
 
 
+##############################
+##### Non-Lecture Coding #####
+##############################
+
+############################################################
+######  Graphical Representations of Categorical Data ###### 
+############################################################
+table(central.park.cloud)
+
+table(central.park.cloud)/length(central.park.cloud)
+
+barplot(table(central.park.cloud), col = "blue", xlim = c(0, 12), xlab = "Frequency", ylab = "Type", horiz = TRUE)
+########################################################
+###### Graphical Representations of Numerical Data ###### 
+########################################################
+typeof(central.park)
+
+attach(central.park)
+
+barplot(MAX, names.arg = 1:31, xlab = "Day", ylab = "Max Temp", col = "green", las=2)
+
+barplot(MIN, names.arg = 1:31, xlab = "Day", ylab = "Min Temp", col = "green", las=2)
+
+barplot(AVG, names.arg = 1:31, xlab = "Day", ylab = "Avg Temp", col = "green", las=2)
+################################
+#### Histograms and Boxplots ####
+################################
+
+head(alltime.movies)
+
+attach(alltime.movies)
+
+hist(Gross, col=hcl(0), ylim = c(0,35))
+
+hist(Release.Year, col=hcl(0), ylim = c(0,34), breaks = 5)
+
+barplot(Release.Year, names.arg = 1:79, xlab = "Year", ylab = "Number", col = "red", horiz = TRUE, ylim = c(0,12))
+
+(x <- hist(Gross, plot = TRUE))
+names(x)
+
+x$breaks
+x$counts
+x$counts[c(1:5)]
+x$mids
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Gross[which((Gross > 150) & (Gross < 200))]
 
