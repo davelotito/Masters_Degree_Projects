@@ -8,7 +8,9 @@
 # Qualitative data, associated with a property or a quality (e.g., gender, eye color, grade, rank, etc.) # Quantitative data, associated with a numeric measurement (e.g., temperature, age, weight, income, etc.)
 
 # The qualitative data, also known as categorical data, can further be classified as:
+
 # Nominal data, where there is no ranking among the distinct categories (e.g., male or female for gender, democrat, republican, or independent for party affiliation, etc.)
+
 # Ordinal data, where there is an implicit ranking among the distinct categories (e.g., sergeant, lieutenant, captain, or chief for the police rank, A, B, C, D, or F for class grade, poor, good, or excellent for customer satisfaction, etc.)
 
 # An example of nominal categorical data is the list of states as shown below. The state.abb dataset provided by R lists the state abbreviations in alphabetical order.
@@ -82,7 +84,7 @@ barplot(table(central.park.cloud), col = "cyan", ylim=c(0,12), xlab = "Type", yl
 
 # The barplot can be created with the bars shown horizontally; the option is specified as shown below.
 
-barplot(table(central.park.cloud), col = "cyan", horiz = TRUE, xliam = c(0,12), las = 2, xlab = "Frequency")
+barplot(table(central.park.cloud), col = "cyan", horiz = TRUE, xlim = c(0,12), las = 2, xlab = "Frequency")
 
 # A pie chart of the data is useful for comparing the proportions of each of the categories.
 
@@ -103,6 +105,7 @@ pie(data, labels = slice.labels,col=hcl(c(0, 60, 120)))
 ############################
 
 # Create a bar chart using the data from the 'who' column. Label the columns appropriately. Show the R commands
+(data <- BushApproval)
 
 (y <- data$who)
 
@@ -416,21 +419,202 @@ boxplot(approval)
 ##### Section #5 - Bivariate Data #####
 ########################################
 
+# Bivariate datasets deal with data contained in two variables. Depending on the given data, the two variables may be related or unrelated. If the given data has the test scores of the students from two different sections taking the same test, the pairs of data are unrelated. If the same section of students takes two different tests, the data is related. In addition to summarizing data as categorical or numeric, the relationship between the data is also explored.
+
+# Contingency (two-way) tables are frequently used to summarize bivariate categorical data. For each possible pair of values for the two variables, the contingency table provides the number of occurrences for that pair. Relationships between the two variables can be examined by comparing the rows/columns of the contingency table.
+
+# If the data for the two categorical variables is given in the unsummarized form (the actual values), the contingency table is created using the R function table(x,y), where x and y are the two data vectors representing the two variables.
+
+# The grades dataset (from the UsingR package) is used in this example. The dataset provides the grades of 122 students for the current class (grade) and their previous class (prev). The first six rows of the dataset are shown below.
+
+head(grades)
+
+# The contingency table between the prev and grade variables is computed using the table function. The function can be called directly on the dataset, table(grades), or explicitly by specifying the two variables as shown below.
+
+attach(grades)
+
+table(prev, grade)
+
+# The above table shows that the current grades relate to the previous grades. Fifteen students who got A in the previous class also got A in the current class. Similarly, eleven students who got F in the previous class also got F in the current class. The lower left triangle shows the students who improved when the previous grade is compared to the current grade. The upper right triangle shows the number of students whose performance declined between the previous class and the current one.
+
+##########################################
+#### Two-way Tables - Summarized Data ####
+##########################################
+
+# If the raw data comparing two variables is available in summarized form, the data can be entered into R in various ways. The following table shows the results of a survey of 82 vehicles looking at seat belt use by parents and their children.
+
+# The data can be entered using the rbind function, where each argument is a vector representing the corresponding row of the table.
+
+(x <- rbind(c(56,8), c(2,16)))
+
+# The data can also be entered using the cbind function, where each argument is a vector representing the corresponding column of the table.
+
+(x <- cbind(c(56,2), c(8,16)))
+
+# The matrix function can also be used by providing all the values as a single vector in the column-major order (default) and specifying either the number of rows or number of columns.
+
+(x <- matrix(c(56,2,8,16), nrow=2))
+
+# If the values are desired in the row-major order, the byrow option is specified as TRUE.
+
+(x <- matrix(c(56,8,2,16), nrow=2, byrow = TRUE))
+
+# Once the table is created, names may optionally be assigned to the rows and columns of the table as follows.
+rownames(x) <- c("buckled", "unbuckled")
+colnames(x) <- c("buckled", "unbuckled")
+x
+
+row1 <- c(56,8)
+names(row1) <- c("buckled" ,"unbuckled")
+
+row2 <- c(2,16)
+
+(x <- rbind(buckled = row1, unbuckled = row2))
+
+# The names for the variables can be specified using dimnames() as follows.
+
+(tmp <- c("buckled", "unbuckled"))
+(dimnames(x) <- list(parent=tmp, child=tmp))
+x
+
+############################
+#### Test Yourself 3.13 ####
+############################
+
+# Consider the following data set representing a clinical trial on 10 patients. Each row represents a patient and the first column indicates their disease level before treatment while the second column represents the disease level after treatment. It should be noted that the disease level is a categorical variables and can take on the following values: "mild", "moderate", "severe", "terminal"
+
+# Use whatever R commands needed to produce a two-way table representing the unsummarized data in the table above.
+
+(pre <- c("mild", "moderate", "mild", "moderate", "severe", "severe", "terminal", "terminal", "severe", "moderate"))
+
+(post <- c("mild", "mild", "mild", "mild", "severe", "moderate", "severe", "terminal", "mild", "moderate"))
+
+table(pre,post)
+
+# Values along the diagonal indicate the number of patients who say no changes in their disease status after treatment. Numbers in the upper diagonal represent patients whose status worsened, while those in the lower diagonal represent patients whose status improved.
+
+############################
+#### Test Yourself 3.14 ####
+############################
+
+#Reproduce the summarized table from the previous problem using the matrix() command. Name the rows and columns accordingly. Show the R commands.
 
 
+data <- matrix(c(2, 0, 0, 0, 2, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1), nrow=4, byrow=TRUE)
+levels <- c('mild',  'moderate',  'severe',  'terminal')
+dimnames(data) <- list(before.treatment=levels, after.treatment=levels)
+data
 
+##################################################
+#### Marginal Distributions of Two-way Tables ####
+##################################################
 
+# The distribution of each variable separately is the marginal distribution of that variable. In a two-way table, adding the rows or the columns gives the marginal distribution of the corresponding variable. The apply sum or the margin.table function can be used for this purpose.
 
+# For the seat belt dataset, the marginal distribution for the parent (rows in the table) is calculated as follows. The argument value 1 identifies the rows while the value 2 identifies the columns.
 
+x
 
+apply(x, 1, sum) # row wise
 
+margin.table(x, 1) # row wise
 
+# Similarly, the marginal distribution for the child variable (columns in the table) is computed as follows.
 
+apply(x, 2, sum) # column wise
 
+margin.table(x, 2) # column wise
 
+# If neither the row nor the column is specified, the function returns the sum of all the values in the table.
 
+margin.table(x)
 
+# The addmargins function extends the two-way table by adding the marginal distributions as shown below.
 
+addmargins(x)
+
+addmargins(x, 1)
+
+addmargins(x, 2)
+
+# Similarly, for the grades dataset shown below, the marginal distributions of the previous grade (prev) and current grade (grade) variables can be computed.
+
+(y <- table(prev, grade))
+
+(margin.table(y, 1))
+
+(margin.table(y, 2))
+
+# From the above, 28 students had an A grade in the previous class while 21 students got an A grade in the current class. The number of F grades remained the same.
+
+margin.table(y)
+
+addmargins(y)
+
+addmargins(y,1)
+
+addmargins(y,2)
+
+############################
+#### Test Yourself 3.15 ####
+############################
+
+# Using the table generated in the previous problem, produce a marginal table by using the apply() and sum() functions. Repeat the task using the margin.table() function. Now add the margins to the original table. Show the R commands.
+
+apply(y, 1, sum)
+
+apply(y, 2, sum)
+
+margin.table(y, 1)
+
+margin.table(y, 2)
+
+(data.with.margins <- addmargins(y))
+
+#####################################################
+#### Conditional Distributions of Two-way Tables ####
+#####################################################
+
+# When comparing the rows (or columns) of the two-way table, having the values as proportions or percentages is more effective. The prop.table function computes the percentages with respect to the sum of the corresponding row (or column). With the argument value 1, the values of the rows add to 1 (100%). With the argument value 2, the values of the columns add to 1 (100%).
+
+options(digits = 2)
+
+addmargins(x)
+
+# From the above table, 88% of the time children wear seat belts when their parents do. If the parent is not wearing a seat belt, 11% of the time the child wore the seat belt, while 89% of the time the child did not.
+
+# Similarly, the proportions along the columns are shown below.
+
+prop.table(x,2)
+
+# If the row or column is not specified, the prop.table function computes the relative percentages with respect to the entire table.
+
+prop.table(x)
+
+# The proportions for the grades dataset along the rows are shown below. For each row, the percentages show the effect of the previous grade on the current grade.
+
+prop.table(y,1)
+
+# The proportions for the grades dataset along the columns are shown below. For each column, the percentages show the effect of the current grade on the previous grade.
+
+prop.table(y,2)
+
+# The options function was used to set the number of digits in the decimal part for display purpose.
+options(digits=1)
+
+############################
+#### Test Yourself 3.16 ####
+############################
+
+# Using the table generated in the previous problem, use prop.table() to show the table values as proportions of the marginal sums, as well as the total sum. Show the R commands.
+
+prop.table(y, 1)
+prop.table(y, 2)
+prop.table(y)
+
+###################################################
+#### Graphical Summarization of Two-way Tables ####
+###################################################
 
 
 
