@@ -1,3 +1,168 @@
 # Module 3 Lecture Notes
 
-# Section #1 - Types of Data
+#####################################
+#### Section #1 - Types of Data #### 
+#####################################
+
+# The data that we analyze can be classified into two types:
+# Qualitative data, associated with a property or a quality (e.g., gender, eye color, grade, rank, etc.) # Quantitative data, associated with a numeric measurement (e.g., temperature, age, weight, income, etc.)
+
+# The qualitative data, also known as categorical data, can further be classified as:
+# Nominal data, where there is no ranking among the distinct categories (e.g., male or female for gender, democrat, republican, or independent for party affiliation, etc.)
+# Ordinal data, where there is an implicit ranking among the distinct categories (e.g., sergeant, lieutenant, captain, or chief for the police rank, A, B, C, D, or F for class grade, poor, good, or excellent for customer satisfaction, etc.)
+
+# An example of nominal categorical data is the list of states as shown below. The state.abb dataset provided by R lists the state abbreviations in alphabetical order.
+
+## Nominal Example:
+state.abb
+
+# The quantitative data, also known as numerical data, can further be classified as:
+# Interval data, where the values are ordered and the difference in the values is meaningful (e.g., temperature in Fahrenheit. If the morning temperature is 60 and the afternoon temperature is 70, it is 10 degrees warmer. If the average temperatures in May and December are 90 and 45, respectively, we cannot infer that May is twice as warm as December). We can only add or subtract with interval data—we cannot multiply or divide. Ratio data, where the values are ordered and can be compared using addition, subtraction, multiplication, or division (e.g., age in years. We can compare twice as old, two years older, etc.)
+
+# Example Datasets for R
+# Some of the datasets are in the basic datasets package. Other datasets are in the UsingR package. For working with the UsingR datasets, the library is first loaded as follows.
+
+## Load Package
+# library(UsingR)
+
+########################################
+##### Section #2 - Univariate Data #####
+########################################
+
+# Univariate datasets deal with data contained in a single variable. Even if the dataset consists of the data for multiple variables, univariate analysis examines one variable at a time. The data can be categorical data or numerical data. Summary descriptions and visual representations of the data are presented in the following sections.
+
+# Use the following commands to load the 'BushApproval' data set into memory. The following problems will use this data set. Feel free to explore the data and data types present before proceeding.
+(data <- BushApproval)
+
+(date <- BushApproval$date)
+
+# What kinda of data is date?
+
+#Answer: Quantitative because it can calculated/measured & Interval data because the data can only be added or subtracted & we know its numerical.
+
+#########################################
+##### Section #3 - Categorical Data #####
+#########################################
+
+# Tables are frequently used for summarizing the categorical data for non-visual representations. Given a vector of values, x , the function table(x) tabulates the frequencies for all the unique values in the data vector x . The function can be applied for both categorical data and numerical data.
+
+(x <- c("yes", "no", "no", "yes", "no"))
+
+table(x)
+
+
+
+# The dataset central.park.cloud (from the UsingR package) contains the information about the type of day (clear, partly.cloudy, or cloudy) for Central Park, NY, during the month of May 2003. The dataset is shown below.
+
+central.park.cloud
+
+# The table function provides a more meaningful summary, showing the frequencies of the types of days.
+
+table(central.park.cloud)
+
+# The proportion of each of these categories with respect to the total size of the dataset can be calculated as follows.
+
+table(central.park.cloud) / length(central.park.cloud)
+
+# Which column represents categorical data? Show the R commands for the Bush Approval data set
+
+(x <- data$who)
+levels(x)
+
+######################################################################
+##### Section #3 - Categorical Data ##################################
+##### Sub-Section: Graphical Representations of Categorical Data #####
+######################################################################
+
+# The frequencies of the various categories can be graphically represented using a barplot. By default, the bars are drawn vertically with the first data bar at the left. The names of the categories are used as the labels for the bars.
+
+barplot(table(central.park.cloud), col = "cyan", ylim=c(0,12), xlab = "Type", ylab = "Frequency")
+
+# A barplot could be misleading if the ranges of the frequencies are not properly shown. The same data would produce the following chart if the y-axis were limited to the range 8 to 12.
+
+# The barplot can be created with the bars shown horizontally; the option is specified as shown below.
+
+barplot(table(central.park.cloud), col = "cyan", horiz = TRUE, xliam = c(0,12), las = 2, xlab = "Frequency")
+
+# A pie chart of the data is useful for comparing the proportions of each of the categories.
+
+pie(table(central.park.cloud), col=(c(0,60,120)))
+
+# The labels for the pie chart can be customized as shown below. The proportion of each category is computed and appended to the respective name.
+
+(data <- table(central.park.cloud))
+(slice.labels < names(data))
+(slice.percents <- round(100 * data/sum(data)))
+(slice.labels <- paste(slice.labels, slice.percents))
+(slice.labels <- paste(slice.labels, "%", sep=""))
+
+pie(data, labels = slice.labels,col=hcl(c(0, 60, 120)))
+
+############################
+#### Test Yourself 3.4 ####
+############################
+
+# Create a bar chart using the data from the 'who' column. Label the columns appropriately. Show the R commands
+
+(y <- data$who)
+
+barchart(y, xlab = "Frequency", ylab = "who", horiz=TRUE)
+
+############################
+#### Test Yourself 3.5 ####
+############################
+
+(Y <-table(data$who))
+
+pie(Y)
+ 
+########################################
+##### Section #4 - Numerical Data #####
+#######################################
+
+# For the variables that hold numerical data, the common summaries of the variables are described using the measures of center and spread. The common measures of central tendency are the mean, the median, and the mode.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
