@@ -80,15 +80,21 @@ levels(x)
 
 barplot(table(central.park.cloud), col = "cyan", ylim=c(0,12), xlab = "Type", ylab = "Frequency")
 
+barplot(table(central.park.cloud), col = c("red", "green", "blue"), ylim = c(0,12), xlab = "Type", ylab = "Frequency")
+
 # A barplot could be misleading if the ranges of the frequencies are not properly shown. The same data would produce the following chart if the y-axis were limited to the range 8 to 12.
 
 # The barplot can be created with the bars shown horizontally; the option is specified as shown below.
 
 barplot(table(central.park.cloud), col = "cyan", horiz = TRUE, xlim = c(0,12), las = 2, xlab = "Frequency")
 
+barplot(table(central.park.cloud), col = c('red', 'green', 'blue'), horiz = TRUE, xlim = c(0,12), las = 2, xlab = 'Frequency')
+
 # A pie chart of the data is useful for comparing the proportions of each of the categories.
 
 pie(table(central.park.cloud), col=(c(0,60,120)))
+
+pie(table(central.park.cloud), col=(c('red','blue','green')))
 
 # The labels for the pie chart can be customized as shown below. The proportion of each category is computed and appended to the respective name.
 
@@ -110,6 +116,12 @@ pie(data, labels = slice.labels,col=hcl(c(0, 60, 120)))
 (y <- data$who)
 
 barchart(y, xlab = "Frequency", ylab = "who", horiz=TRUE)
+
+(data <- BushApproval)
+
+(y <- data$who)
+
+barchart(y, xlab = "who", ylab = "Frequency", horiz = TRUE)
 
 ############################
 #### Test Yourself 3.5 ####
@@ -585,7 +597,12 @@ addmargins(x)
 
 # Similarly, the proportions along the columns are shown below.
 
+# Prob of being MALE/FEMALE conditional of being a Admitted/Rejected
+prop.table(x,1)
+
+# Prob of being Admitted/Rejected conditional of being Male/Female
 prop.table(x,2)
+
 
 # If the row or column is not specified, the prop.table function computes the relative percentages with respect to the entire table.
 
