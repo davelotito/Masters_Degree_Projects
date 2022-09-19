@@ -682,6 +682,80 @@ plot(iris$Sepal.Length, iris$Sepal.Width)
 ##### Section #6 - Relationships in Numeric Data #####
 ######################################################
 
+# The two-way table allows us to investigate the relationship between categorical variables. In this section, the relationship between numerical variables is explored. The bivariate data of two numeric variables X and Y has a natural pairing, (x1 , y1 ), (x2 , y2 ), ... (xn , yn ). In some cases, the variables are related and in other cases, no relation exists between them. The scatterplot is one option to explore the relation between the two numeric variables. The home dataset (from the UsingR package) shows the old and the new prices of 15 homes from Maplewood, NJ. The home prices were assessed first in 1970 and then again in 2000, after 30 years. The first two rows of the dataset are shown below.
+options(digits = 3)
+help(home)
+
+head(home, n=2)
+
+# A scatterplot is drawn using the plot function. The old home prices are plotted against the new home prices.
+
+attach(home)
+
+plot(old, new)
+
+# With a few exceptions, the data falls along a straight line showing a linear increase in the home prices. The five- number summary of the old prices and the new prices are shown below. The ratio of the two shows that some houses doubled in value, while others increased to six times the original value. On the average, the prices increased by four times.
+
+summary(old)
+
+summary(new)
+
+summary(new/old)
+
+# The next example shows the Dow Jones dataset and the maximum daily temperature in New York City for the month of May 2003.
+
+help(maydow)
+
+head(maydow, n = 2)
+
+attach(maydow)
+
+plot(max.temp, DJA)
+
+# The next dataset (kid.weights) contains the weight and height measurement of 250 children. First, we will plot the height versus the weight separately for the boys and girls.
+
+data(kid.weights)
+
+attach(kid.weights)
+
+plot(m$height, m$height, ylim=c(0,160))
+plot(f$height, f$height, ylim=c(0,160))
+
+(m <- subset(kid.weights, gender == "M"))
+(f <- subset(kid.weights, gender == "F"))
+
+##########################################
+##### Section #7 - Multivariate Date #####
+##########################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
