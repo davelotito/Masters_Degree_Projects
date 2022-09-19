@@ -793,6 +793,152 @@ table(cyl, gear)
 ##### Section #8 - Independent Samples #####
 ############################################
 
+# In the student.expenses dataset, the variables are dependent for the particular student. However, if the dataset has several variables of the same type, the data can be compared using their means and spreads through box plots. The ewr dataset (from the UsingR package) has the monthly average taxi in and taxi out times of 8 different airlines at the Newark (EWR) airport during the months from January 1999 to November 2000.
+
+names(ewr)
+
+head(ewr, n = 2)
+
+tail(ewr, n = 2)
+
+# A box plot of the average times of the given airlines shows the differences in the performances of the airlines. The data for both the taxi in and taxi out times is plotted as shown below.
+
+attach(ewr)
+
+boxplot(AA,CO,DL,HP,NW,TW,UA,US, col = rainbow(8))
+
+boxplot(ewr[3:10], col = rainbow(8)) # Get the 3rd-10th col values for names
+
+# From the above figure, the second airline has the worst performance. The fourth airline has the largest median.
+
+# The given data has both the taxi in and taxi out times. The taxi in time is relatively smaller than the taxi out time. Investigating these two times separately provides more insight into the data. Filtering the data based on the inorout variable, the following plot shows the taxi in times and taxi out times of the given airlines side by side.
+
+boxplot(ewr[inorout == "in", 3:10], main = "Taxi in", col = rainbow(8))
+
+boxplot(ewr[inorout == "out", 3:10], main = "Taxi out", col = rainbow(8))
+
+############################
+#### Test Yourself 3.23 ####
+############################
+
+# Using the iris data set, produce boxplots of the sepal width, sepal length, petal width, and petal length. Slice the iris data set so it contains only flowers of the 'virginica' species. Produce boxplots of the virginica sepal width, sepal length, petal width, and petal length. Show the R commands.
+
+data('iris')
+attach(iris)
+
+boxplot(Sepal.Width, Sepal.Length, Petal.Width, Petal.Length)
+
+data <- iris[Species == 'virginica', ]
+
+boxplot(data$Sepal.Width, data$Sepal.Length, data$Petal.Width, data$Petal.Length)
+
+#################################################
+#### Relationship Between Pairs of Variables ####
+#################################################
+
+# The scatterplot matrix shows the pair-wise relationships between the given variables using a scatter plot for each pair. For the airline ewr dataset, consider the first four airlines (columns 3 to 6).
+
+head(ewr[3:6], n = 2)
+
+# The taxi in times of these airlines are plotted pair-wise as shown below.
+
+pairs(ewr[inorout == "in", 3:6], main = "Taxi in", pch=16)
+
+# Similarly, the pair-wise comparison of the taxi out times of the first four airlines is shown below.
+
+pairs(ewr[inorout == "out", 3:6], main = "Taxi out", pch=16)
+
+############################
+#### Test Yourself 3.24 ####
+############################
+
+# Using the mtcars data set, produce a scatter plot of the the 'mpg' vs the 'hp'. Briefly describe any trends you see. Show the R commands.
+
+attach(mtcars)
+
+plot(mpg, hp)
+
+# In general, the mpg and hp are inversely correlated. As hp increases, mpg tends to decrease.
+
+############################
+#### Test Yourself 3.25 ####
+############################
+
+# Use the pairs() function to plot the Sepal Width, Length, Petal Width, Length, of the virginica species. Exclude the 'Species' column. Show the R commands.
+
+# We already created a filter for virginica species above. We can reuse that and slice it accordingly
+
+pairs(data[ , 1:4])
+
+########################################
+##### Section #9 - Summarized Data #####
+########################################
+
+# The UCBAdmissions dataset contains the summarized data of admissions and rejections of male and female applicants who applied to the top six graduate school departments at UC Berkeley in the year 1973. The data is in a 2×2×6 table.
+
+# The dimension names are Admit, Gender, and Dept. The categorical values for these dimensions are shown below.
+
+dimnames(UCBAdmissions)
+
+# The data contains the summarized information about 4526 applicants. The two-way tables for the six departments are shown below.
+UCBAdmissions
+
+# The number and proportion of the total male and female applications (the second dimension) can be computed as follows.
+
+margin.table(UCBAdmissions, 2)
+
+prop.table(margin.table(UCBAdmissions, 2))
+
+# Similarly, the number and proportion of the total admitted and rejected applications (the dimension 1) are as follows.
+
+margin.table(UCBAdmissions, 1)
+
+prop.table(margin.table(UCBAdmissions, 1))
+
+# The marginal distribution of the data over the first two dimensions (adding over all the departments) is shown below.
+
+margin.table(UCBAdmissions, c(1,2))
+
+# The proportional distribution of the Admit and Gender dimensions over the margin for rows (margin = 1) is:
+
+(x <- margin.table(UCBAdmissions, c(1,2)))
+prop.table(x, margin = 1)
+
+# The above results show that among the admitted applicants, 69% are male while 32% are female. Among the rejected applicants, 54% are male while 46% are female.
+
+# The proportional distribution of the Admit and Gender dimensions over the margin for columns (margin = 2) is:
+
+prop.table(x, margin=2)
+
+# The above results show that the males have a 45% chance of getting admitted while the females have only a 30% chance of getting admitted.
+
+# A mosaic plot of the above marginal distribution for Admit versus Gender is shown below.
+
+mosaicplot(x, color=c("green", "red"))
+
+# A bar plot showing the information for each department is computed as shown below. For the male and the female applicants, the number of accepted and rejected applicants is shown for each department. The first two departments are drawn separately to show the legend
+
+
+par(mfrow=c(3,2))
+for (i in 1:2)
+barplot(UCBAdmissions[,,i],
+col = c("green", "red"), legend.text=TRUE,
+main=paste("Dept",LETTERS[i],sep=" "))
+
+for (i in 3:6)
+barplot(UCBAdmissions[,,i],
+col = c("green", "red"),
+main=paste("Dept",LETTERS[i],sep=" "))
+
+
+
+
+
+
+
+
+
+
 
 
 
