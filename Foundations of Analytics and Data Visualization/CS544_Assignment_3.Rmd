@@ -39,8 +39,115 @@ barplot(table(firstdigit), xlab = "Number", ylab = "Frequency", col = "black", y
 # Initialize the dataset about the quarter coin productions of the 50 US states by the DenverMint and PhillyMint. The numbers in the dataset (in thousands ) are the number of quarters minted. With the R code for the following:
 
 us_quarters <- read.csv("https://people.bu.edu/kalathur/datasets/us_quarters.csv")
+head(us_quarters)
 
 # a) For which state were the highest number of quarters produced by each mint? For which state were the lowest number of quarters produced by each mint?
+
+(denvermint <- us_quarters[c("State","DenverMint")])
+
+(phillymint <- us_quarters[c("State","PhillyMint")])
+
+
+denvermint[which.max(denvermint$DenverMint),]
+# For the Denver Mint, Connecticut had the highest number of quarters produced at 657880
+
+phillymint[which.max(phillymint$PhillyMint),]
+# For the Philly Mint, Virginia had the highest number of quarters produced at 943000
+
+denvermint[which.min(denvermint$DenverMint),]
+# For the Denver Mint, Oklahoma had the lowest number of quarters produced at 194600
+
+phillymint[which.min(phillymint$PhillyMint),]
+# For the Philly Mint, Iowa had the lowest number of quarters produced at 213800
+
+# b) What is the value of the total coins in dollars?
+
+(denvermint <- us_quarters[c("DenverMint")])
+(phillymint <- us_quarters[c("PhillyMint")])
+
+(sum <- sum(denvermint, phillymint))
+(sum <- paste0('$',formatC(sum, big.mark=',', format = 'f', digits = 0)))
+# The sum is $34,797,600, almost 35 Million!
+sum
+
+# c) Produce the following barplot from the data using the R barplot function with the data for the two mints as a matrix. Write any two striking inferences you can observe by looking at the plot.
+
+(rownames(us_quarters) <- us_quarters$State)
+(us_quarters <- as.matrix(us_quarters[c('DenverMint', 'PhillyMint')]))
+
+
+options(scipen=5)
+barplot(t(us_quarters), beside = TRUE, legend.text = TRUE, ylim=c(0,1000000), xlim=c(0,150), col=c("blue", "gray"), las = 2, cex.names=.6)
+
+# Inference #1: The northeast states have a much higher output of coins vs. the rest of the country
+# Inference #2: The Denver Mint, on average, is slightly higher than the Philly Mint. For example, looking from Illionis forward you can observe that in most states, Denver is the same or slighlty higher than Philly
+
+# d) Show the scatter plot of the number of coins between the two mints. Write any two inferences you can observe looking at the plot.
+
+us_quarters <- read.csv("https://people.bu.edu/kalathur/datasets/us_quarters.csv")
+
+(scatter <- us_quarters[c("DenverMint", "PhillyMint")])
+
+attach(scatter)
+
+plot(scatter)
+
+# Inference #1: Most of the coins produced at each mint fall between 200000 & 300000
+# Inference #2: The data has quite a few outliers in the PhillyMint data
+
+# e) Show the side-by-side box plots for the two mints. Write any two inferences for each of the box plots.
+
+us_quarters <- read.csv("https://people.bu.edu/kalathur/datasets/us_quarters.csv")
+
+(box <- us_quarters[c("DenverMint", "PhillyMint")])
+
+attach(box)
+
+box
+
+boxplot(box[1:2],main = "Mints", col = rainbow(8))
+
+# Inference #1 DeverMint: The box plot shows that the data contains some outliers. These would need to be treated depending on how you move forward with processing the data
+# Inference #2 DeverMint: The median (indicated by the black line) shows us where the average of the values fall ~300000
+
+# Inference #1 PhillyMint: The data shows us that the majority of the data falls in a smaller range compared to the DenverMint, with the median also slightly below that of the DenverMint.
+# Inference #2 PhillyMint: There is quite a few outliers in the PhillyMint data, we know from the data analysis we did in the prior exercises that the PhillyMint produced the highest number of quarters overall & had the largest value in terms of quarters produced per a state, hence the reason we can see so many outliers.
+
+# f) Using R code, what states would be considered as outliers for each of the two mints. Use the five number summary function to derive the outlier bounds
+
+us_quarters <- read.csv("https://people.bu.edu/kalathur/datasets/us_quarters.csv")
+head(us_quarters)
+
+(us_quarters_philly <- us_quarters[c("State","PhillyMint")])
+(us_quarters_denver <- us_quarters[c("State","DenverMint")])
+
+# 194600 & 657880 are the outliers based off the fivenum() function
+fivenum(us_quarters_denver$DenverMint)
+
+us_quarters_denver[which(us_quarters_denver$DenverMint == 194600), ]
+us_quarters_denver[which(us_quarters_denver$DenverMint == 657880), ]
+# Oklahoma and Connecticut are the outliers in the Denver Mint
+
+# 213800 & 943000 are the outliers based off the fivenum() function
+fivenum(us_quarters_philly$PhillyMint)
+
+us_quarters_philly[which(us_quarters_philly$PhillyMint == 213800), ]
+us_quarters_philly[which(us_quarters_philly$PhillyMint == 943000), ]
+# Iowa & Virginia are the outliers in the Philly Mint
+
+###############
+### Part 3) ###
+###############
+
+# Use the stocks dataset with the weekly closing values for the year 2021 initialized as shown below:
+
+stocks <- read.csv("https://people.bu.edu/kalathur/datasets/stocks.csv")
+head(stocks)
+
+
+
+
+
 
 
 
