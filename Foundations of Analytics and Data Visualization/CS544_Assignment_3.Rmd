@@ -1,0 +1,52 @@
+# CS544 Module 3 Assignment
+## Student: David J Lotito
+
+###############
+### Part 1) ###
+###############
+
+# Initialize the dataset about prime numbers as shown below:
+
+df <- read.csv("https://people.bu.edu/kalathur/datasets/myPrimes.csv")
+head(df, n=100)
+
+# The resulting data frame of the primes below 10000 along with their last and first digits is as shown below:
+
+# a) Show the barplot of the frequencies for the last digit.
+
+(lastdigit <- df[ , "LastDigit"])
+table(lastdigit)
+
+barplot(table(lastdigit), xlab = "Number", ylab = "Frequency", col = "black", ylim = c(0,400))
+
+# b) Show the barplot of the frequencies for the first digit.
+
+(firstdigit <- df[ , "FirstDigit"])
+table(firstdigit)
+
+barplot(table(firstdigit), xlab = "Number", ylab = "Frequency", col = "black", ylim = c(0,200))
+
+# c) What inferences do you draw from these two plots? (two inferences from each plot)
+
+# In a) the distributions are largely the same showing that a lot of the values fall within the same range 1,3,7,9 and not in 2, 5. This plot also tells us that the frequency of the last digits for prime numbers are almost all odd numbers.
+
+# In b) The plot shows that there is a lot more frequency in 1s vs. the rest of the values, this leads me to believe that as the prime numbers increase so will the 1s indicating that this number will always be the leader. The 3 & 4 values are identical leading me to belive that as the numbers increase these two values continue to rise at the same pace, but the even numbers in the graph show a steady decline from 2, 4, 6, 8 the values are steadily decreasing.
+
+###############
+### Part 2) ###
+###############
+
+# Initialize the dataset about the quarter coin productions of the 50 US states by the DenverMint and PhillyMint. The numbers in the dataset (in thousands ) are the number of quarters minted. With the R code for the following:
+
+us_quarters <- read.csv("https://people.bu.edu/kalathur/datasets/us_quarters.csv")
+
+# a) For which state were the highest number of quarters produced by each mint? For which state were the lowest number of quarters produced by each mint?
+
+
+
+
+
+
+
+
+
