@@ -149,10 +149,11 @@ head(stocks)
 pairs(stocks[2:7], main = "Stocks", pch=16)
 
 # b) Show the correlation matrix for the 6 stocks in the dataset rounded to 2 decimals.
-options(digits = 2)
-cor(stocks[2:7])
-
+(cor2 <- cor(stocks[2:7]))
+round(cor2, 2)
 # c) Provide at least 4 interpretations of the results.
+
+summary(stocks[2:7])
 
 # Interpretation #1: We can see from the matrix that TSLA & AAPL stock prices have a strong positive linear relationship indicating that investors who invest in one more than likely invest in the other.
 # Interpretation #2: We can see from the matrix that FB and TSLA stocks are not correlated indicated by the very weak positive relationship
@@ -161,8 +162,9 @@ cor(stocks[2:7])
 
 # d) Store the correlation matrix from b) in the variable cm. Using loops, for each stock in the dataset, show the top 3 correlated stocks for that respective stock. The code should work for any dataset with any number of stocks. Sample output for the given dataset is shown below:
 
-options(digits = 2)
+
 (cm <- cor(stocks[2:7]))
+round(cm, 2)
 
  
 for (c in colnames(cm))  
@@ -178,7 +180,9 @@ cm
 tail(sort(as.matrix(cm)), 10)
 rev(sort(cm[order(cm[2,2]),]))
 
-t(apply(cm[-1,], 2, function(x) head(rev(sort(x)), 4)))
+t(apply(cm[-1,], 2, function(x) head(rev(sort(x)), 3)))
+
+
 
 
 
@@ -193,11 +197,33 @@ head(scores)
 
 # a) Show the default histogram of the student scores. Save the result of the histogram into a variable. Using only the counts and breaks property of this variable, write the R code to produce the following output. The code for the following output should not refer to the individual scores in the dataset.
 
+h <- hist(scores$Score, breaks=8) 
+
+(h2 <- unlist(h[2]))
+(h3 <- unlist(h[1]))
+
+(num = length(h2))
+
+for (i in 1:num) {
+out <- sprintf("%d students in range (%d,%d]",h2[i],h3[i],h3[i+1])
+print(out)
+}
 
 
+# b) Using the breaks option of the histogram, show the histogram and the custom output as shown below so that students in the range (70,90] get an A grade, (50,70] get a B grade, and (30-50] get a C grade. The code for the following output should not refer to the individual scores and should be using only the counts and breaks of the histogram.
 
+h <- hist(scores$Score,breaks=c(30,50,70,90))
 
+h2 <- unlist(h[2])
+h3 <- unlist(h[1])
+h4 <- c("C","B","A")
 
+num = length(h2)
+
+for (i in 1:num) {
+out <- sprintf("%d students in %s grade range (%d,%d]",h2[i],h4[i],h3[i],h3[i+1])
+print(out)
+}
 
 
 
