@@ -144,6 +144,68 @@ us_quarters_philly[which(us_quarters_philly$PhillyMint == 943000), ]
 stocks <- read.csv("https://people.bu.edu/kalathur/datasets/stocks.csv")
 head(stocks)
 
+# a) Show the pair wise plots for all the 6 stocks in the dataset in a single plot.
+
+pairs(stocks[2:7], main = "Stocks", pch=16)
+
+# b) Show the correlation matrix for the 6 stocks in the dataset rounded to 2 decimals.
+options(digits = 2)
+cor(stocks[2:7])
+
+# c) Provide at least 4 interpretations of the results.
+
+# Interpretation #1: We can see from the matrix that TSLA & AAPL stock prices have a strong positive linear relationship indicating that investors who invest in one more than likely invest in the other.
+# Interpretation #2: We can see from the matrix that FB and TSLA stocks are not correlated indicated by the very weak positive relationship
+# Interpretation #3: The data tells us that there is a very strong positive relationship between MSFT and GOOG indicating that investors who have an appetite for one stock more than likely have an appetite for the other. 
+# Interpretation #4: Finally we can observe from that correlation matrix that TSLA and AMZN have a weak positive correlation. This indicates that an investor in one of these stocks is unlikely to have invested in the other.
+
+# d) Store the correlation matrix from b) in the variable cm. Using loops, for each stock in the dataset, show the top 3 correlated stocks for that respective stock. The code should work for any dataset with any number of stocks. Sample output for the given dataset is shown below:
+
+options(digits = 2)
+(cm <- cor(stocks[2:7]))
+
+ 
+for (c in colnames(cm))  
+    for (r in apply(cm[-1,], 2, function(x) head(rev(sort(x)), 3)))
+    if (r != 1)
+    print(r)
+    print(paste("Top 3 for Stock", c, r))
+    
+
+cm
+(newdata <- cm[order(, decreasing=TRUE),])
+
+tail(sort(as.matrix(cm)), 10)
+rev(sort(cm[order(cm[2,2]),]))
+
+t(apply(cm[-1,], 2, function(x) head(rev(sort(x)), 4)))
+
+
+
+###############
+### Part 4) ###
+###############
+
+# Initialize the scores of 100 students as shown below:
+
+scores <- read.csv("https://people.bu.edu/kalathur/datasets/scores.csv")
+head(scores)
+
+# a) Show the default histogram of the student scores. Save the result of the histogram into a variable. Using only the counts and breaks property of this variable, write the R code to produce the following output. The code for the following output should not refer to the individual scores in the dataset.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
