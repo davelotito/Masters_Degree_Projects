@@ -970,14 +970,16 @@ typeof(central.park)
 
 attach(central.park)
 
+central.park
+
 barplot(MAX, names.arg = 1:31, xlab = "Day", ylab = "Max Temp", col = "green", las=2)
 
 barplot(MIN, names.arg = 1:31, xlab = "Day", ylab = "Min Temp", col = "green", las=2)
 
 barplot(AVG, names.arg = 1:31, xlab = "Day", ylab = "Avg Temp", col = "green", las=2)
-################################
-#### Histograms and Boxplots ####
-################################
+####################
+#### Histograms ####
+####################
 
 head(alltime.movies)
 
@@ -999,4 +1001,103 @@ x$mids
 
 
 Gross[which((Gross > 150) & (Gross < 200))]
+
+##################################################
+#### Marginal Distributions of Two-way Tables ####
+##################################################
+
+(x <- rbind(c(56,8), c(2,16)))
+
+(x <- cbind(c(56,2), c(8,16)))
+
+(x <- matrix(c(56,2,8,16), nrow=2))
+
+(x <- matrix(c(56,8,2,16), nrow=2, byrow = TRUE))
+
+# Once the table is created, names may optionally be assigned to the rows and columns of the table as follows.
+
+rownames(x) <- c("buckled", "unbuckled") 
+colnames(x) <- c("buckled", "unbuckled")
+
+(tmp <- c("buckled", "unbuckled"))
+dimnames(x) <- list(parent=tmp, child=tmp)
+x
+
+margin.table(x)
+# Prob of Parent buckling/unbuckled conditional of Child buckled/unbuckled
+prop.table(x,1)
+
+# Prob of Child buckling/unbuckled conditional of Parent buckled/unbuckled
+prop.table(x,2)
+
+############################
+#### Live Lecture Coding ####
+############################
+
+state.abb
+state.name
+state
+
+x <- c("yes", "no", "no", "yes", "no")
+table(x)
+
+x <- factor(x) 
+x[1] <- "yes"
+
+central.park.cloud
+table(central.park.cloud)
+
+y <- central.park.cloud
+
+y[1] <- "rainy"
+
+y
+table(y)
+
+y[1] <- "clear"
+
+table(central.park.cloud) / length(central.park.cloud)
+
+barplot(table(central.park.cloud), col = "cyan", ylim = c(0, 12), xlab = "Type", ylab = "Frequency", main = "Test", horiz = T, las = 2)
+
+x <- c(Food = 100, Gas = 50, Rent = 300, Other = 150)
+
+pie(x)
+pie(x, col=rainbow(4))
+pie(x, col=hcl(h = c(30, 120, 210, 300)))
+
+pie(table(central.park.cloud))
+
+pie(table(central.park.cloud), col=hcl(c(0,60,120)))
+
+data <- table(central.park.cloud)
+slice.labels <- names(data)
+slice.percents <- round(data/sum(data)*100)
+slice.labels <- paste(slice.labels, slice.percents)
+slice.labels <- paste(slice.labels, "%", sep="")
+slice.labels
+
+pie(data, labels = slice.labels, col=hcl(c(0,60,120)))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
