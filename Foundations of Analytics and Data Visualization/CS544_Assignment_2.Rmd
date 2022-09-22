@@ -27,7 +27,7 @@ prob(S, (X1 == X2 & X3 != X1 & X3 != X2) | (X1 == X3 & X2 != X1 & X2 != X3) | (X
 
 
 # d) None of the three rolls are identical.
-(D <- subset(S, (X1 != X2 & X2 != X3)))
+(D <- subset(S, (X1 != X2 & X2 != X3 & X2 != X3 & X3 != X1)))
 prob(S, (X1 != X2 & X2 != X3))
 
 # e) Only two of the three rolls are identical given that the sum of the rolls is greater than 6 but less than 10.
