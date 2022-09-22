@@ -62,13 +62,10 @@ phillymint[which.min(phillymint$PhillyMint),]
 
 # b) What is the value of the total coins in dollars?
 
-(denvermint <- us_quarters[c("DenverMint")])
-(phillymint <- us_quarters[c("PhillyMint")])
+(total <- (sum(us_quarters$DenverMint) + sum(us_quarters$PhillyMint))*0.25)
 
-(sum <- sum(denvermint, phillymint))
-(sum <- paste0('$',formatC(sum, big.mark=',', format = 'f', digits = 0)))
-# The sum is $34,797,600, almost 35 Million!
-sum
+(total <- paste0('$',formatC(total, big.mark=',', format = 'f', digits = 0)))
+
 
 # c) Produce the following barplot from the data using the R barplot function with the data for the two mints as a matrix. Write any two striking inferences you can observe by looking at the plot.
 
@@ -80,7 +77,7 @@ options(scipen=5)
 barplot(t(us_quarters), beside = TRUE, legend.text = TRUE, ylim=c(0,1000000), xlim=c(0,150), col=c("blue", "gray"), las = 2, cex.names=.6)
 
 # Inference #1: The northeast states have a much higher output of coins vs. the rest of the country
-# Inference #2: The Denver Mint, on average, is slightly higher than the Philly Mint. For example, looking from Illionis forward you can observe that in most states, Denver is the same or slighlty higher than Philly
+# Inference #2: The Denver Mint, on average, is slightly higher than the Philly Mint. For example, looking from Illionis forward you can observe that in most states, Denver is the same or slighlty higher than Philly. But on average they are positively correlated, when one mint is producing a lot of coins the one is producing a lot as well.
 
 # d) Show the scatter plot of the number of coins between the two mints. Write any two inferences you can observe looking at the plot.
 
@@ -93,7 +90,7 @@ attach(scatter)
 plot(scatter)
 
 # Inference #1: Most of the coins produced at each mint fall between 200000 & 300000
-# Inference #2: The data has quite a few outliers in the PhillyMint data
+# Inference #2: The data has quite a few outlier states in the dataset as we can see from the right upper corner
 
 # e) Show the side-by-side box plots for the two mints. Write any two inferences for each of the box plots.
 
@@ -107,7 +104,7 @@ box
 
 boxplot(box[1:2],main = "Mints", col = rainbow(8))
 
-# Inference #1 DeverMint: The box plot shows that the data contains some outliers. These would need to be treated depending on how you move forward with processing the data
+# Inference #1 DeverMint: The box plot shows that the data contains some outliers. These would need to be treated depending on how you move forward with processing the data.
 # Inference #2 DeverMint: The median (indicated by the black line) shows us where the average of the values fall ~300000
 
 # Inference #1 PhillyMint: The data shows us that the majority of the data falls in a smaller range compared to the DenverMint, with the median also slightly below that of the DenverMint.
@@ -118,22 +115,15 @@ boxplot(box[1:2],main = "Mints", col = rainbow(8))
 us_quarters <- read.csv("https://people.bu.edu/kalathur/datasets/us_quarters.csv")
 head(us_quarters)
 
-(us_quarters_philly <- us_quarters[c("State","PhillyMint")])
-(us_quarters_denver <- us_quarters[c("State","DenverMint")])
 
-# 194600 & 657880 are the outliers based off the fivenum() function
-fivenum(us_quarters_denver$DenverMint)
+(d_m <- fivenum(us_quarters$DenverMint))
 
-us_quarters_denver[which(us_quarters_denver$DenverMint == 194600), ]
-us_quarters_denver[which(us_quarters_denver$DenverMint == 657880), ]
-# Oklahoma and Connecticut are the outliers in the Denver Mint
+us_quarters$State[c(which(us_quarters$DenverMint > (d_m[4] + 1.5*(d_m[4] - d_m[2]))), which(us_quarters$DenverMint < (d_m[4] - 1.5*(d_m[4] - d_m[2]))))]
 
-# 213800 & 943000 are the outliers based off the fivenum() function
-fivenum(us_quarters_philly$PhillyMint)
 
-us_quarters_philly[which(us_quarters_philly$PhillyMint == 213800), ]
-us_quarters_philly[which(us_quarters_philly$PhillyMint == 943000), ]
-# Iowa & Virginia are the outliers in the Philly Mint
+(f_m <- fivenum(us_quarters$PhillyMint))
+
+us_quarters$State[c(which(us_quarters$PhillyMint > (f_m[4] + 1.5*(f_m[4] - f_m[2]))), which(us_quarters$DenverMint < (f_m[4] - 1.5*(f_m[4] - f_m[2]))))]
 
 ###############
 ### Part 3) ###
