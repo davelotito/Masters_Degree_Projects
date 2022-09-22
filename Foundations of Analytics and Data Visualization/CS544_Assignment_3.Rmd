@@ -17,14 +17,14 @@ head(df, n=100)
 (lastdigit <- df[ , "LastDigit"])
 table(lastdigit)
 
-barplot(table(lastdigit), xlab = "Number", ylab = "Frequency", col = "black", ylim = c(0,400))
+barplot(table(lastdigit), xlab = "Number", ylab = "Frequency", col = "blue", ylim = c(0,400))
 
 # b) Show the barplot of the frequencies for the first digit.
 
 (firstdigit <- df[ , "FirstDigit"])
 table(firstdigit)
 
-barplot(table(firstdigit), xlab = "Number", ylab = "Frequency", col = "black", ylim = c(0,200))
+barplot(table(firstdigit), xlab = "Number", ylab = "Frequency", col = "yellow", ylim = c(0,200))
 
 # c) What inferences do you draw from these two plots? (two inferences from each plot)
 
