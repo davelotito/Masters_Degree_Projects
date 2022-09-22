@@ -166,23 +166,25 @@ summary(stocks[2:7])
 (cm <- cor(stocks[2:7]))
 round(cm, 2)
 
+
+(list_df <- lapply(1:dim(cm)[2], function(col.number) cm[order(cm[, col.number], decreasing=TRUE)[2:4], col.number, drop = T]))
+
  
-for (c in colnames(cm))  
-    for (r in apply(cm[-1,], 2, function(x) head(rev(sort(x)), 3)))
-    if (r != 1)
-    print(r)
-    print(paste("Top 3 for Stock", c, r))
+for (c in colnames(cm))
+    for (s in list_df)
+    if (c != 1)
+    print(paste0("Top 3 for Stock ", c, s))
+    
     
 
-cm
-(newdata <- cm[order(, decreasing=TRUE),])
+sort(cm[1:4], decreasing=TRUE)
 
-tail(sort(as.matrix(cm)), 10)
 rev(sort(cm[order(cm[2,2]),]))
 
-t(apply(cm[-1,], 2, function(x) head(rev(sort(x)), 3)))
+t(apply(cm[,], 2, function(x) head(rev(sort(x)), 4)))
 
 
+(order <- sort(cm, decreasing=TRUE, index.return=TRUE)$x)
 
 
 
