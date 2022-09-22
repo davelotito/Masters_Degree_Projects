@@ -1079,24 +1079,27 @@ slice.labels
 
 pie(data, labels = slice.labels, col=hcl(c(0,60,120)))
 
+View(central.park)
+central.park$MIN
+
+summary(central.park$MIN)
+
+barplot(central.park$MIN, names.arg=1:31, xlab="Day", ylab="Min Temp", col="cyan", las=2)
+
+dotplot(central.park$MIN, labels=1:31, xlab="Min Temp")
 
 
+hist(alltime.movies$Gross, col=hcl(0), ylim = c(0,35))
+
+x <- hist(alltime.movies$Gross, col=hcl(0), ylim = c(0,35))
 
 
+names(x)
+x$breaks
 
+x2<- hist(alltime.movies$Gross, col=hcl(0), ylim = c(0,35), breaks = seq(150, 650, 25))
 
-
-
-
-
-
-
-
-
-
-
-
-
+x2$counts
 
 
 
