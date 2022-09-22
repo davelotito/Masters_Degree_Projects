@@ -161,11 +161,11 @@ round(cm, 2)
 
  
 for (c in colnames(cm))
-    for (s in list_df)
     if (c != 1)
-    print(paste0("Top 3 for Stock ", c, s))
-    
-    
+    print(paste0("Top 3 for Stock ", c))
+    (list_df <- lapply(1:dim(cm)[2], function(col.number) cm[order(cm[, col.number], decreasing=TRUE)[2:4], col.number, drop = T]))   
+
+
 
 sort(cm[1:4], decreasing=TRUE)
 
@@ -189,7 +189,7 @@ head(scores)
 
 # a) Show the default histogram of the student scores. Save the result of the histogram into a variable. Using only the counts and breaks property of this variable, write the R code to produce the following output. The code for the following output should not refer to the individual scores in the dataset.
 
-h <- hist(scores$Score, breaks=8) 
+h <- hist(scores$Score, breaks=8, ylim = c(0, 30), xlim = c(30,90)) 
 
 (h2 <- unlist(h[2]))
 (h3 <- unlist(h[1]))
