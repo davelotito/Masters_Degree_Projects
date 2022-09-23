@@ -1102,5 +1102,38 @@ x2<- hist(alltime.movies$Gross, col=hcl(0), ylim = c(0,35), breaks = seq(150, 65
 x2$counts
 
 
+(min <- summary(central.park$MIN))
+
+central.park$MIN[c(which(central.park$MIN > (min[4] + 1.5*(min[4] - min[2]))), which(central.park$MIN < (min[4] - 1.5*(min[4] - min[2]))))]
+
+
+(x <- c(7, 2, 6, 2, 3, 8, 2, 2, 7, 5, 2, 6, 9, 5))
+
+stem(x)
+options(digits = 3)
+
+(f <- fivenum(x))
+
+c(f[2] - 1.5*(f[4] - f[2]), + f[4] + 1.5*(f[4] - f[2]))
+
+If a boxplot is created with the following data,
+
+(x <- c(46, 28, 16, 58, 58, 34, 70, 24, 54, 98))
+(x <- c(54, 90, 74, 74, 28, 80, 56, 14, 62, 32))
+
+summary(x)
+fivenum(x)
+
+(x <- c(89, 44, 72, 57, 25, 96, 65, 70, 60, 71, 16, 49))
+
+(x <- c(7, 3, 8, 8, 6, 6, 3, 9, 1, 2, 6, 2))
+
+(x <- c(6,1,9,7,4,8,2,7,2,9,1,9,3,4,2))
+
+(x <- c(7, 2, 6, 2, 3, 8, 2, 2, 7, 5, 2, 6, 9, 5))
+
+barplot(x, ylim = c(1,9))
+
+hist(x)
 
 
