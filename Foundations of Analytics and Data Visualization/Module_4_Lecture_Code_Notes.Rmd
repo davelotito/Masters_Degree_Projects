@@ -1,0 +1,263 @@
+# Module 4 Lecture Notes
+
+#####################################################
+#### Section #1 - Intro (Discrete Distributions) #### 
+#####################################################
+
+# Numeric variables are either discrete or continuous. The outcomes of a continuous numeric variable come from a measuring process while those of a discrete variable come from a counting process. In this lecture, the probability distributions of discrete variables are explored. A probability distribution for a discrete random variable is defined in terms of a list of all possible numerical outcomes along with the probability of each outcome. The list of all outcomes is known as the support of the random variable. The probability distribution is specified in terms of a function, the probability mass function that maps each outcome to its probability.
+
+###################################################
+#### Random Variable Example - Number of Heads #### 
+###################################################
+
+# Let the random variable X be the number of heads observed when a fair coin is tossed three times. The support for X is SX = {0, 1, 2, 3}. For computing the probabilities, examine the sample space for the experiment:
+
+# S = {HHH, HHT, HTH, HTT, THH, THT, TTH, TTT}
+
+# Out of the eight outcomes, only one outcome (TTT) has the number of heads 0; three outcomes (HTT, THT, TTH) have the number of heads 1; three outcomes (HHT, HTH, THH) have the number of heads 2; and one outcome (HHH) has the number of heads 3.
+
+# The problems on (PAGE 3) can be modeled in R as follows. The support set for the random variable and the probabilities for this distribution are:
+
+(x <- c(0, 1, 2, 3))
+
+(f <- c(1/8, 3/8, 3/8, 1/8))
+
+# The mean of the distribution is:
+
+(mu <-sum(x * f))
+
+# The variance of the distribution is:
+
+(sigmaSquare <- sum((x - mu)^2 * f))
+
+# The standard deviation of the distribution is:
+
+(sigma <- sqrt(sigmaSquare))
+
+# The cumulative distribution for the random variable is:
+
+(F <- cumsum(f))
+
+###################################################
+#### Random Variable Example - Age of Students #### 
+###################################################
+
+# Suppose the ages of ten students enrolled in a class are 21, 25, 27, 23, 21, 21, 25, 25, 21, and 27. Let the random variable X be the age of a randomly selected student in the class. The frequency distribution of X is shown in the table on (PAGE 5):
+
+(ages <- c(21, 25, 27, 23, 21, 21, 25, 25, 21, 27))
+
+(ctable <- table(ages))
+
+# The above contingency table is converted to a data frame as follows:
+
+(dframe <- as.data.frame(ctable))
+
+# The inputs for the random variable X are the distinct ages:
+
+(x <- as.numeric(as.character(dframe$ages)))
+
+# Similarly, the probability distribution for the random variable is:
+
+(f <- dframe$Freq / (sum(dframe$Freq)))
+
+#######################################
+#### Discrete Uniform Distribution #### 
+#######################################
+
+# A discrete uniform distribution is a symmetric probability distribution where a finite number of input values are equally likely. Consider the rolling of a single die. The outcomes 1, 2, ... , 6 are equally likely, each occurring with a probability of 1/6. If a discrete random variable X has m input values 1, 2, ... , m, then X has the discrete uniform distribution when P(X = x) = 1/m , for all values of x from 1 to m.
+
+# The values can be explicitly computed in R as follows: (The input sequence is 1..6 and each of the 6 probabilities are 1/6.)
+
+(x <- 1:6)
+
+(f <- rep(1/6, 6))
+
+# The mean value is calculated as follows:
+
+(mu <- sum(x*f))
+
+# The variance is computed using the following formula
+
+(sigmaSquare <- sum((x - mu)^2 * f))
+
+# The cumulative distribution function of the above discrete uniform random variable is calculated as follows:
+
+x/6
+
+# Sometimes, the input values for the discrete uniform random variable are in the integer range [a, b], inclusive where a < b. In this case, the probability mass function is (SEE PAGE 9)
+
+# The rolling die example can be modeled in R as follows. The probability, P(X = 1), is:
+
+(m <- 6)
+dunif(1, max = m)
+
+# The PMF can be generated as shown below.
+
+(pmf <- dunif(1:m, max = m))
+
+# A plot of the PMF for the uniform distribution using the following code is shown below.
+
+plot(1:m, pmf, type='h', xlab='x', ylab='PMF', ylim = c(0, 0.2))
+abline(h=0)
+
+M <- 25
+N <- 50
+K <- 3
+phyper(0:K, m = M, n = N, k = K, lower.tail = F)
+
+
+
+
+#########################
+### Formulas for Quiz ###
+#########################
+
+# Suppose you go to bed at 10 PM and wake up at 6 AM and check your email the first thing after waking up. On an average, your inbox receives 105 emails during that period. What is the probability that you will have in between 97 and 109 emails (both inclusive) to read? (round the answer to three decimals)
+
+diff(ppois(c(96, 109), lambda=105))
+
+# Suppose you go to bed at 10 PM and wake up at 6 AM and check your email the first thing after waking up. On an average, your inbox receives 110 emails during that period. What is the probability that you will have at most 107 emails to read? (round the answer to three decimals)
+
+ppois(107, lambda=110)
+
+
+# Suppose you go to bed at 10 PM and wake up at 6 AM and check your email thefirst thing after waking up. On an average, your inbox receives 70 emails during that period. What is the probability that you will have exactly 70 emails to read? (round the answer to three decimals)
+ 
+dpois(70, lambda=70)
+
+# Suppose the scores of an exam follow a normal distribution with mean = 65 and standard deviation = 6. What is the chance that a randomly selected student will score at least 75? (round up the answer to nearest integer)
+
+pnorm(75, mean = 65, sd=6)
+
+# Suppose the scores of an exam follow a normal distribution with mean = 55 and standard deviation = 6. What is the chance that a randomly selected student will score in between 46 and 65? (round up the answer to nearest integer)
+
+pnorm(46:65, mean = 55, sd=6)
+
+
+# Suppose the scores of an exam follow a normal distribution with mean = 70 and standard deviation = 6. What is the minimum score that a randomly selected student should get to be in the top 5%? (round up the answer to nearest integer)
+
+qnorm(0.95, mean = 70, sd=6)
+
+
+
+# Suppose a discrete random variable has a uniform distribution from 1 to 50. The probability that the random variable is at least 28 is
+
+punif(28, max=50, lower.tail = F)
+
+# Suppose the scores of an exam are all integer scores and follow a discrete uniform distribution from 50 to 80. The probability that a randomly selected student will score 76 is
+dunif(76, min = 50, max = 80)
+
+
+sum(dbinom(0:3, size=5, prob=0.24))
+
+# At the carnival, you decided to play the balloon and dart game to pop the balloons with the darts. You are provided 5 darts. Your chance of popping a balloon with a dart is 24%. What is the probability that you will pop at least 3 balloons with the 5 darts (round the answer to three decimals)?
+pbinom(2, size=5, prob=0.24, lower.tail = F) 
+
+# At the carnival, you decided to play the balloon and dart game to pop the balloons with the darts. You are provided 5 darts. Your chance of popping a balloon with a dart is 77%. What is the probability that you will pop atmost 4 balloons with the 5 darts (round the answer to three decimals)?
+pbinom(0:4, size=5, prob=0.77, lower.tail = T) 
+
+
+# At the carnival, you decided to play the balloon and dart game to pop the balloons with the darts. You are provided 5 darts. Your chance of popping a balloon with a dart is 80%. What is the probability that you will pop exactly 2 balloons with the 5 darts (round the answer to three decimals)?
+dbinom(2, size = 5, prob = 0.80)
+
+# In a game of chutes and ladders, suppose you need a 3 to win the game. You are rolling a 6-faced fair die. What is the probability that you will win the game on the eighth try? (round the answer to four decimals)
+
+set.seed(10)
+library(purrr)
+count = 0
+for(i in 1:10000)
+{
+j = 1
+x = rdunif(1, 6, 1)
+while(x != 5)
+{
+j = j+1
+x = rdunif(1, 6, 1)
+}
+if(j == 8)
+{
+count = count + 1
+}
+}
+count/10000
+
+# In a game of chutes and ladders, suppose you need a 6 to win the game. You are rolling a 6-faced fair die. What is the probability that you will win the game in at most 6 tries? (round the answer to four decimals)
+
+set.seed(10)
+library(purrr)
+count = 0
+for(i in 1:10000)
+{
+j = 1
+x = rdunif(1, 6, 1)
+while(x != 5)
+{
+j = j+1
+x = rdunif(1, 6, 1)
+}
+if(j <= 6)
+{
+count = count + 1
+}
+}
+count/10000
+
+# A fair coin (Heads/Tails) is tossed 16 times. What is the probability that you will get extactly 7 Heads? (round the answer to four decimals)
+
+n <- 16
+
+p <- 1/2
+
+dbinom(7, size = n, prob = p)
+
+# A fair coin (Heads/Tails) is tossed 6 times. What is the probability that you will get at least 2 Heads? (round the answer to four decimals)
+
+n <- 6
+
+p <- 1/2
+
+pbinom(1, size = n, prob = p, lower.tail = F)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
