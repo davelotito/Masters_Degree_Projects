@@ -174,14 +174,14 @@ head(scores)
 
 h <- hist(scores$Score, breaks=8, ylim = c(0, 30), xlim = c(30,90)) 
 
-(h2 <- unlist(h[2]))
-(h3 <- unlist(h[1]))
+h2 <- h$counts
+h3 <- h$breaks
 
 (num = length(h2))
 
 for (i in 1:num) {
 out <- sprintf("%d students in range (%d,%d]",h2[i],h3[i],h3[i+1])
-print(out)
+cat(out, "\n")
 }
 
 
@@ -189,15 +189,15 @@ print(out)
 
 h <- hist(scores$Score,breaks=c(30,50,70,90))
 
-h2 <- unlist(h[2])
-h3 <- unlist(h[1])
+h2 <- h$counts
+h3 <- h$breaks
 h4 <- c("C","B","A")
 
 num = length(h2)
 
 for (i in 1:num) {
 out <- sprintf("%d students in %s grade range (%d,%d]",h2[i],h4[i],h3[i],h3[i+1])
-print(out)
+cat(out, "\n")
 }
 
 
