@@ -154,6 +154,170 @@ sample(0:1, size = 10, replace = T, prob = c(1-p,p))
 
 # The binomial distribution is the probability distribution for the number of successes in a sequence of Bernoulli trials. The number of outcomes that contain x successes out of n Bernoulli trails is the binomial coefficient (n). A binomial x random variable X counts the number of successes in n Bernoulli trials. The distribution of X is described by the two parameters, n (the number of trials) and p (the success probability).
 
+# Notation
+
+# X ~ binom(size = n, prob = p)
+
+############################################
+#### Bernoulli Trials—Coin Toss Example #### 
+############################################
+
+# A coin is tossed three times. Let success be the outcome of getting a head for each toss. Given that the coin is unfair and has an 80% chance of landing on heads, the probability of success, p, is 0.8. The probability of failure is 0.2. For each toss, let s denote the success outcome and f denote the failure outcome. The possible outcomes for three tosses and their corresponding probabilities are shown in the table on (PAGE 14):
+
+#########################################
+#### Example Using R—Tossing 5 Coins #### 
+#########################################
+
+# The coin-tossing example can be modeled using R as follows. Suppose a fair coin is tossed five times. The random variable X is the number of heads, and success probability is 1/2.
+
+# The probability that, say, X = 3, can directly be calculated using the binomial formula as shown below.
+options(digits=4)
+
+n <- 5
+p <- 1/2
+
+choose(n,3) * p^3 * (1-p)^2
+
+# The stats package provides the dbinom function to compute the probability for the given value of X . The probability for X = 3 can be calculated as follows.
+
+dbinom(3, size = n, prob = p)
+
+# The probability mass function for a sequence (or list) of values can be directly calculated as shown below. The following arguments for the function calculate all probabilities for 0..n.
+
+dbinom(0:n, size = n, prob = p)
+
+# Similarly, the probabilities for X = 1 and X = 5 can be calculated by providing the list of values as the first argument.
+
+dbinom(c(1,5), size = n, prob = p)
+
+# The probability for three or fewer heads, P(X <| 3), can be calculated as the sum of the probabilities P(X = 0) + P(X = 1) + P(X = 2) + P(X = 3). The cumulative probability is shown below.
+
+sum(dbinom(0:3, size = n, prob = p))
+
+# The pbinom function provides the alternative to directly compute the cumulative probability. P(X % 3) is also calculated as shown below.
+
+pbinom(3, size = n, prob = p)
+
+# The probability of 4 or more heads can be calculated as P(X = 4) + P(X = 5) as shown below.
+
+sum(dbinom(4:n, size = n, prob = p))
+
+# The above probability is the same as 1 $ P(X % 3). Using the pbinom function, the value is:
+
+1 - pbinom(3, size = n, prob = p)
+
+# Instead of using the complement, the value P(X |> 4), or P(X > 3), can be calculated by providing the additional argument lower.tail = FALSE in the formula for computing P(X <| 3) as shown below. This adds the values of the probabilities from the next integer of the first argument to the size of the experiment.
+
+pbinom(3, size = n, prob = p, lower.tail = F)
+
+# A spike plot of the probability distribution for the binomial random variable can be produced as shown below. The probabilities, computed as heights, correspond to the input values 0..n. The plot is generated for the sequence using the vertical lines (type = "h"). The tops of the lines are shown as points with the plotting character of a filled circle.
+
+heights <- dbinom(0:n, size = n, prob = p)
+plot(0:n, heights, type = "h", main = "Spike splot of X", xlab = "x", ylab = "PMF")
+points(0:n, heights, pch = 16)
+
+########################
+### Plotting the CDF ###
+########################
+
+# The cumulative distribution function of the binomial random variable can be plotted in R by using the cumsum and stepfun functions. Given the probabilities, the cumsum function returns the cumulative probabilities. The first value of 0 (corresponding to FX (x), x < 0) is inserted into the cdf variable.
+# Thestepfun, for the given values of (x1,x2,...,xn) and (y0,y1,y2,...,yn), returns piecewise constant functions. The values returned by this function are constant for [x0 , xi+1 ). The following example shows how a stepfun works:
+
+x <- c(0,1,2,3)
+y <- c(0,10,20,30,40)
+
+stepfun(x,y)
+
+# For the coin-tossing examples, the CDF is plotted as shown below. The step function values are plotted using the plot function. The verticals option is FALSE so that vertical lines are not drawn at the steps.
+
+n <- 5
+p <- 1/2
+
+pmf <- dbinom(0:n, size = n, prob = p)
+cdf <- c(0, cumsum(pmf))
+cdfplot <- stepfun(0:n, cdf)
+plot(cdfplot, verticals = F, pch = 16, main = "Step plot", xlab = "x", ylab = "CDF")
+
+# The qbinom function is the quantile function that is the inverse of the pbinom function, i.e., it returns the value for which the CDF is given.
+
+qbinom(0.8125, size = n, prob = p)
+
+# The rbinom function can be used to generate random numbers according to the binomial distribution.
+
+rbinom(10, size = n, prob = p)
+
+# A plot of the frequency distribution of a sample of 1000 numbers following the binomial distribution can be generated as shown below.
+
+y <- rbinom(1000, size = n, prob = p)
+table(y)
+plot(table(y), type = "h", col="red")
+
+###################################
+### Hypergeometric Distribution ###
+###################################
+
+# In the binomial distribution, the Bernoulli trials are independent of each other and hence the probability of success remains the same for each trial. Also, the sample data is selected with replacement. In the hypergeometric distribution, the sample data is selected without replacement. Hence, the outcomes are dependent on the previous observations. See (PAGE 31) for all examples.
+
+# Notation
+# X ~ hyper(m = M, n = N, k = K)
+
+# The associated R functions for the PMF and CDF of the hypergeometric distribution are dhyper(x, m, n, k) and phyper(x, m, n, k), respectively. The above problem with five white balls, three black balls, and a sample size of two is modeled as follows:
+
+M <- 5
+N <- 3
+K <- 2
+
+(pmf <- dhyper(0:K, m = M, n = N, k = K))
+
+# The corresponding cumulative probabilities are shown below.
+
+(cdf <- phyper(0:K, m = M, n = N, k = K))
+
+# The quantile function, qhyper, is the inverse of the phyper function, returning the number for the specified CDF.
+
+qhyper(0.64, m = M, n = N, k = K)
+
+rhyper(10, m = M, n = N, k = K)
+
+######################################
+### Example Using R - Faulty Chips ###
+######################################
+
+# Suppose there are 20 faulty chips out of manufactured lot of 1000 chips. For quality control, 50 chips are selected at random without replacement. The random variable is the number of faulty chips in the selected sample. In this hypergeometric distribution, M = 20, N = 980, and K = 50.
+
+# The probability of exactly 2 faulty chips in the sample using R:
+
+M <- 20
+N <- 980
+K <- 50
+
+dhyper(2, m = M, n = N, k = K)
+
+sum(dhyper(0:2, m = M, n = N, k = K))
+
+phyper(2, m = M, n = N, k = K)
+
+# To calculate P(X |>) 3) = P(X > 2), the lower.tail property of the phyper function is used. This is equivalent to 1 $ P(<| 2)
+
+phyper(2, m = M, n = N, k = K, lower.tail = F)
+
+# The probability distribution for the number of faulty chips can be calculated and plotted as follows:
+
+(pmf <- dhyper(0:K, m = M, n = N, k = K))
+plot(0:K, pmf, typer = "h", xlab = "x", ylab = "PMF", ylim = c(0, 0.5))
+abline(h=0)
+
+#############################################
+#### Section #3 - Geometric Distribution #### 
+#############################################
+
+# The geometric distribution concerns the number of failures before a success occurs in a sequence of Bernoulli trials. In a geometric distribution, the random variable X is the number of failures before a success
+
+
+
+
+
+
 
 
 
@@ -287,12 +451,16 @@ pbinom(1, size = n, prob = p, lower.tail = F)
 
 M <- 25
 N <- 50
-K <- 3
-phyper(0:K, m = M, n = N, k = K, lower.tail = F)
+K <- 20
 
+sum(dhyper(0:3, m = M, n = N, k = K))
 
+# An M&M candy dispenser has 30 red, 30 blue, and 30 green M&Ms. The dispenser dispenses 20 M&Ms each time. What is the probability, that on the first use, you will get 9 blue M&Ms out of the 20 dispensed. (round the answer to three decimals)
 
-
+M <- 30
+N <- 60
+K <- 20
+sum(dhyper(9, m = M, n = N, k = K))
 
 
 
