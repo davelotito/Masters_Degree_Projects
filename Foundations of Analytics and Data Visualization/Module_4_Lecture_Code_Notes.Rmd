@@ -124,6 +124,47 @@ sample(10:20, size = 5, replace = T)
 
 sample(c("H", "T"), size = 10, replace = T)
 
+##########################################
+#### Binomial Distribution Background #### 
+##########################################
+
+# The binomial distribution is based on binomial coefficients and Bernoulli trials. A Bernoulli trial is a random experiment with only two possible outcomes, success and failure.
+
+##########################
+#### Bernoulli Trials #### 
+##########################
+
+# A Bernoulli trial is a random experiment in which there are only two possible outcomes—success (S) and failure (F). The random variable X in a Bernoulli trial is defined as follows:
+
+# X = 1, if the outcome is a success (S), and X = 0, if the outcome is a failure (F). 
+
+# Let the probability of success be p. Then the probability of failure is (1– p).
+
+# Using R, the sample() function can be used to draw the samples with the specified distribution. The first argument is the list of outcomes 0, 1. Since the first outcome in this list is the negative outcome, its probability is 1– p. The following examples (PAGE 13) show ten random samples with p = 1 and p = 3 , respectively:
+
+p <- 1/4
+sample(0:1, size = 10, replace = T, prob = c(1-p,p))
+
+p <- 3/4
+sample(0:1, size = 10, replace = T, prob = c(1-p,p))
+
+############################################
+#### Section #2 - Binomial Distribution #### 
+############################################
+
+# The binomial distribution is the probability distribution for the number of successes in a sequence of Bernoulli trials. The number of outcomes that contain x successes out of n Bernoulli trails is the binomial coefficient (n). A binomial x random variable X counts the number of successes in n Bernoulli trials. The distribution of X is described by the two parameters, n (the number of trials) and p (the success probability).
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
