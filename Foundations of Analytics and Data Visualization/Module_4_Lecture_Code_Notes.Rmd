@@ -100,10 +100,34 @@ dunif(1, max = m)
 plot(1:m, pmf, type='h', xlab='x', ylab='PMF', ylim = c(0, 0.2))
 abline(h=0)
 
-M <- 25
-N <- 50
-K <- 3
-phyper(0:K, m = M, n = N, k = K, lower.tail = F)
+# The CDF for the above distribution is:
+
+(cdf <- punif(1:m, max = m))
+
+# The CDF can also be calculated using the PMF as follows:
+
+cumsum(pmf)
+
+# The qunif function is the quantile function that is the inverse of the punif function, i.e., it returns the value for which the CDF is given.
+options(digits=2)
+qunif(0.4, max = 6)
+
+# The data for a discrete uniform random variable can be generated in R using the sample function with the replace option set to TRUE. The following code generates the data for a fair die rolled twenty times:
+
+sample(6, size = 20, replace=T)
+
+# The following code generates five random numbers in the given range from 10 to 20:
+
+sample(10:20, size = 5, replace = T)
+
+# The following code generates ten outcomes from flipping a fair coin:
+
+sample(c("H", "T"), size = 10, replace = T)
+
+
+
+
+
 
 
 
@@ -218,9 +242,12 @@ p <- 1/2
 
 pbinom(1, size = n, prob = p, lower.tail = F)
 
+# An M&M candy dispenser has 25 red, 25 blue, and 25 green M&Ms. The dispenser dispenses 20 M&Ms each time. What is the probability, that on the first use, you will get at most 3 red M&Ms out of the 20 dispensed. (round the answer to three decimals)
 
-
-
+M <- 25
+N <- 50
+K <- 3
+phyper(0:K, m = M, n = N, k = K, lower.tail = F)
 
 
 
