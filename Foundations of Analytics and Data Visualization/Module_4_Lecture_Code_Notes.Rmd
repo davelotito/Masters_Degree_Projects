@@ -530,6 +530,70 @@ axis(side = 1, at = c(218, 234, 250, 266, 282, 298, 314), labels = T)
 #### Standard Normal Distribution #### 
 ######################################
 
+# Given a normally distributed random variable X with mean u and standard deviation o , the standardized normal random variable Z, is derived as follows:
+
+# Notation: Z ~ noram(mean = 0, sd = 1)
+
+# The standard normal curve satisfies the following properties:
+# The total area under the standard normal curve is 1
+# The curve extends indefinitely in both directions along the x-axis
+# The curve is symmetric around x = 0
+# Almost all of the area under the standard curve lies between $3 and 3 68.27% of the observations lie within one standard deviation of the mean (-1, 1) 95.45% of the observations lie within two standard deviations of the mean (-2, 2) 99.73% of the observations lie within three standard deviations of the mean (-3, 3)
+
+# The proportions of the observations falling within the three ranges around the mean can be calculated in R as follows:
+
+100*(pnorm(c(1, 2, 3)) - pnorm(c(-1, -2, -3)))
+
+##########################
+#### Normal Quantiles #### 
+##########################
+
+# Given a number, the cumulative distribution function, pnorm, computes the probability that a normal random variable will be less than that number. The quantile function, qnorm(x, mean=0, sd=1), does the reverse. Given the probability, the function returns the number whose cumulative distribution matches the probability. For a standard normal variable with mean 0 and standard deviation 1, the qnorm function takes the probability and returns the associated z-score.
+
+qnorm(0.5, mean = 0, sd = 1)
+
+# Example:
+
+# Suppose the scores on a test follow the normal distribution with a mean value of 80 and a standard deviation of 5. The minimum score for a student to be in the top 5% can be calculated as follows. P(X < 0.95) is the area under the normal curve representing the bottom 95% of the class. The maximum value of X that satisfies the condition can be computed as shown below
+
+qnorm(0.95, mean = 80, sd = 5)
+
+# If the scores are rounded, a student should have 88 or above to be in the top 5% of the class. Similarly, to be in the top 1% of the class, the following function gives the minimum score as 92.
+
+qnorm(0.99, mean = 80, sd = 5)
+
+############################################################
+#### Generating Random Numbers with Normal Distribution #### 
+############################################################
+
+# The rnorm function, rnorm(n, mean = 0, sd = 1), generates n random numbers that follow the normal distribution with the corresponding mean and standard deviation.
+
+# The random values for 20 students can be generated with a mean value of 80 and standard deviation of 5 as follows:
+
+(y <- rnorm(20, mean = 80, sd = 5))
+
+# The generated values, for say, 1000 numbers, can be rounded and plotted as shown below.
+
+y <- rnorm(1000, mean = 80, sd = 5)
+y <- round(y)
+table(y)
+plot(table(y), type = "h")
+
+##############################################
+#### Section #7: Exponential Distribution #### 
+##############################################
+
+# The exponential distribution is a continuous distribution and ranges from zero to positive infinity. This distribution is commonly used in queuing theory for waiting time distributions, the length of time between arrivals, patients entering a hospital, etc.
+
+# Notation: X ~ exp(rate = A)
+
+# The associated PDF and CDF functions in R are dexp(x, rate = 1) and pexp(x, rate = 1), respectively.
+
+
+
+
+
+
 
 
 
