@@ -1,0 +1,57 @@
+# CS544 Module 4 Assignment
+## Student: David J Lotito
+
+#####################################
+### Part 1) Binomial distribution ###
+#####################################
+
+# Suppose a student has 40% chance of scoring a perfect score in an exam with randomly selected questions. Each student will be provided 5 attempts.
+
+# a) Compute and plot the probability distribution for the number of perfect scores over the 5 attempts (both the PMF and CDF)
+
+?pbinom()
+
+n = 5
+p = 0.40
+
+(pmf <- dbinom(0:n, size = n, prob = p))
+
+(cdf <- cumsum(pmf))
+
+# b) What is the probability that a student will score a perfect score in exactly 2 out of the 5 attempts?
+
+n = 5
+p = 0.6
+
+pbinom(2, size = n, prob = p, lower.tail = T)
+
+# Explicit Formula Calculation
+
+p = 0.4
+q = 1-P = 0.6
+n = 5
+x = 2
+
+5*2 * (0.4)^2 * (0.6)^3
+
+# c) What is the probability that a student will score a perfect score in at least 2 out of the 5 attempts?
+
+n = 5
+p = 0.4
+
+pbinom(1, size = n, prob = p, lower.tail=F)
+
+# d) Simulate the number of perfect scores over 5 attempts for 1000 students. Show the barplot of the frequencies of successes.
+
+n = 5
+p = 0.4
+
+r = rbinom(1000, n, p)
+hist(r)
+
+
+
+
+
+
+
