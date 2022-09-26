@@ -589,13 +589,77 @@ plot(table(y), type = "h")
 
 # The associated PDF and CDF functions in R are dexp(x, rate = 1) and pexp(x, rate = 1), respectively.
 
+##########################################
+#### Example—Exponential Distribution #### 
+##########################################
 
+# Suppose customers come to a bank at the rate of 20 per hour (A = 20). If a customer has just arrived, the probability that the next customer will arrive within 1 minute is calculated as follows. Since the arrival rate is per hour, 1 minute corresponds to 1/60 of the hour. Hence the required probability is:
 
+pexp(1/60, rate = 20)
 
+# The probability that a customer will arrive within the next minute is 28.3%.
 
+# The PDF for this distribution can be plotted in R as follows:
 
+x <- seq(0, 1, by = 1/60)
+pdf <- dexp(x, rate = 20)
 
+plot(x, pdf, type = "l", col = "red", xlim = c(0,0.4))
+abline(h=0)
 
+cdf <- pexp(x, rate = 20)
+plot(x, cdf, type = "l", col = "red", xlim = c(0, 0.4))
+
+######################################
+#### Section #8: Random Variables #### 
+######################################
+
+# A random variable is a function that associates a number with each outcome. So, the outcome selected is a quantitative variable whose value depends on chance. The following are some examples of random variables:
+
+# The sum of the dice when a pair of dice is rolled.
+# The number of heads when a coin is tossed, say, three times The number of siblings for the students in a class, etc.
+
+# The discrete random variables can be modeled in R as follows. Given a particular sample probability space, the addrv function adds the specified random variables to the probability space. In the following example, the standard die is rolled twice and the outcomes of the two rolls make up the probability space. The first two and last two out of the 36 outcomes are also shown.
+
+(S <- rolldie(2, makespace = T))
+head(S, n = 2)
+tail(S, n = 2)
+
+# Let the random variable U be the sum of the two faces of the coin. The random variable defined using the expression X1 + X2 is added to the data using the addrv function as follows:
+
+(S <- addrv(S, U = X1 + X2))
+
+# Portions of the data frame with the values of the random variable are shown below.
+
+head(S, n = 2)
+
+S[10:16, ]
+
+tail(S, n = 2)
+
+# Given the data frame with the computed random variable, U , the sum of the two rolls of the die, the following can easily be determined. The probability that the sum of the two rolls is at most 6 or greater than 6 is answered as shown below. (Note that the two probabilities add to 1, as they are complementary.)
+
+Prob(S, U <= 6)
+
+Prob(S, U > 6)
+
+###################################
+#### Multiple Random Variables #### 
+###################################
+
+# The random variable can also be defined using the function (FUN) argument to the addrv function. By default, the specified function applies to the non-probability columns of the data frame. Since multiple random values are being modeled using the same data, the applicable columns for the random variable need to be specified explicitly. This is done through the invars argument for the addrv function. The previous example is modified further by adding the random variables V (maximum of the two rolls X1 and X2) and W (minimum of the two rolls X1 and X2).
+
+S <- addrv(S, FUN = max, invars = c("X1", "X2"), name = "V")
+
+S <- addrv(S, FUN = max, invars = c("X1", "X2"), name = "W")
+
+# Portions of the data frame with the values of the random variables are shown below.
+
+head(S, n = 2)
+
+S[10:16, ]
+
+tail(S, n = 2)
 
 
 
