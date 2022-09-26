@@ -335,6 +335,53 @@ abline(h=0)
 #### Section #3 - Negative Binomial Distribution #### 
 #####################################################
 
+# The negative binomial distribution concerns the number of failures until a total of r successes occur in a sequence of Bernoulli trials. In a negative binomial distribution, the random variable X is the number of failures that precede the rth success.
+
+# Notation: X ~ nbinom(size = r, prob = p)
+
+# The associated R functions for the PMF and CDF of the negative binomial distribution are dnbinom(x, size, prob) and pnbinom(x, size, prob), respectively.
+
+r <- 3
+p <- 1/2
+
+dnbinom(5, size = r, prob = p)
+
+# The probability mass function of the negative binomial variable is calculated in R as follows:
+
+(pmf <- dnbinom(0:10, size = r, prob = p))
+
+# The plot of the above distribution is shown below.
+
+plot(0:10, pmf, type = "h", xlab = "x", ylab = "PMF", ylim = c(0, 0.2))
+abline(h=0)
+
+# The probability that at most 5 failures are observed is:
+#          P(X %5)=P(X =0)+p(X =1+...+P(X =5))
+# The cumulative probability can be computed in R as follows:
+
+pnbinom(5, size = r, prob = p)
+
+# The plot for the cumulative distribution function is shown below.
+
+(cdf <- c(0, cumsum(pmf)))
+
+cdfplot <- stepfun(0:10, cdf)
+plot(cdfplot, pch = 16, main = "", xlab = "x", ylab = "CDF")
+
+###########################################
+#### Section #4 - Poisson Distribution #### 
+###########################################
+
+
+
+
+
+
+
+
+
+
+
 
 
 
