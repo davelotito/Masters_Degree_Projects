@@ -313,6 +313,29 @@ abline(h=0)
 
 # The geometric distribution concerns the number of failures before a success occurs in a sequence of Bernoulli trials. In a geometric distribution, the random variable X is the number of failures before a success
 
+# Notation - X ~ geom(prob = p)
+
+# The associated R functions for the PMF and CDF of the geometric distribution are dgeom(x, prob) and pgeom(x, prob), respectively. Consider the coin-tossing example with a fair coin where the probability of success (say, getting a head) is 1.
+
+# THe probabilities from table on (PAGE 36) are computed in R as follows
+options(digits = 3)
+p <- 1/2
+dgeom(2, prob = p)
+
+# Similarly, the PMF can be calculated in R as follows:
+
+(pmf <- dgeom(0:10, prob = p))
+
+# The plot of the above distribution is shown below.
+
+plot(0:10, pmf, type = "h", xlab = "x", ylab = "PMF")
+abline(h=0)
+
+#####################################################
+#### Section #3 - Negative Binomial Distribution #### 
+#####################################################
+
+
 
 
 
@@ -462,11 +485,24 @@ N <- 60
 K <- 20
 sum(dhyper(9, m = M, n = N, k = K))
 
+# Consider a slot machine with 3 wheels (reels). Each reel has 10 slots, 0, 1, ..., 9. Suppose you have a win if the 3 slots match (0-0-0, 1-1-1, ..., 9-9-9). You decided to play until you win 3 times. What is the probability that you will walk out after exactly 355 tries? (round the answer to four decimals)
+
+p <- 0.008450704225
+
+dnbinom(355, size = 3, prob = p)
+
+# Consider a slot machine with 3 wheels (reels). Each reel has 10 slots, 0, 1, ..., 9. Suppose you have a win if the 3 slots match (0-0-0, 1-1-1, ..., 9-9-9). You decided to play until you win 3 times. What is the probability that you will walk out after at most 315 tries? (round the answer to four decimals)
 
 
+p <- 0.009523809524
 
+pnbinom(315, size = 3, prob = p)
 
+# Consider a slot machine with 3 wheels (reels). Each reel has 10 slots, 0, 1, ..., 9. Suppose you have a win if the 3 slots match (0-0-0, 1-1-1, ..., 9-9-9). You decided to play until you win 3 times. The machine says that your chances of matching the 3 slots is 59%. What is the minimum number of tries you will need to win 3 times?
 
+p <- 0.01966666667
+
+qnbinom(0.59, size = 3, prob = p) * 2
 
 
 
