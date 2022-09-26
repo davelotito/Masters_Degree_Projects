@@ -372,13 +372,76 @@ plot(cdfplot, pch = 16, main = "", xlab = "x", ylab = "CDF")
 #### Section #4 - Poisson Distribution #### 
 ###########################################
 
+# The Poisson distribution is used to model the frequency with which a specified event occurs during a particular period of time. Some examples where the Poisson distribution is applicable are:
 
+# The number of patients arriving in an ER between 11 PM and midnight
+# The number of customers arriving in a bank between 9 AM and 11 AM
+# The number of support calls received per day
 
+# The Poisson distribution is identified by a single parameter, A (lambda), which is the mean or the average number of events per time unit [0, 1].
 
+# Notation: X ~ pois(lambda = A)
 
+# The associated R functions for the PMF and CDF of the Poisson distribution are dpois(x, lambda) and ppois(x, lambda), respectively.
 
+# P(X=6)=e$886 =0.122
 
+# The above probability can be computed in R using the dpois function as follows:
 
+dpois(6, lambda = 8)
+
+# Chances are 12.2% that exactly 6 patients will arrive during this period.
+
+# The probability that at most 2 patients arrive during this interval is:
+
+ppois(2, lambda = 8)
+
+# Chances are only 1.37% that 2 or fewer patients will arrive during this interval.
+
+# The probability of between 5 and 10 patients (inclusive) arriving is:
+
+diff(ppois(c(4, 10), lambda = 8))
+
+# The probability mass function of the random variable X can be computed as follows:
+
+(pmf <- dpois(0:20, lambda = 8))
+
+# The above values can be plotted showing the distribution for the first 20 values.
+
+plot(0:20, pmf, type = "h", xlab = "x", ylab = "PMF", ylim = c(0, 0.15))
+abline(h=0)
+
+# The above figure shows that the Poisson distribution is right-skewed (all Poisson distributions are right-skewed).
+
+# Suppose that a fast food drive-thru serves, on average, 3 vehicles per 5-minute interval during lunchtime. In this case, if X is number of vehicles arriving in a 5-minute period, then X + pois(lambda = 3). If the lunch hour is Noon to 1 PM, the total time period is 60 minutes (twelve 5-minute units). If Y is the number of vehicles arriving during the lunch hour, then Y + pois(lambda = 3 # 12 = 36).
+
+###############################################
+#### Section #5 - Continuous Distributions #### 
+###############################################
+
+# For continuous random variables, the probability density function (PDF) defines the distribution of values. Common distributions include the normal distribution (also known as Gaussian distribution), uniform distribution (also known as rectangular distribution), and exponential distribution.
+
+# The normal distribution is symmetric and has a bell shape. Most of the values tend to cluster around the mean. Since this is symmetrical distribution, the mean equals the median. In the uniform distribution, each value has an equal probability of occurrence. The uniform distribution is also symmetrical, hence the mean equals the median. The exponential distribution is skewed to the right, hence its mean is larger than the median. The density curve is always on or above the x-axis, and the total area under a density curve equals 1.
+
+#########################################
+#### Continuous Uniform Distribution #### 
+#########################################
+
+# For the random variable X with the continuous uniform distribution over the interval [a, b], the probability of occurrence is the same anywhere in the range.
+
+# Notation: X ~ unif(min = a, max = b)
+
+# Using R, the associated functions for the PDF and CDF are dunif(x, min = a, max = b) and punif(x, min = a, max = b), respectively.
+
+########################################
+#### Example 1—Uniform Distribution #### 
+########################################
+
+# A common use of the uniform distribution is in the selection of random numbers. For random sampling, the uniform distribution [0, 1] is used.
+
+# The probability of getting a random number between 0.2 and 0.4, P[0.2 < X < 0.4] can be calculated in R as follows.
+
+punif(0.4, min = 0, max = 1) - punif(0.2, min = 0, max = 1)
 
 
 
