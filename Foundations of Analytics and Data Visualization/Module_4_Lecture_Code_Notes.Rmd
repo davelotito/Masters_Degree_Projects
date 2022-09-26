@@ -443,10 +443,92 @@ abline(h=0)
 
 punif(0.4, min = 0, max = 1) - punif(0.2, min = 0, max = 1)
 
+########################################
+#### Example 2—Uniform Distribution #### 
+########################################
 
+# Suppose that the download time of songs follows a uniform distribution between 2.5 and 6.5 seconds. The probability that the download time will be more than 5 seconds can be calculated as follows:
 
+1 - punif(5, min = 2.5, max = 6.5)
 
+# or
 
+punif(5, min = 2.5, max = 6.5, lower.tail = F)
+
+#########################################
+#### Section #6: Normal Distribution #### 
+#########################################
+
+# The normal distribution is the most common continuous distribution in practice. The classic bell-shaped curve represents the normal distribution. The probability is calculated for values that occur within a certain range or interval as the area under the curve. A normal distribution is completely determined by the mean (!) and the standard deviation (" ). Two normally distributed random variables having the same mean and standard deviation must have identical distributions.
+
+# A normal distribution is symmetric and centered around its mean, while the spread of the curve depends on the standard deviation. As the standard deviation increases, the distribution will be flatter and more spread out. The following figure shows three normal distributions with standard deviations of 0.5, 1, and 2, respectively, all centered around the mean equal to 0.
+
+# In a normal distribution, almost all the possible observations of the random variable lie within three standard deviations of either side of the mean. The curve associated with the normal distribution satisfies the following properties:
+
+# The curve is bell shaped
+# The curve is centered around the mean (u)
+# The curve is close to the x-axis for values below u - 3o and for values above u + 3o
+
+# Notation: X ~ norm(mean = u, sd = o)
+
+# The associated PDF and CDF functions in R are dnorm(x, mean = 0, sd = 1) and pnorm(x, mean = 0, sd = 1), respectively.
+
+#######################################
+#### Example - Normal Distribution #### 
+#######################################
+
+# The gestation period for humans is normally distributed with a mean of 266 days and a standard deviation of 16 days. The normal curve for this distribution can be plotted in R as follows:
+
+(x <- seq(200, 320))
+
+(pdf <- dnorm(x, mean = 266, sd = 16))
+
+plot(x, pdf, type = "l", col = "red", xlim = c(200, 320), ylim = c(0, 0.03), xaxt = "n", yaxt = "n", main = "Gestation Period", xlab = "Days", ylab = "PDF")
+axis(side = 1, at = c(218, 234, 250, 266, 282, 298, 314), labels = T)
+axis(side = 2, at = c(0, 0.01, 0.02, 0.03), labels = T)
+
+# The cumulative probability of a baby being born within the mean value of 266 days is:
+
+mu <- 266
+sigma <- 16
+
+pnorm(mu, mean = mu, sd = sigma)
+
+# The above value shows that 50% of babies are born within the mean value.
+
+# The cumulative probability of a baby being born within less than the 3rd standard deviation, u - 3o, (218 days) is:
+
+pnorm(mu - 3*sigma, mean = mu, sd = sigma)
+
+# The above value shows that 0.135% of babies are born with a gestation of 218 or fewer days.
+# The cumulative probability of a baby being born within 3 standard deviations from the mean, (u - 3o , u + 3o ), (218 days to 314 days) is:
+
+pnorm(mu + 3*sigma, mean = mu, sd = sigma) - pnorm(mu - 3*sigma, mean = mu, sd = sigma)
+
+# The above value shows that 99.73% of babies are born within a gestation period of 218 days to 314 days.
+# The cumulative probability of a baby being born within 2 standard deviations from the mean, (u - 2o , u + 2o ), ( 234 days to 298 days) is:
+
+pnorm(mu + 2*sigma, mean = mu, sd = sigma) - pnorm(mu - 2*sigma, mean = mu, sd = sigma)
+
+# The above value shows that 95.45% of babies are born within a gestation period of 234 days to 298 days. Similarly, the cumulative probability of a baby being born within 1 standard deviation from the mean, (u - o, u + o), (250 days to 282 days) is:
+
+pnorm(mu + sigma, mean = mu, sd = sigma) - pnorm(mu - sigma, mean = mu, sd = sigma)
+
+# The above value shows that 68.27% of babies are born within a gestation period of 250 days to 282 days. 
+
+# The CDF for the gestation period is plotted in R as follows:
+
+x <- seq(212, 320)
+
+cdf <- pnorm(x, mean = 266, sd = 16)
+
+plot(x, cdf, type = "l", col = "red", xlim = c(212, 320), ylim = c(0, 1), xaxt = "n", main = "Gestation Period CDF", xlab = "Days", ylab = "CDF")
+abline(h=0)
+axis(side = 1, at = c(218, 234, 250, 266, 282, 298, 314), labels = T)
+
+######################################
+#### Standard Normal Distribution #### 
+######################################
 
 
 
