@@ -16,7 +16,13 @@ p = 0.40
 
 (pmf <- dbinom(0:n, size = n, prob = p))
 
+plot(0:n, pmf, type = "h", xlab = "x", ylab = "PMF")
+abline(h=0)
+
 (cdf <- cumsum(pmf))
+
+plot(0:n, cdf, type = "h", xlab = "x", ylab = "CDF")
+abline(h=0)
 
 # b) What is the probability that a student will score a perfect score in exactly 2 out of the 5 attempts?
 
@@ -49,7 +55,54 @@ p = 0.4
 r = rbinom(1000, n, p)
 hist(r)
 
+# Part2) Negative Binomial distribution
 
+# Suppose a student has 60% chance of scoring a perfect score in an exam with randomly selected questions. The student has to repeatedly take the exam until they achieve three perfect scores.
+
+# a) Compute and plot the probability distribution for scoring the three perfect scores (both the PMF and CDF). The student will only go for a maximum of 10 failures before giving up.
+
+n = 3
+p = 0.6
+
+(pmf <- dnbinom(0:10, size = n, prob = p))
+
+plot(0:10, pmf, type = "h", xlab = "x", ylab = "PMF")
+abline(h=0)
+
+(cdf <- cumsum(pmf))
+
+plot(0:10, cdf, type = "h", xlab = "x", ylab = "CDF")
+abline(h=0)
+
+# b) What is the probability that the student will have the three perfect scores with exactly 4 failures?
+
+n = 3
+p = 0.6
+
+dnbinom(4, size = n, prob = p)
+
+# Explicit Formula Calculation
+#P(x = 4):
+(6/2)*(0.6)^3*(0.6)^4
+
+# c) What is the probability that the student will have the three perfect scores with at most 4 failures?
+
+n = 3
+p = 0.6
+
+pnbinom(4, size = n, prob = p)
+
+# d) Simulate the number of failures to get the three perfect scores for 1000 students. Show the barplot of the frequencies of the failures.
+
+n = 3
+p = 0.6
+
+r = rnbinom(1000, n, p)
+hist(r)
+
+# Part3) Hypergeometric distribution
+
+# Suppose that your professor created a pool of 60 multiple choice questions and 40 programming questions for the final exam. For each student, a random set of 20 distinct questions from the pool will be presented during the exam. The student has the opinion that the multiple-choice questions are easy to handle than the programming questions.
 
 
 
