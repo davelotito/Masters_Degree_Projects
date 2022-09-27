@@ -12,6 +12,7 @@ ufc_data <- read.csv("/Users/davelotito/Code/Masters_Degree_Projects/Foundations
 nrow(ufc_data)
 ncol(ufc_data)
 
+
 head(ufc_data, n= 5)
 
 ufc_data[1:3,1:3]
