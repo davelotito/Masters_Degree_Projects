@@ -104,6 +104,42 @@ hist(r)
 
 # Suppose that your professor created a pool of 60 multiple choice questions and 40 programming questions for the final exam. For each student, a random set of 20 distinct questions from the pool will be presented during the exam. The student has the opinion that the multiple-choice questions are easy to handle than the programming questions.
 
+# a) Compute and plot the probability distribution for the number of multiple choice questions out of the 20 questions that the student will be given?
+options(scipen=999)
+M = 80
+N = 40
+K = 20
+(q_a <- dhyper(0:K, m = M, n = N, k = K))
+
+plot(0:K, q_a, type = "h", xlab = "x", ylab = "Question A")
+abline(h=0)
+
+# b) What is the probability that the student will have exactly 10 multiple choice questions out of the 20 questions in the exam?
+
+
+### NEED TO REVIEW THIS, NOT CORRECT! ###
+M = 80
+N = 40
+K = 20
+
+dhyper(10, m = M, n = N, k = K)
+
+# P(X = 10) = fx(10)
+(80/10) * (40/10) / (100/20)
+
+# c) What is the probability that the student will have at least 10 multiple choice questions out of the 20 questions in the exam?
+
+phyper(10, m = M, n = N, k = K, lower.tail = F)
+
+# d) Simulate the number of multiple choice questions for 1000 students. Show the barplot of the frequencies of the multiple-choice questions.
+
+(students_1k <- rhyper(1000, m = M, n = N, k = K))
+
+hist(students_1k)
+
+# Part4) Poisson distribution
+
+
 
 
 
