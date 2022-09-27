@@ -55,7 +55,9 @@ p = 0.4
 r = rbinom(1000, n, p)
 hist(r)
 
-# Part2) Negative Binomial distribution
+##############################################
+#### Part2) Negative Binomial distribution ###
+##############################################
 
 # Suppose a student has 60% chance of scoring a perfect score in an exam with randomly selected questions. The student has to repeatedly take the exam until they achieve three perfect scores.
 
@@ -100,7 +102,9 @@ p = 0.6
 r = rnbinom(1000, n, p)
 hist(r)
 
-# Part3) Hypergeometric distribution
+###########################################
+#### Part3) Hypergeometric distribution ###
+###########################################
 
 # Suppose that your professor created a pool of 60 multiple choice questions and 40 programming questions for the final exam. For each student, a random set of 20 distinct questions from the pool will be presented during the exam. The student has the opinion that the multiple-choice questions are easy to handle than the programming questions.
 
@@ -137,7 +141,9 @@ phyper(10, m = M, n = N, k = K, lower.tail = F)
 
 hist(students_1k)
 
-# Part4) Poisson distribution
+####################################
+#### Part4) Poisson distribution ###
+####################################
 
 # Suppose that, on an average, students email 10 questions per day to the professor.
 
@@ -170,10 +176,51 @@ course_time = 50
 
 boxplot(number_questions, horizontal = T, main = "Questions Per Day")
 
+###################################
+#### Part5) Normal distribution ###
+###################################
 
+# Suppose that visitors at a theme park spend an average of $100 on souvenirs. Assume that the money spent is normally distributed with a standard deviation of $10.
 
+# a) Plot the PDF of this distribution covering the three standard deviations on either side of the mean.
+x <- seq(60,140)
 
+(pdf <- dnorm(x, mean = 100, sd = 10))
 
+plot(x, pdf, type="l", col="red",xaxt="n",xlab="Spending",ylab="PDF",main="Spending on Souvenirs")
+axis(side = 1, at = seq(60,140,10), 
+     labels = TRUE)
+
+# b) What are the chances that a randomly selected visitor will spend more than $120?
+
+pnorm(120,100,10,lower.tail=F)
+
+# c) What is the chance that a randomly selected visitor will spend between $80 and $90 (inclusive)?
+
+pnorm(90,100,10)-pnorm(80,100,10)
+
+# d) What are the chances of spending within one standard deviation, two standard deviations, and three standard deviations, respectively?
+
+# 1 SD
+pnorm(110,100,10)-pnorm(90,100,10)
+# 2 SD
+pnorm(120,100,10)-pnorm(80,100,10)
+# 3 SD
+pnorm(130,100,10)-pnorm(70,100,10)
+
+# e) Between what two values will the middle 80% of the money spent will fall?
+
+qnorm(0.10,100,10)
+qnorm(0.90,100,10)
+
+# f) If the theme park gives a free T-shirt for the top 2% of the spenders, what will be the minimum amount you have to spend to get the free T-shirt?
+
+qnorm(0.98, 100, 10)
+
+# g) Show a plot for 10,000 visitors using the above distribution.
+
+plot(table(round((rnorm(10000,100,10)))),type="h",xaxt="n",xlab="Spending",ylab="Frequency",main="10,000 Visitors")
+axis(side=1, at=seq(60,140,10),labels=T)
 
 
 
