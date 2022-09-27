@@ -139,6 +139,39 @@ hist(students_1k)
 
 # Part4) Poisson distribution
 
+# Suppose that, on an average, students email 10 questions per day to the professor.
+
+# a) What is the probability that the professor will have to answer exactly 8 questions per day?
+
+dpois(8, lambda = 10)
+
+# b) What is the probability that the professor will have to answer at most 8 questions per day?
+
+ppois(8, lambda = 10)
+
+# c) What is the probability that the professor will have to answer between 6 and 12 questions (inclusive)?
+
+diff(ppois(c(5, 12), lambda = 10))
+
+# d) Calculate and plot the PMF for the first 20 questions.
+
+(pmf <- dpois(0:20, lambda = 10))
+
+plot(0:20, pmf, type = "h", xlab = "x", ylab = "PMF", xlim = c(0, 22))
+abline(h=0)
+
+# e) Suppose the course runs for 50 days. Simulate the number of questions the professor gets per day over the course run. Show a barplot of the frequencies of the number of questions. Show a boxplot of the number of questions. What do you infer from the plots?
+
+lambda = 10
+
+course_time = 50
+
+(number_questions = rpois(course_time,lambda))
+
+boxplot(number_questions, horizontal = T, main = "Questions Per Day")
+
+
+
 
 
 
