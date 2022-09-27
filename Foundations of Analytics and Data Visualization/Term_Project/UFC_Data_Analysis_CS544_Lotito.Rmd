@@ -1,0 +1,22 @@
+# Data Analysis Project - CS544
+# Student: David Lotito
+
+# Preparing the data
+# • Import the data set into R.
+# • Document the steps for the import process and any preprocessing had to be done prior to or after the import. Any R code used in the process should be included.
+
+ufc_data <- read.csv("/Users/davelotito/Code/Masters_Degree_Projects/Foundations of Analytics and Data Visualization/Term_Project/UFC_Preprocessed_Fight_Data.csv", header = T)
+
+# Exploritory Analysis
+
+nrow(ufc_data)
+ncol(ufc_data)
+
+head(ufc_data, n= 5)
+
+ufc_data[1:3,1:3]
+
+
+
+
+
