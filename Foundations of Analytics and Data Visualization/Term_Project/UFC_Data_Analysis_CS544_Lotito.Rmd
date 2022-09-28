@@ -42,9 +42,10 @@ table(winner_title)
 
 ```
 
+# Wins by Color for Title Fights vs. Non-Title Fights
 
 ```{r, echo = FALSE}
-barplot(table(winner_title), col = c("Blue", "Red"), xlab = "Title Bout vs. Non-Title Bout", ylab = "Number of Fights", main = "Wins by Color - Title Fight vs. Non-Title Fight")
+barplot(table(winner_title), col = c("Blue", "Red"), xlab = "Title Bout vs. Non-Title Bout", ylab = "Number of Fights", main = "Fights 1993-2021")
 ```
 
 
