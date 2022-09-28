@@ -5,6 +5,11 @@
 # • Import the data set into R.
 # • Document the steps for the import process and any preprocessing had to be done prior to or after the import. Any R code used in the process should be included.
 
+#########################################################################################################
+### The dataset is from Kaggle and contains the UFC-Fight historical data from 1993 to 2021. The author scraped the data using beautifulsoup in Python and processed it via Pandas. The file I am using has already be preprocessed and is ready for analysis! ###
+#########################################################################################################
+
+# Import CSV
 ufc_data <- read.csv("/Users/davelotito/Code/Masters_Degree_Projects/Foundations of Analytics and Data Visualization/Term_Project/UFC_Preprocessed_Fight_Data.csv", header = T)
 
 # Exploritory Analysis
