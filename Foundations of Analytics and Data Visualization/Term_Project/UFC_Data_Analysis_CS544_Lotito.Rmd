@@ -22,6 +22,32 @@ head(ufc_data, n= 5)
 
 ufc_data[1:3,1:3]
 
+# Analyzing the data
+# • Do the analysis as in Module3 for at least one categorical variable and at least one numerical variable. Show appropriate plots for your data.
+
+# Analysis of winner in title bount on color
+
+(winner_title <- ufc_data[(c("Winner", "title_bout"))])
+
+table(winner_title)
+
+barplot(table(winner_title), col = c("Blue", "Red"), xlab = "Title Bout vs. Non-Title Bout", ylab = "Number of Fights", main = "Wins by Color - Title Fight vs. Non-Title Fight")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
