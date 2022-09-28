@@ -1,6 +1,7 @@
 ---
 title: "UFC Fights Analysis"
 author: "David Lotito"
+date: 9/28/2022
 output:
   html_document:
     fig_width: 8
@@ -11,15 +12,22 @@ output:
       collapsed: true
 ---
 
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(fig.width=8, fig.height=4,
                       echo=FALSE, warning=FALSE, message=FALSE)
 ```
 
-# UFC Fight Data
+# Dataset Overview
 
-The following dataset is from Kaggle and contains the UFC-Fight historical data from 1993 to 2021. The author scraped the data using beautifulsoup in Python and processed it via Pandas. The file I am using has already be preprocessed and is ready for analysis!
+The following dataset is from Kaggle and contains the UFC-Fight historical data from 1993 to 2021.This dataset is a list of every UFC fight in the history of the organisation. Every row contains information about both fighters, fight details and the winner. The author scraped the data using beautifulsoup in Python and processed it via Pandas. The file I am using has already be preprocessed and is ready for analysis.
+
+# Data Prep
+
+Each row is a compilation of both fighter stats. Fighters are represented by 'red' and 'blue' (for red and blue corner). So for instance, red fighter has the complied average stats of all the fights except the current one. The stats include damage done by the red fighter on the opponent and the damage done by the opponent on the fighter (represented by 'opp' in the columns) in all the fights this particular red fighter has had, except this one as it hasn't occured yet (in the data). Same information exists for blue fighter. The target variable is 'Winner' which is the only column that tells you what happened.
+
+# Goal of Analysis
+
+The goal of this analysis is to understand how the fights have changed over the course of time and to understand the fighters strategies
 
 ```{r echo=TRUE}
 # Import CSV
