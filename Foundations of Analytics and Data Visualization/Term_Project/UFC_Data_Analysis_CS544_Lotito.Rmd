@@ -44,19 +44,28 @@ We want to understand if a specific color gives any indicator if a fighter is mo
 barplot(table(winner_title[1]), col = c("Blue", "Red"), xlab = "Red Wins vs. Blue Wins", ylab = "Frequency", main = "Fights 1993-2021", ylim = c(0,5000))
 ```
 
-
-# Wins by Color for Title Fights vs. Non-Title Fights
+## Wins by Color for Title Fights vs. Non-Title Fights
 
 Since we can see that more red colored fighters are winning fights we wanted to see if the same applies when we add in another variable, in this case we are looking at fighting for a title. The results show that when fighting for a title, red fighters tend to win more often than blue fighters.
+
 
 ```{r, echo = FALSE}
 barplot(table(winner_title), col = c("Blue", "Red"), xlab = "Title Bout vs. Non-Title Bout", ylab = "Frequency", main = "Fights 1993-2021 by Title Bout")
 ```
 
 
+## Fighter Ages: Blue vs. Red
 
+As we can see from the analysis in the scatter plot that the majority of the fights are in their early 20s to late 30s indicating that as the fighters age they are less and less likely to continue fighting. We do have some outliers of course who fight well into their 40s and even 50s. The average age for the fighters overall is ~30.
 
+```{r, echo = FALSE}
+ages <- ufc_data[c("B_age", "R_age")]
 
+plot(ages, main = "Age of Fighters - 1993 to 2021", col = c("blue", "red"))
+legend(x=48,y=45,c("B_age","R_age"),cex=.8,col=c("blue","red"),pch=c(1,1))
+
+summary(ages)
+```
 
 
 
