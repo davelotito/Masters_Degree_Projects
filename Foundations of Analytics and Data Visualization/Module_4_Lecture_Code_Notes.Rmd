@@ -847,9 +847,3 @@ qnbinom(0.59, size = 3, prob = p) * 2
 
 
 
-
-
-
-
-
-
