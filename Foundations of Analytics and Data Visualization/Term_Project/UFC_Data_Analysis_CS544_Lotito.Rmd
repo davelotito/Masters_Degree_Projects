@@ -44,7 +44,7 @@ We want to understand if a specific color gives any indicator if a fighter is mo
 barplot(table(winner_title[1]), col = c("Blue", "Red"), xlab = "Red Wins vs. Blue Wins", ylab = "Frequency", main = "Fights 1993-2021", ylim = c(0,5000))
 ```
 
-## Wins by Color for Title Fights vs. Non-Title Fights
+### Wins by Color for Title Fights vs. Non-Title Fights
 
 Since we can see that more red colored fighters are winning fights we wanted to see if the same applies when we add in another variable, in this case we are looking at fighting for a title. The results show that when fighting for a title, red fighters tend to win more often than blue fighters.
 
@@ -54,7 +54,7 @@ barplot(table(winner_title), col = c("Blue", "Red"), xlab = "Title Bout vs. Non-
 ```
 
 
-## Fighter Ages: Blue vs. Red
+### Fighter Ages: Blue vs. Red
 
 As we can see from the analysis in the scatter plot that the majority of the fights are in their early 20s to late 30s indicating that as the fighters age they are less and less likely to continue fighting. We do have some outliers of course who fight well into their 40s and even 50s. The average age for the fighters overall is ~30.
 
@@ -67,15 +67,19 @@ legend(x=48,y=45,c("B_age","R_age"),cex=.8,col=c("blue","red"),pch=c(1,1))
 summary(ages)
 ```
 
+### Fighter Wins: Blue vs. Red
+
+After analyzing the fighters number of wins, number of wins in a title fight, and the ages of fighters I wanted to take a deeper diver into the overall picture of the blue vs. red wins & losses to see the bigger picture. As we can see from the box plot below that the red fighters are clearly the better fighters overall with more wins over the blue fighters. But we need to take into account that there has been less fights overall for the blue fighters as we can see from the box plots.
+
+```{r, echo = FALSE}
+wins <- ufc_data[c("B_wins", "R_wins", "B_losses", "R_losses")]
+
+boxplot(wins, horizontal = T, col=c("blue","red"), main = "Red/Blue: Wins vs. Losses", xlab = "Numbers of Wins/Losses", las = 1, cex.axis=0.8)
+
+colSums(wins)
 
 
-
-
-
-
-
-
-
+```
 
 
 
