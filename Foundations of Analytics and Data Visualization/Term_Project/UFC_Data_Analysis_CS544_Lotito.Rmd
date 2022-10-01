@@ -72,7 +72,7 @@ summary(ages)
 
 ### Fighter Wins: Blue vs. Red
 
-After analyzing the fighters number of wins, number of wins in a title fight, and the ages of fighters I wanted to take a deeper diver into the overall picture of the blue vs. red wins & losses to see the bigger picture. As we can see from the box plot below that the red fighters are clearly the better fighters overall with more wins over the blue fighters. But we need to take into account that there has been less fights overall for the blue fighters as we can see from the column sums.
+After analyzing the fighters number of wins, number of wins in a title fight, and the ages of fighters I wanted to take a deeper diver into the overall picture of the blue vs. red wins & losses to see the bigger picture. As we can see from the box plot below that the red fighters are clearly the better fighters overall with more wins over the blue fighters. Blue fighters have less losses compared to Red Fighters, but we need to take into account that there has been less fights overall for the blue fighters as we can see from the column sums.
 
 
 ```{r, echo = FALSE}
@@ -80,3 +80,13 @@ wins <- ufc_data[c("B_wins", "R_wins", "B_losses", "R_losses")]
 boxplot(wins, horizontal = T, col=c("blue","red"), main = "Red/Blue: Wins vs. Losses", xlab = "Values", las = 1, cex.axis=0.8)
 colSums(wins)
 ```
+
+
+
+
+
+
+
+
+
+
