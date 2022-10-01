@@ -664,73 +664,57 @@ tail(S, n = 2)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #########################
 ### Formulas for Quiz ###
 #########################
 
 # Suppose you go to bed at 10 PM and wake up at 6 AM and check your email the first thing after waking up. On an average, your inbox receives 105 emails during that period. What is the probability that you will have in between 97 and 109 emails (both inclusive) to read? (round the answer to three decimals)
 
-diff(ppois(c(96, 109), lambda=105))
+diff(ppois(c(127, 138), lambda=130))
 
 # Suppose you go to bed at 10 PM and wake up at 6 AM and check your email the first thing after waking up. On an average, your inbox receives 110 emails during that period. What is the probability that you will have at most 107 emails to read? (round the answer to three decimals)
 
-ppois(107, lambda=110)
+ppois(73, lambda=70)
 
 
-# Suppose you go to bed at 10 PM and wake up at 6 AM and check your email thefirst thing after waking up. On an average, your inbox receives 70 emails during that period. What is the probability that you will have exactly 70 emails to read? (round the answer to three decimals)
+# Suppose you go to bed at 10 PM and wake up at 6 AM and check your email the first thing after waking up. On an average, your inbox receives 70 emails during that period. What is the probability that you will have exactly 70 emails to read? (round the answer to three decimals)
  
-dpois(70, lambda=70)
+dpois(85, lambda=85)
 
 # Suppose the scores of an exam follow a normal distribution with mean = 65 and standard deviation = 6. What is the chance that a randomly selected student will score at least 75? (round up the answer to nearest integer)
 
-pnorm(75, mean = 65, sd=6)
+pnorm(61, mean = 65, sd=6)
 
 # Suppose the scores of an exam follow a normal distribution with mean = 55 and standard deviation = 6. What is the chance that a randomly selected student will score in between 46 and 65? (round up the answer to nearest integer)
 
-pnorm(46:65, mean = 55, sd=6)
+pnorm(55:72, mean = 65, sd=5)
 
 
 # Suppose the scores of an exam follow a normal distribution with mean = 70 and standard deviation = 6. What is the minimum score that a randomly selected student should get to be in the top 5%? (round up the answer to nearest integer)
 
-qnorm(0.95, mean = 70, sd=6)
+qnorm(0.99, mean = 60, sd=9)
 
 
 
 # Suppose a discrete random variable has a uniform distribution from 1 to 50. The probability that the random variable is at least 28 is
 
-punif(28, max=50, lower.tail = F)
+punif(23, max=50, lower.tail = F)
 
 # Suppose the scores of an exam are all integer scores and follow a discrete uniform distribution from 50 to 80. The probability that a randomly selected student will score 76 is
-dunif(76, min = 50, max = 80)
+dunif(64, min = 60, max = 70)
 
 
 sum(dbinom(0:3, size=5, prob=0.24))
 
 # At the carnival, you decided to play the balloon and dart game to pop the balloons with the darts. You are provided 5 darts. Your chance of popping a balloon with a dart is 24%. What is the probability that you will pop at least 3 balloons with the 5 darts (round the answer to three decimals)?
-pbinom(2, size=5, prob=0.24, lower.tail = F) 
+pbinom(3, size=5, prob=0.63, lower.tail = F) 
 
 # At the carnival, you decided to play the balloon and dart game to pop the balloons with the darts. You are provided 5 darts. Your chance of popping a balloon with a dart is 77%. What is the probability that you will pop atmost 4 balloons with the 5 darts (round the answer to three decimals)?
-pbinom(0:4, size=5, prob=0.77, lower.tail = T) 
+pbinom(0:4, size=5, prob=0.54, lower.tail = T) 
 
 
 # At the carnival, you decided to play the balloon and dart game to pop the balloons with the darts. You are provided 5 darts. Your chance of popping a balloon with a dart is 80%. What is the probability that you will pop exactly 2 balloons with the 5 darts (round the answer to three decimals)?
-dbinom(2, size = 5, prob = 0.80)
+dbinom(4, size = 5, prob = 0.30)
 
 # In a game of chutes and ladders, suppose you need a 3 to win the game. You are rolling a 6-faced fair die. What is the probability that you will win the game on the eighth try? (round the answer to four decimals)
 
@@ -761,13 +745,13 @@ count = 0
 for(i in 1:10000)
 {
 j = 1
-x = rdunif(1, 6, 1)
-while(x != 5)
+x = rdunif(1, 5, 1)
+while(x != 4)
 {
 j = j+1
-x = rdunif(1, 6, 1)
+x = rdunif(1, 5, 1)
 }
-if(j <= 6)
+if(j <= 3)
 {
 count = count + 1
 }
@@ -776,7 +760,7 @@ count/10000
 
 # A fair coin (Heads/Tails) is tossed 16 times. What is the probability that you will get extactly 7 Heads? (round the answer to four decimals)
 
-n <- 16
+n <- 17
 
 p <- 1/2
 
@@ -784,39 +768,39 @@ dbinom(7, size = n, prob = p)
 
 # A fair coin (Heads/Tails) is tossed 6 times. What is the probability that you will get at least 2 Heads? (round the answer to four decimals)
 
-n <- 6
+n <- 9
 
 p <- 1/2
 
-pbinom(1, size = n, prob = p, lower.tail = F)
+pbinom(6, size = n, prob = p, lower.tail = F)
 
 # An M&M candy dispenser has 25 red, 25 blue, and 25 green M&Ms. The dispenser dispenses 20 M&Ms each time. What is the probability, that on the first use, you will get at most 3 red M&Ms out of the 20 dispensed. (round the answer to three decimals)
 
-M <- 25
-N <- 50
+M <- 20
+N <- 40
 K <- 20
 
-sum(dhyper(0:3, m = M, n = N, k = K))
+sum(dhyper(0:10, m = M, n = N, k = K))
 
 # An M&M candy dispenser has 30 red, 30 blue, and 30 green M&Ms. The dispenser dispenses 20 M&Ms each time. What is the probability, that on the first use, you will get 9 blue M&Ms out of the 20 dispensed. (round the answer to three decimals)
 
-M <- 30
-N <- 60
+M <- 35
+N <- 70
 K <- 20
-sum(dhyper(9, m = M, n = N, k = K))
+sum(dhyper(6, m = M, n = N, k = K))
 
 # Consider a slot machine with 3 wheels (reels). Each reel has 10 slots, 0, 1, ..., 9. Suppose you have a win if the 3 slots match (0-0-0, 1-1-1, ..., 9-9-9). You decided to play until you win 3 times. What is the probability that you will walk out after exactly 355 tries? (round the answer to four decimals)
 
 p <- 0.008450704225
 
-dnbinom(355, size = 3, prob = p)
+dnbinom(360, size = 3, prob = p)
 
 # Consider a slot machine with 3 wheels (reels). Each reel has 10 slots, 0, 1, ..., 9. Suppose you have a win if the 3 slots match (0-0-0, 1-1-1, ..., 9-9-9). You decided to play until you win 3 times. What is the probability that you will walk out after at most 315 tries? (round the answer to four decimals)
 
 
 p <- 0.009523809524
 
-pnbinom(315, size = 3, prob = p)
+pnbinom(160, size = 3, prob = p)
 
 # Consider a slot machine with 3 wheels (reels). Each reel has 10 slots, 0, 1, ..., 9. Suppose you have a win if the 3 slots match (0-0-0, 1-1-1, ..., 9-9-9). You decided to play until you win 3 times. The machine says that your chances of matching the 3 slots is 59%. What is the minimum number of tries you will need to win 3 times?
 
@@ -824,9 +808,22 @@ p <- 0.01966666667
 
 qnbinom(0.59, size = 3, prob = p) * 2
 
+########################
+### CODE FOR PROJECT ###
+########################
 
 
+```{r, echo = FALSE}
+wins <- ufc_data[c("B_wins", "R_wins", "B_losses", "R_losses")]
 
+p <- plot_ly(ufc_data, x = ~wins , type="box", name = 'Red/Blue: Wins vs. Losses', colors = c("blue", "red"))
+  add_trace(p, x = ~B_wins, name = 'Blue Wins', color = "Blue") |>
+  add_trace(p, x = ~R_wins, name = 'Red Wins', color = "Red") |>
+  add_trace(p, x = ~B_losses, name = 'Blue Losses', color = "Blue") |>
+  add_trace(p, x = ~R_losses, name = 'Red Losses', color = "Red") |>
+  layout(xaxis = x)
+colSums(wins)
+```
 
 
 
