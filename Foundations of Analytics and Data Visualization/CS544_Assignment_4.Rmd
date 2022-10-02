@@ -25,20 +25,20 @@ plot(0:n, cdf, type = "h", xlab = "x", ylab = "CDF")
 abline(h=0)
 
 # b) What is the probability that a student will score a perfect score in exactly 2 out of the 5 attempts?
-
+options(digits=1)
 n = 5
-p = 0.6
+p = 0.4
 
 pbinom(2, size = n, prob = p, lower.tail = T)
 
 # Explicit Formula Calculation
-
-p = 0.4
+options(digits=1)
+p = 0.6
 # q = 1-P = 0.6
 n = 5
 x = 2
 
-5*2 * (0.4)^2 * (0.6)^3
+choose(n,x) * p^3 * (1 - p)^2
 
 # c) What is the probability that a student will score a perfect score in at least 2 out of the 5 attempts?
 
@@ -131,7 +131,6 @@ dhyper(10, m = M, n = N, k = K)
 # # Explicit Formula Calculation
 
 choose(M,10) * choose(N,10) / choose(M+N, 20)
-
 
 
 # c) What is the probability that the student will have at least 10 multiple choice questions out of the 20 questions in the exam?
