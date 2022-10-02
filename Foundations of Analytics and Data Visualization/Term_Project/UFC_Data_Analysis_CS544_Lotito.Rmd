@@ -37,7 +37,7 @@ Each row is a compilation of both fighter stats. Fighters are represented by 're
 
 # Goal of Analysis
 
-The goal of this analysis is to understand how the fights have changed over the course of time and to understand the fighters strategies
+The goal of this analysis is to understand how long fighters tend to last in the UFC, who typically wins more often(Red or Blue), and if you were to bet on fights based on color of the fighters corner(Red or Blue) would you be more likely to win on a specific color.
 
 # Wins by Color
 
@@ -49,17 +49,41 @@ barplot(table(winner_title[1]), col = c("Blue", "Red"), xlab = "Red Wins vs. Blu
 
 ### Wins by Color for Title Fights vs. Non-Title Fights
 
-Since we can see that more red colored fighters are winning fights we wanted to see if the same applies when we add in another variable, in this case we are looking at fighting for a title. The results show that when fighting for a title, red fighters tend to win more often than blue fighters.
+Since we can see that more red colored fighters are winning fights I wanted to see if the same applies when we add in another variable, in this case we are looking at fighting for a title. The results show that when fighting for a title, red fighters tend to win more often than blue fighters.
 
 
 ```{r, echo = FALSE}
 barplot(table(winner_title), col = c("Blue", "Red"), xlab = "Title Bout vs. Non-Title Bout", ylab = "Frequency", main = "Fights 1993-2021 by Title Bout")
 ```
+# Win Streak: Blue vs. Red
+
+Now that we know that red fighters tend to win more often, both in title-fights and non-title fights I wanted to analyze what the winning streak looks like for both red and blue fighters. The analysis tells us that for both red and blue fighters the resultsa are about the same with a mean of around 1.3 and a max streak of 16 for both. The distributions are also identical.
+
+```{r, echo = FALSE}
+
+win_streak <- ufc_data[c("R_current_win_streak")]
+
+
+barplot(table(win_streak), col = c("Red"), xlab = "Red # of Wins in Steak", ylab = "Frequency", main = "Duration of Win Streak: Red Fighters")
+
+table(win_streak)
+summary(win_streak)
+```
+```{r, echo = FALSE}
+
+win_streak_blue <- ufc_data[c("B_current_win_streak")]
+
+
+barplot(table(win_streak), col = c("Blue"), xlab = "Blue # of Wins in Steak", ylab = "Frequency", main = "Duration of Win Streak: Blue Fighters")
+
+table(win_streak_blue)
+summary(win_streak)
+```
 
 # Distribution of Data
 ## Fighter Ages: Blue vs. Red
 
-As we can see from the analysis in the scatter plot that the majority of the fights are in their early 20s to late 30s indicating that as the fighters age they are less and less likely to continue fighting. We do have some outliers of course who fight well into their 40s and even 50s. The average age for the fighters overall is ~30.
+How long do fighters last in the UFC? Whats the average age of fighters? What do the outliers tell us? These are all questions that I wanted to analyze. As we can see from the analysis in the scatter plot that the majority of the fights are in their early 20s to late 30s indicating that as the fighters age they are less and less likely to continue fighting, likely due to the wear and tear on the body. We do have some outliers, of course, who fight well into their 40s and even 50s. The average age for the fighters overall is ~30. This makes sense as most professional athletes peak in their early to mid 30s.
 
 ```{r, echo = FALSE}
 ages <- ufc_data[c("B_age", "R_age")]
@@ -70,9 +94,9 @@ legend(x=48,y=45,c("B_age","R_age"),cex=.8,col=c("blue","red"),pch=c(1,1))
 summary(ages)
 ```
 
-## Fighter Wins: Blue vs. Red
+## Fighter Wins/Losses: Blue vs. Red
 
-After analyzing the fighters number of wins, number of wins in a title fight, and the ages of fighters I wanted to take a deeper diver into the overall picture of the blue vs. red wins & losses to see the bigger picture. As we can see from the box plot below that the red fighters are clearly the better fighters overall with more wins over the blue fighters. Blue fighters have less losses compared to Red Fighters, but we need to take into account that there has been less fights overall for the blue fighters as we can see from the column sums.
+After analyzing the fighters number of wins, number of wins in a title fight, and the ages of fighters I wanted to take a deeper diver into the overall picture of the blue vs. red wins & losses to see the bigger picture. As we can see from the box plot below that the red fighters are clearly the better fighters overall with more wins over the blue fighters. Blue fighters have less losses compared to Red Fighters, but we need to take into account that there has been less fights overall for the blue fighters as we can see from the data provided.
 
 
 ```{r, echo = FALSE}
@@ -80,6 +104,24 @@ wins <- ufc_data[c("B_wins", "R_wins", "B_losses", "R_losses")]
 boxplot(wins, horizontal = T, col=c("blue","red"), main = "Red/Blue: Wins vs. Losses", xlab = "Values", las = 1, cex.axis=0.8)
 colSums(wins)
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
