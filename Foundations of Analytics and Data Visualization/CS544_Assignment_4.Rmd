@@ -111,17 +111,19 @@ plot(table(r), type="h")
 
 # a) Compute and plot the probability distribution for the number of multiple choice questions out of the 20 questions that the student will be given?
 options(scipen=999)
-M = 80
+M = 60
 N = 40
 K = 20
-(q_a <- dhyper(0:K, m = M, n = N, k = K))
+(pmf <- dhyper(0:K, m = M, n = N, k = K))
 
-plot(0:K, q_a, type = "h", xlab = "x", ylab = "Question A")
+(cdf <- cumsum(pmf))
+
+plot(0:K, cdf, type = "h", xlab = "x", ylab = "Question A")
 abline(h=0)
 
 # b) What is the probability that the student will have exactly 10 multiple choice questions out of the 20 questions in the exam?
 
-M = 80
+M = 60
 N = 40
 K = 20
 
