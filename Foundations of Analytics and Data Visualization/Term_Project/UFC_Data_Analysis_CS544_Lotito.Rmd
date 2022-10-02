@@ -57,30 +57,22 @@ barplot(table(winner_title), col = c("Blue", "Red"), xlab = "Title Bout vs. Non-
 ```
 # Win Streak: Blue vs. Red
 
-Now that we know that red fighters tend to win more often, both in title-fights and non-title fights I wanted to analyze what the winning streak looks like for both red and blue fighters. The analysis tells us that for both red fighters tend to have longer winning streaks vs. blue fighters. This makes sense as we saw from the other analysis we did on wins. The distributions are similar, but we can clearly see that red fighters tend to have longer winning streaks vs. blue fighters.
+Now that we know that red fighters tend to win more often, both in title-fights and non-title fights I wanted to analyze what the winning streak looks like for both red and blue fighters. The analysis tells us that for both red fighters tend to have longer winning streaks vs. blue fighters. This makes sense as we saw from the other analysis we did on wins. The distributions are similar, but we can clearly see that red fighters tend to have longer winning streaks vs. blue fighters. Both plots are right skewed as evident from the plots provided.
 
-```{r, echo = FALSE}
-
-win_streak_red <- ufc_data[c("R_current_win_streak")]
-
-
-barplot(table(win_streak_red), col = c("Red"), xlab = "Red # of Wins in Steak", ylab = "Frequency", main = "Duration of Win Streak: Red Fighters", ylim = c(0, 3000))
-
-table(win_streak_red)
-summary(win_streak_red)
-```
-```{r, echo = FALSE}
+``` {r, echo = FALSE}
 
 win_streak_blue <- ufc_data[c("B_current_win_streak")]
+win_streak_red <- ufc_data[c("R_current_win_streak")]
 
+par(mfrow=c(1,2))   
+ 
+barplot(table(win_streak_blue), col = c("Blue"), , xlab = "Blue # of Wins in Steak", ylab = "Frequency", main = "Duration of Win Streak: Blue Fighters", ylim = c(0, 3500))
+barplot(table(win_streak_red), col = c("Red"), xlab = "Red # of Wins in Steak", ylab = "Frequency", main = "Duration of Win Streak: Red Fighters", ylim = c(0, 3000))
 
-barplot(table(win_streak_blue), col = c("Blue"), xlab = "Blue # of Wins in Steak", ylab = "Frequency", main = "Duration of Win Streak: Blue Fighters", ylim = c(0, 3500))
-
-table(win_streak_blue)
 summary(win_streak_blue)
+summary(win_streak_red)
+
 ```
-
-
 # Distribution of Data
 ## Fighter Ages: Blue vs. Red
 
