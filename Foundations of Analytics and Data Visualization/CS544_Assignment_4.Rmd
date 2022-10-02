@@ -25,20 +25,16 @@ plot(0:n, cdf, type = "h", xlab = "x", ylab = "CDF")
 abline(h=0)
 
 # b) What is the probability that a student will score a perfect score in exactly 2 out of the 5 attempts?
-options(digits=1)
+
 n = 5
 p = 0.4
 
-pbinom(2, size = n, prob = p, lower.tail = T)
+dbinom(2, size = n, prob = p)
 
 # Explicit Formula Calculation
-options(digits=1)
-p = 0.6
-# q = 1-P = 0.6
-n = 5
-x = 2
 
-choose(n,x) * p^3 * (1 - p)^2
+
+choose(n,2) * p^2 * (1 - p)^3
 
 # c) What is the probability that a student will score a perfect score in at least 2 out of the 5 attempts?
 
@@ -53,7 +49,9 @@ n = 5
 p = 0.4
 
 r = rbinom(1000, n, p)
-hist(r)
+
+plot(table(r), type="h")
+
 
 ##############################################
 #### Part2) Negative Binomial distribution ###
@@ -77,16 +75,16 @@ plot(0:10, cdf, type = "h", xlab = "x", ylab = "CDF")
 abline(h=0)
 
 # b) What is the probability that the student will have the three perfect scores with exactly 4 failures?
-options(digits=1)
+
 n = 3
 p = 0.6
 
 dnbinom(4, size = n, prob = p)
 
 
-
 # Explicit Formula Calculation
 #P(x = 4):
+
 choose(6, 2) * (p**n) * ((1-p)**4) 
 
 # c) What is the probability that the student will have the three perfect scores with at most 4 failures?
@@ -102,7 +100,8 @@ n = 3
 p = 0.6
 
 r = rnbinom(1000, n, p)
-hist(r)
+
+plot(table(r), type="h")
 
 ###########################################
 #### Part3) Hypergeometric distribution ###
@@ -141,7 +140,8 @@ phyper(10, m = M, n = N, k = K, lower.tail = F)
 
 (students_1k <- rhyper(1000, m = M, n = N, k = K))
 
-hist(students_1k)
+
+plot(table(students_1k), type="h")
 
 ####################################
 #### Part4) Poisson distribution ###
@@ -176,7 +176,12 @@ course_time = 50
 
 (number_questions = rpois(course_time,lambda))
 
+plot(table(number_questions))
+
 boxplot(number_questions, horizontal = T, main = "Questions Per Day")
+
+# The box plot shows us that there is some outliers within the data and that we have a mean of around ~9.5 questions per a day. The outliers look to be 3, 17, 20 based on the bar plot showing that its unlikely to get those number of questions per a day from the professor & most of the data falls within 3 standard divations of the mean.
+
 
 ###################################
 #### Part5) Normal distribution ###
