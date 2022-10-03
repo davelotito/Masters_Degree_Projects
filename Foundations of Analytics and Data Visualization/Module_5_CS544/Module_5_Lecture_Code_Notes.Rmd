@@ -3,3 +3,236 @@
 #####################################################
 #### Section #1 - Intro (Central Limit Theorem) #### 
 #####################################################
+
+# One of the important theorems in statistics is the Central Limit Theorem.
+
+
+# The Central Limit Theorem states that the distribution of the sample means for a given sample size of the population has the shape of the normal distribution. The theorem is shown with various distributions of the input data in the following sections.
+
+#######################################
+#### Data from Normal Distribution #### 
+#######################################
+
+# The following example shows the probability distribution for \(1000\) numbers drawn using a normal distribution with a mean value of \(60\) and a standard deviation of \(10\).
+
+```{r, echo = FALSE}
+x <- rnorm(1000, mean = 60, sd = 10)
+
+hist(x, prob = T, xlim = c(30,90), ylim = c(0, 0.05))
+```
+# The above histogram has an approximate shape of a normal distribution. The distribution is centered around \(60\) (the mean) and most of the values are within three standard deviations (\(3\cdot 10=30\)) from the mean.
+
+# For the sample distribution of the sample means, a sample of size \(5\) is used in this example. Using the same distribution (normal distribution with mean \(60\) and standard deviation \(10\)), the mean of the sample is calculated. The experiment is repeated \(10,000\) times to produce a vector of \(10,000\) means of the sample, each sample of size \(5\). The variable xbar stores the calculated means of the samples.
+
+``` {r, echo = F}
+samples <- 10000
+sample.size <- 5
+
+xbar <- numeric(samples)
+
+for (i in 1:samples) {
+  xbar[i] <- mean(rnorm(sample.size, mean = 60, sd = 10))
+}
+
+hist(xbar, prob = T, breaks = 15, xlim = c(30, 90), ylim = c(0, 0.1))
+
+```
+# From the above figure, the distribution of xbar also has the shape of a normal distribution. The mean of this distribution is the same as the mean of the data.
+
+mean(xbar)
+sd(xbar)
+
+#######################################
+#### Section #2 - Sampling Methods #### 
+#######################################
+
+# A sample is a portion of the population that is selected for doing the data analysis. The results from this sample are then used to estimate the characteristics of the population. A frame is defined as a listing of items that define a population. Samples are drawn from the frames.
+
+# Broadly, samples can be classified into two categories—probability samples and nonprobability samples. Common nonprobability sampling techniques include convenience sampling and judgment sampling. In probability sampling, the items for the sample are selected based on known probabilities. The common methods used in probability sampling are simple random sampling, systematic sampling, stratified sampling, and cluster sampling. The following sections study the probability sampling techniques in detail.
+
+################################
+#### Simple Random Sampling #### 
+################################
+
+# In simple random sampling, every item from a frame has the same chance for selection in the sample as every other item. Suppose \(N\) represents the size of the frame or the number of items in the frame. For selecting a sample of size \(n\), the probability of selecting the first member of the sample is \(\frac{1}{N}\). Samples can be chosen with replacement or without replacement. If sampling with replacement is used, the probability of selecting any member for the sample is \(\frac{1}{N}\). If sampling without replacement is used, the probability of selecting the second member is \(\frac{1}{N-1}\), etc. The process is repeated until the desired sample size is selected.
+
+# The sampling package developed for R provides the implementations for various sampling techniques.
+
+library(sampling)
+
+# The srswr(n, N) function draws a simple random sample of size \(n\) with replacement from a frame of size \(N\). The function returns a vector of size \(N\). The \(k\)th element of this vector indicates how many times that element is included in the sample.
+
+s <- srswr(10,26)
+s
+
+# If the items in the input frame are upper case letters, the selected items and their counts in the sample can be indexed as shown below.
+
+LETTERS[s != 0]
+
+s[s != 0]
+
+# The following shows the full selected sample using the counts are repetition.
+
+rep(LETTERS[s != 0], s[s != 0])
+
+# For simple random sampling without replacement, the function srswor(n, N) draws a sample of size \(n\) from a frame of size \(N\). The function returns a vector of size \(N\), with each element being 1, if selected in the sample, or 0, otherwise.
+
+(s <- srswor(10, 26))
+
+##########################################
+#### Example – Simple Random Sampling #### 
+##########################################
+
+# The swissmunicipalities dataset included in the sampling package provides the population information for Swiss municipalities (for the year 2003).
+
+data(swissmunicipalities)
+names(swissmunicipalities)
+
+# The columns in the data frame corresponding to the Swiss region, municipality name, number of men and women between the ages \(20\) and \(30\), number of households, and total population are shown below.
+
+head(swissmunicipalities[c(2, 4, 14, 17 ,22)])
+
+# The data set has information about \(2,896\) municipalities. The number of municipalities in each region (\(1\ldots7\)) is shown below.
+
+nrow(swissmunicipalities)
+
+table(swissmunicipalities$REG)
+
+# A simple random sample of size \(70\) is drawn from the population with replacement.
+
+s <- srswr(70, nrow(swissmunicipalities))
+s[s != 0]
+
+# The municipalities that are included in the above random sample correspond to the rows of the dataset as shown below.
+
+rows <- (1:nrow(swissmunicipalities))[s!=0]
+rows <- rep(rows, s[s != 0])
+rows
+
+# The data of the selected sample and the frequency of municipalities in each region are shown below.
+
+sample.1 <- swissmunicipalities[rows, ]
+head(sample.1[c(2 ,4, 14, 17 , 22)])
+
+table(sample.1$REG)
+
+# A simple random sample of size \(70\) is drawn from the population without replacement. The data of the selected sample and the frequency of municipalities in each region are shown below.
+
+s <- srswor(70, nrow(swissmunicipalities))
+
+sample.2 <- swissmunicipalities[s != 0, ]
+head(sample.2[c(2, 4, 14, 17, 22)])
+
+#############################
+#### Systematic Sampling #### 
+#############################
+
+# In systematic sampling, for selecting a sample of size \(n\), the \(N\) items from the frame are partitioned into \(n\) groups. Each group has \(k\) items, where \(k=\frac{N}{n}\), rounded to the nearest integer. The first item for the sample is randomly selected from the first set of \(k\) items in the frame. After the first selection, the remaining \(n-1\) items are selected by taking every \(k\)th item from the frame. From a population of \(1000\) students, if a sample of size \(50\) is to selected, then \(k=1000/50=20\). The first sample is selected at random from the first \(20\) students. Suppose student \(13\) is selected as the first item. The subsequent selections will be every \(20\)th student after the first selection, i.e., \(33\), \(53\), \(73\), \(\ldots\), \(953\), \(973\), and \(993\).
+
+# Selection bias may occur as a result of systematic sampling if there is a pattern in the input frame.
+
+# The following code shows the calculation of the items in each group for the given values of \(N\) (the frame size) and \(n\) (the sample size).
+
+N <- 1000
+n <- 50
+
+# items in each group
+(k <- ceiling(N / n))
+
+# The next step is to select an item at random from the first group of \(k\) items. Based on this selection, the sample of size \(n\) is drawn by selecting every \(k\)th item.
+
+(r <- sample(k, 1))
+
+# select every kth item
+
+seq(r, by = k, length = n)
+
+#######################################
+#### Example – Systematic Sampling #### 
+#######################################
+
+# The swissmunicipalities dataset is used for systematic sampling. For a sample of size \(70\), the data is divided into \(42\) groups. From the first group, a random item is selected.
+
+N <- nrow(swissmunicipalities)
+n <- 70
+
+(k <- ceiling(N / n))
+
+(r <- sample(k, 1))
+
+# The rows of the systematic sample are now computed by taking every \(42\)nd item. The selected sample is indexed from these rows. The frequency of municipalities in each region is shown below.
+
+# select every kth item
+
+s <- seq(r, by = k, length = n)
+
+sample.3 <- swissmunicipalities[s, ]
+
+head(sample.3[c(2, 4, 14, 17, 22)])
+
+table(sample.3$REG)
+
+###############################
+#### Unequal Probabilities #### 
+###############################
+
+# In the above sampling methods, each item in the frame has equal probability of being included in the sample. For unequal probabilities, the inclusionprobabilities function computes the probability for each item to be included in the sample with probabilities proportional to the size.
+
+pik <- inclusionprobabilities(swissmunicipalities$POPTOT, 70)
+length(pik)
+
+sum(pik)
+
+# The sum of the inclusion probabilities is equal to the sample size. The UPsystematic function uses systematic method with unequal probabilities (without replacement) for selecting the sample based on the inclusion probabilities.
+
+s <- UPsystematic(pik)
+
+sample.4 <- swissmunicipalities[s != 0, ]
+
+head(sample.4[c(2, 4, 14, 17, 22)])
+
+table(sample.4$REG)
+
+#############################
+#### Stratified Sampling #### 
+#############################
+
+# In stratified sampling, the \(N\) items from the frame are subdivided into separate subgroups based on some common characteristic, e.g., gender, race, year of school, etc. The subgroups are known as strata. Simple random samples are selected from each stratum and combined for the desired sample of size \(n\). The number of samples selected from each stratum is proportional to the relative size of that stratum with respect to the entire frame.
+
+# The following example illustrates stratified sampling using simulated data from \(4\) sections (A, B, C, and D) of a class, each section with \(25\) students. The score for each student is drawn at random from a uniform distribution using the range \(60\) to \(80\).
+
+
+section.ids <- rep(LETTERS[1:4], each = 25)
+
+section.scores <- round(runif(100, 60, 80))
+
+data <- data.frame(Section = section.ids, Score = section.scores)
+
+head(data)
+
+table(data$Section)
+
+# The section already organizes the above data frame. Using the Section column as the strata, a stratified sample of size \(3\) from each section is sampled without replacement using the strata function as shown below.
+
+st.1 <- strata(data, stratanames = c("Section"), size = rep(3, 4), method = "srswor", description = T)
+
+# For each stratum, \(3\) units are selected for a total sample size of \(12\). The data frame returned by the strata function is shown below. The object includes the strata columns, the identifier of the selected items, and the inclusion probability of each item. In the given data, each section has \(25\) students and the sample from each stratum has \(3\) students, resulting in an inclusion probability of \(3/25=0.12\) for each item.
+
+st.1
+
+# The getdata function extracts the observed data from the data frame and includes the columns from the data frame in addition to the identifier, the inclusion probability, and the stratum.
+
+(st.sample1 <- getdata(data, st.1))
+
+
+
+
+
+
+
+
+
+
+
+
+
