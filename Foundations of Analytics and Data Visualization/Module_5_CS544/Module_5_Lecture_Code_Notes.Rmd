@@ -263,23 +263,65 @@ strata(data, stratanames = c("Section"), size = rep(5, 4), method = "srswor", de
 
 # The inclusion probabilities for items from each stratum are now \(5/10\), \(5/20\), \(5/30\), and \(5/40\) (\(0.5\), \ (0.25\), \(0.17\), and \(0.12\)), respectively.
 
+#############################################
+#### Example – Strata with Two Variables #### 
+#############################################
 
+# Suppose each section is further stratified by the gender of the students. The following data frame shows the data for the four sections organized first by section and then by gender (female and male) within each section.
 
+section.ids <- rep(LETTERS[1:4], c(10, 20, 30, 40))
 
+section.scores <- round(runif(100, 60, 80))
 
+section.genders <- rep(rep(c("F", "M"), 4), c(10, 0, 5, 15, 20, 10, 15, 25))
 
+data <- data.frame(Section = section.ids, Score = section.scores, Gender = section.genders)
 
+head(data)
 
+# The data is already organized by section and gender. If that is not the case, the strata have to be ordered as follows:
 
+data <- data[order(data$Section, data$Gender), ]
 
+# The contingency table showing the tabulation of the data by section and gender is shown below.
 
+(freq <- table(data$Section, data$Gender))
 
+# For a desired sample size of \(20\), the number of students from each stratum (section and gender) can be calculated proportional to their frequencies as follows:
 
+(st.sizes <- 20 * freq / sum(freq))
 
+# The strata sizes have to be specified as a vector. Converting the tabular data to a vector organizes the data by columns.
 
+as.vector(st.sizes)
 
+# Since the data frame is ordered by gender within the sections, the transpose of the table is used when converting to a vector.
 
+as.vector(t(st.sizes))
 
+# Only the strata sizes that are not zero are specified when sampling.
+
+st.sizes <- as.vector(t(st.sizes))
+
+st.sizes <- st.sizes[st.sizes != 0]
+st.sizes
+
+# The strata function selects the samples from each stratum (section and gender) as shown below.
+
+st.3 <- strata(data, stratanames = c("Section", "Gender"), size = st.sizes, method = "srswor", description = T)
+
+(st.sample3 <- getdata(data, st.3))
+
+# The swissmunicipalities data set is listed in the descending order by the total population of each municipality. If the region column is used for stratification, the data is first ordered using this column as shown below.
+
+order.index <- order(swissmunicipalities$REG)
+data <- swissmunicipalities[order.index, ]
+
+head(data[c(2, 4, 14, 17, 22)])
+
+##########################
+#### Cluster Sampling #### 
+##########################
 
 
 
