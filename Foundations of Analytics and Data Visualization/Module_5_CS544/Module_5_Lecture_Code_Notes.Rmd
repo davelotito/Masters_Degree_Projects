@@ -224,6 +224,71 @@ st.1
 
 (st.sample1 <- getdata(data, st.1))
 
+##################################
+#### Example – Unequal Strata #### 
+##################################
+
+# The following example shows the sampling done for strata of different sizes. The four sections of a class have \(10\), \(20\), \(30\), and \(40\) students respectively.
+
+section.ids <- rep(LETTERS[1:4], c(10, 20, 30, 40))
+
+section.scores <- round(runif(100, 60, 80))
+
+data <- data.frame(Section = section.ids, Score = section.scores)
+
+head(data)
+
+
+# The sample sizes for each stratum can be calculated proportional to their size. For a desired sample size of \(20\), the number of students to be included from each section is computed as shown below.
+
+(freq <- table(data$Section))
+
+(st.sizes <- 20 * freq / sum(freq))
+
+# Using the Section column as the strata, a stratified sample of sizes \(2\), \(4\), \(6\), and \(8\) from sections A, B, C, and D is sampled without replacement using the strata function as shown below.
+
+st.2 <- strata(data, stratanames = c("Section"), size = st.sizes, method = "srswor", description = T)
+
+# For each stratum, the selected units are selected for a total sample size of \(20\). The inclusion probabilities for each item in each stratum are the same in this example, as the number of items is proportional to the size of that stratum (Section A: \(2/10 = 0.2\), Section B: \(4/20 = 0.2\), Section C: \(6/30 = 0.2\), Section D: \(8/40 = 0.2\))
+
+st.2
+
+# The data extracted from the data frame using the sample is shown below.
+
+(st.sample2 <- getdata(data, st.2))
+
+# If the sample number of items is to be selected from each stratum, the inclusion probabilities will differ as shown below.
+
+strata(data, stratanames = c("Section"), size = rep(5, 4), method = "srswor", description = T)
+
+# The inclusion probabilities for items from each stratum are now \(5/10\), \(5/20\), \(5/30\), and \(5/40\) (\(0.5\), \ (0.25\), \(0.17\), and \(0.12\)), respectively.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
