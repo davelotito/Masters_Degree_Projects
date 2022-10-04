@@ -193,13 +193,28 @@ sample.3 <- top5department[s, ]
 
 ```
 
+# d) Order the data using the Department variable. Draw a stratified sample using proportional sizes based on the Department variable. Show the frequencies for the selected departments. Show the percentages of these with respect to sample size.
+``` {r, echo = F}
+set.seed(9386) 
+
+dept_ordered <- boston[order(boston$Department, decreasing = F), ]
 
 
+stratified_data = data.frame(Department = dept_ordered$Department)
+freq = table(stratified_data$Department)
+
+st.sizes =as.vector(t(round((595 * freq / sum(freq)))))
+
+stratified = strata(stratified_data, stratanames = c("Department"),
+               size = st.sizes,
+               description = T)
+
+(df <- table(stratified_data$Department))
+(prop.table(df)*100)
+```
 
 
-
-
-
+# e) Compare the means of Earnings variable for these four samples against the mean for the data.
 
 
 
