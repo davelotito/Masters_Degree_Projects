@@ -1,2 +1,112 @@
 # CS544 Module 4 Assignment
 ## Student: David J Lotito
+
+####################################
+### Part1) Central Limit Theorem ###
+####################################
+
+# Initialize the city of Boston earnings dataset as shown below:
+library(prob)
+library(sampling)
+
+boston <- read.csv( "https://people.bu.edu/kalathur/datasets/bostonCityEarnings.csv", colClasses = c("character", "character", "character", "integer", "character"))
+
+# The data in the file contains the total earnings of the employees of city of Boston.
+
+# a) Show the histogram of the employee earnings. Use breaks from 40000 to 400000 in steps of 20000 and show the corresponding tick labels on the x-axis. Compute the mean and standard deviation of this data. What do you infer from the shape of the histogram?
+
+``` {r, echo = F}
+hist(boston$Earnings, xlim = c(40000, 400000))
+(a.mean <- mean(boston$Earnings))
+(a.sd <- sd(boston$Earnings))
+```
+# The histgram tells us the data is right skewed.
+
+# b) Draw 5000 samples of this data of size 10, show the histogram of the sample means. Compute the mean of the sample means and the standard deviation of the sample means. Use sample() function with replace as FALSE for drawing the samples. Set the start seed for random numbers as the last 4 digits of your BU id.
+``` {r, echo = F}
+set.seed(9386)
+
+samples <- 5000
+sample.size <- 10
+
+
+for (i in 1:samples) {
+sample[i] <- mean(sample(boston$Earnings, 10, replace = FALSE))
+}
+
+hist(sample, prob = FALSE, breaks = 15, main = "Sample Size = 10")
+(b.mean <- mean(sample))
+(b.sd <- sd(sample))
+```
+# c) Draw 5000 samples of this data of size 40, show the histogram of the sample means. Compute the mean of the sample means and the standard deviation of the sample means. Use sample() function with replace as FALSE for drawing the samples. Set the start seed for random numbers as the last 4 digits of your BU id.
+
+``` {r, echo = F}
+set.seed(9386)
+
+samples <- 5000
+sample.size <- 40
+
+
+for (i in 1:samples) {
+sample[i] <- mean(sample(boston$Earnings, 40, replace = FALSE))
+}
+
+hist(sample, prob = FALSE, breaks = 15, main = "Sample Size = 40")
+(c.mean <- mean(sample))
+(c.sd <- sd(sample))
+```
+# d) Compare of means and standard deviations of the above three distributions.
+
+paste("Distribution #1 Mean =", a.mean, "& Distribution #1 SD = ", a.sd)
+
+paste("Distribution #2 Mean =", b.mean, "& Distribution #2 SD = ", b.sd)
+
+paste("Distribution #3 Mean =", c.mean, "& Distribution #3 SD = ", c.sd)
+
+#####################################################################
+### Part2) Central Limit Theorem – Negative Binomial distribution ###
+#####################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
