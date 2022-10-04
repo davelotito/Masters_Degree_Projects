@@ -67,11 +67,112 @@ paste("Distribution #3 Mean =", c.mean, "& Distribution #3 SD = ", c.sd)
 ### Part2) Central Limit Theorem – Negative Binomial distribution ###
 #####################################################################
 
+# Suppose the input data follows the negative binomial distribution with the parameters size = 3 and prob = 0.5. Set the start seed for random numbers as the last 4 digits of your BU id.
+
+# a) Generate 5000 random values from this distribution. Show the barplot with the proportions of the distinct values of this distribution.
+
+``` {r, echo = F}
+set.seed(9386)
+
+samples <- 5000
+xbar <- numeric(samples)
+for (i in 1:samples) {
+xbar[i] <- mean(rnbinom(5000, size=5,prob = 0.5))
+}
+barplot(prop.table(table(xbar)),
+xlab = "x", ylab = "Proportion")
+mean(xbar)
+sd(xbar)
 
 
+```
+# b) With samples sizes of 10, 20, 30, and 40, draw 1000 samples from the data generated in a). Use sample() function with replace as FALSE. Show the histograms of the densities of the sample means. Use a 2 x 2 layout.
+
+``` {r, echo = F}
+set.seed(9386)
+
+samples <- 5000
+
+xbar <- numeric(samples)
+
+par(mfrow = c(2,2))
+
+x = rnbinom(5000, size=5,prob=0.5)
+
+for (size in c(10, 20, 30, 40)) {
+for (i in 1:samples) {
+xbar[i] <- mean(sample(x, size = size, replace = TRUE))
+}
+hist(xbar, prob = TRUE, breaks = 15, xlim=c(0,6), ylim = c(0, 1.5),main = paste("Sample Size =", size))
+cat("Sample Size = ", size, " Mean = ", mean(xbar)," SD = ", sd(xbar), "\n")
+}
 
 
+```
 
+# c) Compare of means and standard deviations of the data from a) with the four sequences generated in b).
+
+## NEED TO UNDERSTAND HOW TO ANSWER THIS QUESTION
+
+#######################
+### Part3) Sampling ###
+#######################
+
+# Create a subset of the dataset from Part1 with only the top 5 departments based on the number of employees working in that department. The top 5 departments should be computed using R code. Then, use %in% operator to create the required subset.
+
+# Use a sample size of 50 for each of the following.
+# Set the start seed for random numbers as the last 4 digits of your BU id.
+
+# a) Show the sample drawn using simple random sampling without replacement. Show the frequencies for the selected departments. Show the percentages of these with respect to sample size.
+
+boston <- read.csv( "https://people.bu.edu/kalathur/datasets/bostonCityEarnings.csv", colClasses = c("character", "character", "character", "integer", "character"))
+
+head(boston)
+
+## Find Top 5 departments ##
+top5 <- boston[order(boston$Department, decreasing = TRUE), ]["Department"]
+
+# Get freq of each department
+top5 <- data.frame(table(top5[c("Department")]))
+
+## Order top 5 deparments
+top5[order(-top5$Freq),][1:5,]
+
+# Subset department based on number of employees
+top5department <- subset(boston, Department %in% c('Boston Police Department','Boston Fire Department','BPS Special Education', 'BPS Facility Management', 'Boston Public Library'))["Department"]
+colnames(top5department) <- "Department"
+
+``` {r, echo = F}
+set.seed(9386)
+
+srswor <- srswor(50, nrow(top5department))
+
+sample.1 <- top5department[rows, ]
+
+(df <- table(sample.1))
+(prop.table(df)*100)
+
+```
+
+# b) Show the sample drawn using systematic sampling. Show the frequencies for the selected departments. Show the percentages of these with respect to sample size.
+
+``` {r, echo = F}
+set.seed(9386)
+
+N = nrow(top5department)
+n = 50
+k = floor(N / n)
+r = sample(k, 1)
+s = seq(r, by = k, length = n)
+
+sample.2 <- top5department[s, ]
+
+(df <- table(sample.2))
+(prop.table(df))
+
+```
+
+# c) Calculate the inclusion probabilities using the Earnings variable. Using these values, show the sample drawn using systematic sampling with unequal probabilities. Show the frequencies for the selected departments. Show the percentages of these with respect to sample size.
 
 
 
