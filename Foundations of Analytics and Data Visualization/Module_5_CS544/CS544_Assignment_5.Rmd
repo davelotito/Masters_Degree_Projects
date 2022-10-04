@@ -209,7 +209,7 @@ stratified = strata(stratified_data, stratanames = c("Department"),
                size = st.sizes,
                description = T)
 
-(df <- table(stratified_data$Department))
+(df <- table(stratified$Department))
 (prop.table(df)*100)
 ```
 
