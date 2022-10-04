@@ -174,14 +174,24 @@ sample.2 <- top5department[s, ]
 
 # c) Calculate the inclusion probabilities using the Earnings variable. Using these values, show the sample drawn using systematic sampling with unequal probabilities. Show the frequencies for the selected departments. Show the percentages of these with respect to sample size.
 
+``` {r, echo = F}
+set.seed(9386)
+
+earnings_inc_prob <- inclusionprobabilities(boston$Earnings, 50)
+
+N = nrow(earnings_department)
+n = 50
+k = floor(N / n)
+r <- sample(UPsystematic(earnings_inc_prob), 1)
+s = seq(r, by = k, length = n)
 
 
+sample.3 <- top5department[s, ]
 
+(df <- table(sample.3))
+(prop.table(df)*100)
 
-
-
-
-
+```
 
 
 
