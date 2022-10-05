@@ -29,7 +29,7 @@ winner_title <- ufc_data[(c("Winner", "title_bout"))]
 
 # Dataset Overview
 
-The following dataset is from Kaggle and contains the UFC-Fight historical data from 1993 to 2021.This dataset is a list of every UFC fight in the history of the organisation. Every row contains information about both fighters, fight details and the winner. The data was scraped using beautifulsoup in Python and processed via Pandas. This is the preprocessed file where each row contains information about each fighter collected up until this particular fight and the descriptive fight details. In this file, feature engineering, missing data treatment and one hot encoding are already done. The raw files have been merged to form this dataset.
+The following dataset is from Kaggle and contains the UFC-Fight historical data from 1993 to 2021. This dataset is a list of EVERY UFC fight in the history of the organisation. Every row contains information about both fighters, fight details and the winner. The data was scraped using beautifulsoup in Python and processed via Pandas. This is the preprocessed file where each row contains information about each fighter collected up until this particular fight and the descriptive fight details. In this file, feature engineering, missing data treatment and one hot encoding are already done. The raw files have been merged to form this dataset.
 
 # Data Prep
 
