@@ -323,11 +323,75 @@ head(data[c(2, 4, 14, 17, 22)])
 #### Cluster Sampling #### 
 ##########################
 
+# In cluster sampling, the population is divided into groups called clusters. Each cluster should mirror the entire population. A random sample of these groups (or clusters) is then selected. The sample is made up of all the members of these selected clusters, a process known as one-stage cluster sampling. In two-stage cluster sampling, members are sampled from each selected cluster using simple random sampling or systematic random sampling. Suppose the student data is organized into four clusters, each cluster being the corresponding section.
 
+section.ids <- rep(LETTERS[1:4], c(10, 20, 30, 40))
 
+section.scores <- round(runif(100, 60, 80))
 
+data <- data.frame(Section = section.ids, Score = section.scores)
 
+table(data$Section)
 
+# The cluster method returns information about the desired selection of the specified number of clusters. The selected clusters include all samples from those clusters.
+
+cl <- cluster(data, c("Section"), size = 2, method = "srswor")
+
+cl.sample <- getdata(data, cl)
+
+table(cl.sample$Section)
+
+# Similarly, a cluster of size \(4\) can be selected using the swissmunicipalities dataset as shown below, clustered by region.
+
+table(swissmunicipalities$REG)
+
+cl <- cluster(swissmunicipalities, c("REG"), size = 4, method = "srswor")
+
+sample.6 <- getdata(swissmunicipalities, cl)
+
+table(sample.6$REG)
+
+############################
+#### Section #3: Errors #### 
+############################
+
+# Even with random probability sampling methods, surveys taken from samples of the population have errors. The errors are classified under the following types—coverage errors, nonresponse errors, sampling errors, and measurement errors.
+
+#########################
+#### Coverage Errors #### 
+#########################
+
+# Since the sampling is done using the sampling frame, the frame should be an adequate representation of the population. The frame is an up-to-date list of all items that is used as input by the various sampling methods. Coverage errors occur when certain groups of items are excluded from the frame. These excluded items now do not have any chance of getting selected in the sample. This coverage error results in selection bias. In this case where certain groups are excluded from the frame, the random samples selected will only provide an estimation of the frame and not the population. Missing items cause under coverage while duplicate items cause over coverage. Up to date frames should be used for minimizing coverage errors.
+
+############################
+#### Nonresponse Errors #### 
+############################
+
+# When samples are selected for doing surveys, not everyone in the sample responds to the survey. Nonresponse errors occur when data is not collected from all items in the sample. This results in a nonresponse bias. No assumption should be made that the characteristic estimate of the nonresponses would be the same as those who responded. Reducing nonresponse errors comes at a higher cost by preferring personal interviews and telephone interviews rather than mail in surveys. Item nonresponse errors arise when a specific question or item in the survey is not answered.
+
+#########################
+#### Sampling Errors #### 
+#########################
+
+# When samples are used for estimating the characteristic of the population, the estimate changes from sample to sample and these variations are reflected through the sampling error. The error is affected by the probability of particular items getting selected in particular samples. Surveys or polls capture the sampling error and state it as the margin or error. The sampling error can be reduced through larger sample sizes, which increases the cost of the survey.
+
+############################
+#### Measurement Errors #### 
+############################
+
+# For surveys, questions should be designed for gathering meaningful information. Weakness in the questions leads to measurement error. The questions should be unambiguous and clear. A second source of measurement error, called the Hawthorne effect, occurs when the user changes their behavior to please the interviewer. This results in observation bias. Respondent error results when users provide incorrect responses to the survey, or when the interviewer fails to record the correct values.
+
+###############
+#### Noise #### 
+###############
+
+# Noise is also called random error or statistical uncertainty. Any measurement of any physical quantity is uncertain because of the noise. Noise is different from systematic error in measurement due to a defect.
+
+#######################
+#### Data Dredging #### 
+#######################
+
+# Data dredging, also referred to as data fishing or data snooping, is the investigation for statistically significant relationships in data. Researchers use statistical techniques to draw false or misleading conclusions. Researchers may also manipulate the data to produce a result that is not valid. In other scenarios, the researcher is not sure what to look for and misled by the correlations seen from the results.
 
 
 

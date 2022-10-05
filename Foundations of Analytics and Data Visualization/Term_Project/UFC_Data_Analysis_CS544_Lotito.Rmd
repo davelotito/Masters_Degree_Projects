@@ -21,6 +21,7 @@ knitr::opts_chunk$set(fig.width=8, fig.height=4,
 ```{r echo=TRUE}
 # Import CSV
 library(plotly)
+library(tidyr)
 
 ufc_data <- read.csv("/Users/davelotito/Code/Masters_Degree_Projects/Foundations of Analytics and Data Visualization/Term_Project/UFC_Preprocessed_Fight_Data.csv", header = T)
 
@@ -97,12 +98,31 @@ wins <- ufc_data[c("B_wins", "R_wins", "B_losses", "R_losses")]
 boxplot(wins, horizontal = T, col=c("blue","red"), main = "Red/Blue: Wins vs. Losses", xlab = "Values", las = 1, cex.axis=0.8)
 colSums(wins)
 ```
+# Central Limit Theorem
+``` {r, echo = F}
+set.seed(9386)
+
+# Combine Ages into One Column
+ages<- data.frame(ages = c(ufc_data[,"B_age"], ufc_data[,"R_age"]))
+
+ages <- as.matrix(ages)
+
+xbar <- c()
+
+par(mfrow = c(2,2))
 
 
+for (size in c(10, 20, 30, 40)) {
+for (i in 1:nrow(ages)) {
+xbar[i] <- mean(sample(x = ages, size = 10, replace = TRUE))
+}
+hist(xbar, prob = TRUE, breaks = 15, main = paste("Sample Size =", size))
+
+cat("Sample Size = ", size, " Mean = ", mean(xbar)," SD = ", sd(xbar), "\n")
+}
 
 
-
-
+```
 
 
 
