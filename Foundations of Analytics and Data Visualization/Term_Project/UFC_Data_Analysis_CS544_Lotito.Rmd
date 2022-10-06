@@ -22,10 +22,13 @@ knitr::opts_chunk$set(fig.width=8, fig.height=4,
 # Import CSV
 library(plotly)
 library(tidyr)
+library(prob)
+library(sampling)
 
 ufc_data <- read.csv("/Users/davelotito/Code/Masters_Degree_Projects/Foundations of Analytics and Data Visualization/Term_Project/UFC_Preprocessed_Fight_Data.csv", header = T)
 
 winner_title <- ufc_data[(c("Winner", "title_bout"))]
+
 ```
 
 # Dataset Overview
@@ -45,7 +48,9 @@ The goal of this analysis is to understand how long fighters tend to last in the
 We want to understand if a specific color gives any indicator if a fighter is more likely to win a fight. In the below bar plot we are showing the frequency of wins for Blue vs. Red fighter color.
 
 ```{r, echo = FALSE}
+
 barplot(table(winner_title[1]), col = c("Blue", "Red"), xlab = "Red Wins vs. Blue Wins", ylab = "Frequency", main = "Fights 1993-2021", ylim = c(0,5000))
+
 ```
 
 ### Wins by Color for Title Fights vs. Non-Title Fights
@@ -107,29 +112,40 @@ ages<- data.frame(ages = c(ufc_data[,"B_age"], ufc_data[,"R_age"]))
 
 ages <- as.matrix(ages)
 
-xbar <- c()
 
 par(mfrow = c(2,2))
 
+xbar <- c()
 
 for (size in c(10, 20, 30, 40)) {
 for (i in 1:nrow(ages)) {
 xbar[i] <- mean(sample(x = ages, size = 10, replace = TRUE))
 }
+cat("Sample Size = ", size, " Mean = ", mean(xbar)," SD = ", sd(xbar), "\n")
 hist(xbar, prob = TRUE, breaks = 15, main = paste("Sample Size =", size))
 
-cat("Sample Size = ", size, " Mean = ", mean(xbar)," SD = ", sd(xbar), "\n")
 }
 
 
 ```
 
+# Sampling
+``` {r, echo = F}
 
+set.seed(9386)
 
+srswor <- srswor(1000, nrow(ages))
+srswor[srswor != 0]
+rows <- (1:nrow(ages))[srswor!=0]
+rows <- rep(rows, srswor[srswor != 0])
+sample.1 <- ages[rows, ]
 
+df <- table(sample.1)
 
+barplot(df, main = "SRSWOR")
 
-
+(prop.table(df)*100)
+```
 
 
 
