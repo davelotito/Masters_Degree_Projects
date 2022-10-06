@@ -20,7 +20,7 @@ hist(boston$Earnings, xlim = c(40000, 400000))
 (a.mean <- mean(boston$Earnings))
 (a.sd <- sd(boston$Earnings))
 ```
-# The histgram tells us the data is right skewed.
+# The histgram tells us the data is right skewed, meaning most of the data falls on the left tail of the distribution
 
 # b) Draw 5000 samples of this data of size 10, show the histogram of the sample means. Compute the mean of the sample means and the standard deviation of the sample means. Use sample() function with replace as FALSE for drawing the samples. Set the start seed for random numbers as the last 4 digits of your BU id.
 ``` {r, echo = F}
@@ -81,8 +81,8 @@ xbar[i] <- mean(rnbinom(5000, size=5,prob = 0.5))
 }
 barplot(prop.table(table(xbar)),
 xlab = "x", ylab = "Proportion")
-mean(xbar)
-sd(xbar)
+(a.mean <- mean(xbar))
+(a.sd <- sd(xbar))
 
 
 ```
@@ -101,18 +101,25 @@ x = rnbinom(5000, size=5,prob=0.5)
 
 for (size in c(10, 20, 30, 40)) {
 for (i in 1:samples) {
-xbar[i] <- mean(sample(x, size = size, replace = TRUE))
+xbar[i] <- mean(sample(x, size = size, replace = FALSE))
 }
-hist(xbar, prob = TRUE, breaks = 15, xlim=c(0,6), ylim = c(0, 1.5),main = paste("Sample Size =", size))
-cat("Sample Size = ", size, " Mean = ", mean(xbar)," SD = ", sd(xbar), "\n")
+hist(xbar, prob = TRUE, breaks = 15, xlim=c(0,10), ylim = c(0, 1),main = paste("Sample Size =", size))
+(b_metrics <- cat("Sample Size = ", size, " Mean = ", mean(xbar)," SD = ", sd(xbar), "\n"))
 }
 
 
 ```
 
 # c) Compare of means and standard deviations of the data from a) with the four sequences generated in b).
+``` {r, echo = F}
+cat(a.mean, "\n")
+cat(a.sd, "\n")
 
-## NEED TO UNDERSTAND HOW TO ANSWER THIS QUESTION
+cat("Sample Size =  10  Mean =  5.06032  SD =  1.029698", "\n")
+cat("Sample Size =  20  Mean =  5.04892  SD =  0.723682", "\n")
+cat("Sample Size =  30  Mean =  5.069073  SD =  0.6081567", "\n")
+cat("Sample Size =  40  Mean =  5.066975  SD =  0.5129426", "\n")
+```
 
 #######################
 ### Part3) Sampling ###
@@ -161,7 +168,7 @@ set.seed(9386)
 
 N = nrow(top5department)
 n = 50
-k = floor(N / n)
+k = ceiling(N / n)
 r = sample(k, 1)
 s = seq(r, by = k, length = n)
 
@@ -174,6 +181,7 @@ sample.2 <- top5department[s, ]
 
 # c) Calculate the inclusion probabilities using the Earnings variable. Using these values, show the sample drawn using systematic sampling with unequal probabilities. Show the frequencies for the selected departments. Show the percentages of these with respect to sample size.
 
+
 ``` {r, echo = F}
 set.seed(9386)
 
@@ -181,7 +189,7 @@ earnings_inc_prob <- inclusionprobabilities(boston$Earnings, 50)
 
 N = nrow(earnings_department)
 n = 50
-k = floor(N / n)
+k = ceiling(N / n)
 r <- sample(UPsystematic(earnings_inc_prob), 1)
 s = seq(r, by = k, length = n)
 
@@ -194,6 +202,7 @@ sample.3 <- top5department[s, ]
 ```
 
 # d) Order the data using the Department variable. Draw a stratified sample using proportional sizes based on the Department variable. Show the frequencies for the selected departments. Show the percentages of these with respect to sample size.
+
 ``` {r, echo = F}
 set.seed(9386) 
 
