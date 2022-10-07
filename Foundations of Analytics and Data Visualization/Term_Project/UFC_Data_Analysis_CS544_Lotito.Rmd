@@ -190,4 +190,21 @@ paste("Systematic Sampling SD:", sd(df))
 
 ```
 
+# Conclusion
+
+As we can see based on the data analysis, if you were to predict who was going to win a fight based on age, color of fighter (red or blue) and if it was a title bout or non title bout you can easily take a look at the charts provided and make a more informed decision on placing a bet and/or a prediction on who you think will win or lose the fight. These are just some of the many metrics that are provided in the dataset, we didnt even scratch the surface. There is many more metrics that we can leverage from this data to draw more conclusions on whether a fight will end in a knock out, submission, etc.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
