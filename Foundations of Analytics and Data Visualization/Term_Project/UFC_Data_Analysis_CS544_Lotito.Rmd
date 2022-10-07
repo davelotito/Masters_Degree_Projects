@@ -147,6 +147,8 @@ hist(ages, main = "Population of Ages", ylim = c(0, 2500))
 ```
 
 ## SRSWOR
+Simple random sampling is when a specified sample is selected from the larger group or larger frame. Each person or object has an equivalent opportunity of getting selected. An example is if we have 4 firefighters, 6 cops, and 4 nurses and simple random sampling were to be used to pick a sample size of 5 any five the group of 14 could be picked.
+
 ``` {r, echo = F}
 
 set.seed(9386)
@@ -166,6 +168,8 @@ paste("SRSWOR SD:", sd(df))
 ```
 
 ## Systematic Sampling
+Systematic sampling is when there are “rules” decided to pick the sample size. For example, if there were 10 houses on 4 streets. The “rule” could be that the sampling will start with the 2nd house and then every 3rd house will be chosen. There is a potential bias with this type of sampling
+
 ``` {r, echo = F}
 set.seed(9386)
 
