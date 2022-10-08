@@ -31,9 +31,12 @@ winner_title <- ufc_data[(c("Winner", "title_bout"))]
 
 ```
 
+
 # Dataset Overview
 
 The following dataset is from Kaggle and contains the UFC-Fight historical data from 1993 to 2021. This dataset is a list of EVERY UFC fight in the history of the organisation. Every row contains information about both fighters, fight details and the winner. The data was scraped using beautifulsoup in Python and processed via Pandas. This is the preprocessed file where each row contains information about each fighter collected up until this particular fight and the descriptive fight details. In this file, feature engineering, missing data treatment and one hot encoding are already done. The raw files have been merged to form this dataset.
+
+<center><a href="https://imgbb.com/"><img src="https://i.ibb.co/pKsfngK/cover-1-1.jpg" alt="cover-1-1" border="0"></a></center>
 
 # Data Prep
 
@@ -102,6 +105,36 @@ legend(x=48,y=45,c("B_age","R_age"),cex=.8,col=c("blue","red"),pch=c(1,1))
 
 summary(ages)
 ```
+
+## Ages of Fighters in Title Bout
+
+Now that we know the average age of fighters in the UFC being ~29.5, I wanted to dive deeper into these age groups to see out of the population what is the ages of fighters that are fighting for a title. To do this, I filtered the data on title_bout == True and pulled in both the ages of the blue fighters and red fighters. Below is the the results. The average is slightly lower at ~29.25, but a negligible difference. This histogram also tells us that as the fighters gain more experience in the sport they are more likely to be in a title bout, but even with it tappering off at ~33 years old there is again another spike around 35 years old inferring to us that there is more older fighters that hold a title and are holding it longer or fighters are given a chance to fighter for a title as they get more established in their career before they retire.
+
+``` {r, echo = F}
+title_bouts <- ufc_data[ufc_data$title_bout == "True", ]
+
+title_bouts_ages <- title_bouts[c("title_bout", "B_age", "R_age")]
+
+ages_combine <- data.frame(ages = c(title_bouts_ages[,"B_age"], title_bouts_ages[,"R_age"]))
+
+fig <- plot_ly(
+  x = title_bouts_ages$B_age,
+  y = title_bouts_ages$title_bout,
+  name = "Blue Ages",
+  marker = list(color = c("Blue")),
+  type = "histogram"
+) |>
+  layout(title = "Age of Fighters in Title Bout",
+         xaxis = list(title = "Ages",
+                      zeroline = FALSE),
+         yaxis = list(title = "",
+                      zeroline = FALSE)) 
+  fig <- fig |> add_trace(x = title_bouts_ages$R_age, name = 'Red Ages', marker = list(color = c("Red")))
+  
+fig
+
+```
+
 
 ## Fighter Wins/Losses: Blue vs. Red
 
@@ -199,6 +232,7 @@ paste("Systematic Sampling Mean:", mean(df))
 paste("Systematic Sampling SD:", sd(df))
 
 ```
+
 
 # Conclusion
 
