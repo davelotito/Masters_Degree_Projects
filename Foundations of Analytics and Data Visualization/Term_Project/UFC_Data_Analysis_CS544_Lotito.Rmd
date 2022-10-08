@@ -44,7 +44,9 @@ Each row is a compilation of both fighter stats. Fighters are represented by 're
 
 # Goal of Analysis
 
-The goal of this analysis is to understand how long fighters tend to last in the UFC, who typically wins more often(Red or Blue), and if you were to bet on fights based on color of the fighters corner(Red or Blue) would you be more likely to win on a specific color.
+The goal of this analysis is to understand how long fighters tend to last in the UFC, who typically wins more often(Red or Blue), ages of fighters in title bout fights, and if you were to bet on fights based on color of the fighters corner(Red or Blue) would you be more likely to win on a specific color.
+
+Although MMA is a demanding sport, in order to rise to the top the best fighters need to have years of experience in various martial arts. This would have us believe that the average age of fighters will be well into their late 20s to late 30s. So lets dig in and see what the data tells us!
 
 # Wins by Color
 
