@@ -15,8 +15,10 @@ boston <- read.csv( "https://people.bu.edu/kalathur/datasets/bostonCityEarnings.
 
 # a) Show the histogram of the employee earnings. Use breaks from 40000 to 400000 in steps of 20000 and show the corresponding tick labels on the x-axis. Compute the mean and standard deviation of this data. What do you infer from the shape of the histogram?
 
+
+
 ``` {r, echo = F}
-hist(boston$Earnings, xlim = c(40000, 400000))
+hist(boston$Earnings, breaks = seq(40000, 400000, by = 20000))
 (a.mean <- mean(boston$Earnings))
 (a.sd <- sd(boston$Earnings))
 ```
@@ -77,7 +79,7 @@ set.seed(9386)
 samples <- 5000
 xbar <- numeric(samples)
 for (i in 1:samples) {
-xbar[i] <- mean(rnbinom(5000, size=5,prob = 0.5))
+xbar[i] <- mean(rnbinom(5000, size=3, prob = 0.5))
 }
 barplot(prop.table(table(xbar)),
 xlab = "x", ylab = "Proportion")
@@ -136,6 +138,7 @@ boston <- read.csv( "https://people.bu.edu/kalathur/datasets/bostonCityEarnings.
 
 head(boston)
 
+
 ## Find Top 5 departments ##
 top5 <- boston[order(boston$Department, decreasing = TRUE), ]["Department"]
 
@@ -143,7 +146,7 @@ top5 <- boston[order(boston$Department, decreasing = TRUE), ]["Department"]
 top5 <- data.frame(table(top5[c("Department")]))
 
 ## Order top 5 deparments
-top5[order(-top5$Freq),][1:5,]
+top5 <- top5[order(-top5$Freq),][1:5,]
 
 # Subset department based on number of employees
 top5department <- subset(boston, Department %in% c('Boston Police Department','Boston Fire Department','BPS Special Education', 'BPS Facility Management', 'Boston Public Library'))["Department"]
@@ -153,6 +156,9 @@ colnames(top5department) <- "Department"
 set.seed(9386)
 
 srswor <- srswor(50, nrow(top5department))
+
+rows <- (1:nrow(top5department))[srswor!=0]
+rows <- rep(rows, srswor[srswor != 0])
 
 sample.1 <- top5department[rows, ]
 
@@ -212,11 +218,11 @@ dept_ordered <- boston[order(boston$Department, decreasing = F), ]
 stratified_data = data.frame(Department = dept_ordered$Department)
 freq = table(stratified_data$Department)
 
-st.sizes =as.vector(t(round((595 * freq / sum(freq)))))
+st.sizes = as.vector(t(round((595 * freq / sum(freq)))))
 
 stratified = strata(stratified_data, stratanames = c("Department"),
                size = st.sizes,
-               description = T)
+               description = T, method = "srswor")
 
 (df <- table(stratified$Department))
 (prop.table(df)*100)
@@ -224,11 +230,6 @@ stratified = strata(stratified_data, stratanames = c("Department"),
 
 
 # e) Compare the means of Earnings variable for these four samples against the mean for the data.
-
-
-
-
-
 
 
 
