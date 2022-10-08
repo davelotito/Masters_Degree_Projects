@@ -115,7 +115,7 @@ colSums(wins)
 ```
 # Central Limit Theorem
 
-The central limit theorem states that the distribution of sample means, taken from independent random sample sizes, follows a normal distribution even if the original population is not normally distributed. This is important because there are a lot of statistical procedures that require normality in the data set. As a result we can apply statistical techniques that assume normality even when the population is non normal. Using the age attribute in this data set the applicability of the central limit theorem can be shown. As displayed in the box plot and histogram above, the age distribution of all groups have a positive skew.
+The central limit theorem states that the distribution of sample means, taken from independent random sample sizes, follows a normal distribution even if the original population is not normally distributed. This is important because there are a lot of statistical procedures that require normality in the data set. As a result, we can apply statistical techniques that assume normality even when the population is not normal. Using the age attribute in this data set the applicability of the central limit theorem can be shown. As displayed in histograms below, the age distribution of all groups have a positive skew.
 
 ``` {r, echo = F}
 set.seed(9386)
