@@ -1,1 +1,74 @@
-# Module 5 Lecture Notes
+# Module 6 Lecture Notes
+
+
+#####################################
+### Section #1: Strings and REGEX ###
+#####################################
+
+# R provides very basic support for manipulating strings, both for data preparation and data cleaning. String manipulation is quite often needed for text processing and analyzing data which has string attributes. The stringr package provides more robust support for most commonly used string operations. The stringr package can be installed through the RStudio menu options, or programmatically with the following statement, if it was not already installed before.
+
+if (!is.element("stringr", installed.packages()[, "Package"]))
+    install.packages("stringr", repos="http://cran.us.r-project.org", dependencies = T)
+
+library(stringr)
+
+################################
+### Common String Operations ###
+################################
+
+# The following sections describe some of the commonly used string operations provided by the stringr package.
+
+#################
+# Joining Strings
+#################
+
+# The str_c function is used for joining multiple strings into a single string. If the function is provided a single vector, the function returns a vector of the same length with every value converted to a string (character base type).
+
+str_c(c(1,2))
+
+# If the str_c function has multiple arguments, the corresponding elements from each vector are joined together and returned as a vector as shown below.
+
+str_c(c("a", "b"), c(1, 2), c("c", "d"))
+
+# The default separator is the empty string when the corresponding values are joined. An explicit value for the separator can also be specified as shown below. In that case, the corresponding values are joined together, separated by the specified value.
+
+str_c(c("a", "b"), c(1, 2), c("c", "d"), sep = "-")
+
+# Similar to other vector operations, when the corresponding lengths are not the same, the values in the shorter vectors are repeated to accommodate the corresponding values in the longer vector(s), as shown in the following two examples.
+
+str_c(LETTERS, " is for", "...")
+
+str_c(LETTERS, c(" is for", " for"), "...")
+
+# The vector letters[-26] provides the vector of letters from a through y, whereas the vector letters[-1] provides the vector of letters from b through z. Joining the corresponding values with the string is before in between results in the following pattern:
+
+str_c(letters[-26], " is before ", letters[-1])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
