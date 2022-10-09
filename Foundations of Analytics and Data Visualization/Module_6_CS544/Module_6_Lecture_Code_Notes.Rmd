@@ -44,19 +44,150 @@ str_c(LETTERS, c(" is for", " for"), "...")
 
 str_c(letters[-26], " is before ", letters[-1])
 
+# The input vectors can be collapsed into a single string using the collapse argument. The following examples show the results with a single vector, multiple vectors, and with both the sep and collapse values.
 
+str_c(c(1,2), collapse = "")
 
+str_c(c("a", "b"), c(1, 2), c("c", "d"), collapse = ":")
 
+str_c(c("a", "b"), c(1, 2), c("c", "d"), sep = "-", collapse = ":")
 
+# The vector of letters can be collapsed into a single string as shown in the following two examples.
 
+str_c(letters, collapse = "")
 
+str_c(letters, collapse = ":")
 
+# The str_flatten takes a single argument and flattens it to a single string. The default collapse value is the empty string.
 
+str_flatten(letters)
 
+str_flatten(letters, collapse = ":")
 
+####################
+# Lengths of Strings
+####################
 
+# The str_length function returns the length of the input values, coerced as strings if needed, in the given vector.
 
+str_length(c("a", "b", "c"))
 
+str_length(c("a1", "b23", "c456"))
+
+# The length of a missing value is reported as missing length.
+
+str_length(c("a1", NA, "c456"))
+
+#######################
+# Substrings of Strings
+#######################
+
+# The str_sub function extracts substrings from the given input string vector. The start and end values may optionally specify the portion of the string to be extracted. The default value for start is 1, the beginning index of the string. The default value for end is -1, the last index of the string. The following example shows extracting the first 6 characters of the specified string.
+
+s <- "United States"
+
+str_length(s)
+
+str_sub(s, 1, 6)
+
+str_sub(s, end = 6)
+
+str_sub(s, start = 2, end = 5)
+
+# The following example shows two different ways of extracting the second word, States, from the given string. In the second case, the default end value -1 is used for the end of the string.
+
+str_sub(s, 8, 13)
+
+str_sub(s, 8)
+
+# If a vector of values is specified for the beginning and end positions, a resulting vector of the substrings is produced. The start argument provides the two beginning indices and the end argument provides the two ending indices. As a result, two substrings are extracted with the corresponding start and end values from each vector.
+
+str_sub(s, c(1, 8), c(6, 13))
+
+str_sub(s, start = c(1, 8), end = c(6, 13))
+
+# In the following example, the default end index of -1 is used for both the substrings.
+
+str_sub(s, c(1, 8))
+
+# In the following example, the default start index of 1 is used for both the substrings.
+
+str_sub(s, end = c(6, 13))
+
+# A negative value for any index is interpreted as the position counting backwards from the end of the string, -1 being the last index. The following examples provide the start index value as a negative value. The default end index, -1, is used.
+
+str_sub(s, -1)
+
+str_sub(s, -6)
+
+# The following example shows the resulting string, ted, when both the beginning and ending indices are provided with negative values.
+
+str_sub(s, -10, -8)
+
+# The following example assumes the default start index of 1.
+
+str_sub(s, end = -6)
+
+# The str_sub function may also be used for replacing substrings from the given character vector. The following example shows the replacement of the first character in the given string, resulting in changing the given string from CLAP to FLAP.
+
+x <- "CLAP"
+
+str_sub(x, 1, 1) <- "F"; x
+
+# The following examples show the replacement of the last character, changing the current string from FLAP to FLAT, and then a second replacement that changes the string from FLAT to FOOT. In the latter case, the target substring being replaced starts at index 2 and ends at index -2.
+
+str_sub(x, -1, -1) <- "T"; x
+
+str_sub(x, 2, -2) <- "OO"; x
+
+# The following example only retains the first and last character of the given string, replacing everything else in between with the empty string.
+
+str_sub(x, 2, -2) <- ""; x
+
+########################
+# Duplication of Strings
+########################
+
+# The str_dup function allows for duplication of strings to be duplicated the specified number of times. In the simplest case, with a single value of 2 for the times to duplicate, each string in the input vector is duplicated twice, as shown below.
+
+x <- c("a1", "b2", "c3")
+
+str_dup(x, 2)
+
+# If the times to duplicate is a vector of values, the corresponding string in the input vector is duplicated the respective number of times, as shown below.
+
+str_dup(x, 1:3)
+
+# The following example concatenates the string a in front of each of the duplicated ha strings.
+
+str_c("a", str_dup("ha", 0:4))
+
+#####################
+# Trimming of Strings
+#####################
+
+# The str_trim function removes white spaces from the ends of the input strings. The default behavior of the function is to remove both from the left and the right, if there are any.
+
+x <- "          How            are      \n    you?\t"
+x
+
+str_trim(x)
+
+str_trim(x, side = "left")
+
+str_trim(x, side = "right")
+
+# The str_squish function removes the white spaces from the ends of the string and also collapses consecutive white space character into a single space within the string.
+
+x <- "      How       are     \n   you?\t"
+str_squish(x)
+
+x <- "\t How\t\t   \t\tare\tyou"
+str_squish(x)
+
+####################################
+# Padding and Truncation of Strings
+####################################
 
 
 
