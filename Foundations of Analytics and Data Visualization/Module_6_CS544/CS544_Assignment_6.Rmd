@@ -1,0 +1,16 @@
+# CS544 Module 6 Assignment
+## Student: David J Lotito
+
+
+#################
+# Part1) Strings
+#################
+
+library(stringr)
+
+# Use the stringr functions for the following:
+# Initialize the vector of words from Lincoln’s speech with the following code:
+
+file <- "http://people.bu.edu/kalathur/datasets/lincoln.txt"
+words <- scan(file, what=character())
+
