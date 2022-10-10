@@ -14,3 +14,38 @@ library(stringr)
 file <- "http://people.bu.edu/kalathur/datasets/lincoln.txt"
 words <- scan(file, what=character())
 
+# a) Detect and show all the words that have a punctuation symbol.
+
+words[str_detect(words, "[:punct:]")]
+
+# b) Replace all the punctuations in the words dataset with an empty string. Remove any resulting empty words from this dataset. Convert all the remaining words to lower case.
+
+remove_punct <- str_replace_all(words, "[:punct:]", "")
+
+remove_empty_string <- remove_punct[remove_punct != ""]
+
+# Make this the new_words dataset.
+new_words <- str_to_lower(remove_empty_string)
+
+# c) What are the top 5 frequent words in the new_words dataset?
+
+names(sort(table(new_words), decreasing = T))[1:5]
+
+
+# d) Show the frequencies of the word lengths in the new_words dataset. Plot the distribution of these frequencies.
+``` {r, echo = F}
+
+hist(str_length(new_words), xlim = c(1, 15))
+
+```
+
+# e) What are the words in the new_words dataset with the longest length?
+
+max(str_length(new_words))
+
+new_words[str_detect(new_words, "^[a-zA-Z]{16}$")]
+
+# f) Show all the words in the new_words dataset that start with the letter p.
+
+
+
