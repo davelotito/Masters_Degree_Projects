@@ -189,16 +189,197 @@ str_squish(x)
 # Padding and Truncation of Strings
 ####################################
 
+# The str_pad function may be used to pad the given strings to the given width. The default padding character is the space and padded on the left when the side is not specified explicitly. In the following example, the length of the resulting string will be 10 with 5 spaces padded on the left.
 
+str_pad("cs544", 10)
 
+str_pad("cs544", 10, pad = "_")
 
+# The operations are vectorized when multiple strings and/or padding characters are specified as shown below.
 
+str_pad(c("a", "abc", "abcdef"), 5)
 
+str_pad("a", c(2, 4, 6))
 
+str_pad("cs544", 10, pad = c("_", "#"))
 
+str_pad(c("cs544", "cs555"), 10, pad = c("_", "#"))
 
+# If the size is less than the length of the input string, the string is left unchanged.
 
+str_pad("cs544", 3)
 
+# The str_trunc function is used for truncating the given string. The default string that replaces the truncated content on the specified side is the ellipsis ...
+
+x <- "Foundations of Data Analytics with R";x
+
+str_length(x)
+
+rbind(str_trunc(x, 25, "left"),
+str_trunc(x, 25, "right"),
+str_trunc(x, 25, "center"))
+
+###############################
+# Detecting Patterns in Strings
+###############################
+
+# The str_detect function is useful for detecting if the specified pattern is present or not in the given input string. The fruit dataset is a vector of 80 fruit names available with the stringr library.
+
+head(fruit)
+
+tail(fruit)
+
+length(fruit)
+
+# The str_detect function returns TRUE or FALSE for each presence or absence of the pattern. The logical results can then be indexed to select the detected values. The following example shows all the fruits which have the pattern ap in them.
+
+fruit[str_detect(fruit, "ap")]
+
+# The regular expression pattern ^ap specifies that the matched value should begin with the value ap. The result is the two fruits that match as shown below.
+
+fruit[str_detect(fruit, "^ap")]
+
+# The pattern it$ can be used to match all the fruits that end with the specified value it. This results in the 8 fruits that end with it as shown below.
+
+fruit[str_detect(fruit, "it$")]
+
+# The following example shows all fruits that either have a d or a v or a w in them.
+
+fruit[str_detect(fruit, "[dvw]")]
+
+# The following example shows all fruits that have a white space in them.
+
+fruit[str_detect(fruit, "[:space:]")]
+
+##############################
+# Matching Patterns in Strings
+##############################
+
+# Pattern matching is an important step in text data processing. Typical searches involve looking for patterns in the data and finding those patterns. For the following samples, the data shown with 4 strings are used for illustrating the pattern matching functions.
+
+data <- c("123 Main St", "6175551234", "978-356-1234", "Work: 617-423-4567; Home: 508.555.3589; Cell: 555 777 3456")
+
+# The goal in this example is to look for phone numbers in the input strings. The phone numbers can be found with varying formats as in the example above. A regular expression can be used to capture these varying patterns. The following regular expression states that the phone number starts with a digit (2 to 9), followed by two digits (0 to 9), followed by an optional hyphen, space, or a period, followed by three digits (0 to 9), followed by an optional hyphen, space, or a period, and then four digits (0 to 9).
+
+phone <- "([2-9][0-9]{2})([- .]?)([0-9]{3})([- .])?([0-9]{4})"
+
+# The str_detect function can be used to check if the string has the pattern or not as shown below.
+
+str_detect(data, phone)
+
+# The above result can be used as a logical index into the data to display the matched inputs.
+
+data[str_detect(data, phone)]
+
+# The str_subset function can also be used to directly return the matched strings as shown below.
+
+str_subset(data, phone)
+
+# The str_locate function is useful for locating the positions of the pattern in the given string. The start and end indices of only the first match in the input strings are returned as a matrix.
+
+str_locate(data, phone)
+
+# The str_extract function can be used for extracting the first matched pattern in the input strings as shown below.
+
+str_extract(data, phone)
+
+# For locating all occurrences of the pattern in the input strings, the str_locate_all function returns a list of matrices as shown below. The last input string in the data has three matches.
+
+str_locate_all(data, phone)
+
+# The str_extract_all function can be used for extracting all the matched patterns as shown below. The result is a list of character vectors.
+
+str_extract_all(data, phone)
+
+# With the simplify option, the same function returns all matches as a matrix as shown below. The number of columns will correspond to the maximum number of matches in any of the input data.
+
+str_extract_all(data, phone, simplify = T)
+
+# The above functions were useful for extracting the matched pattern. The regular expression used for the phone numbers has the round brackets or parenthesis which can be used to identify the corresponding part of the matched pattern. The pattern in the example has five such groups underlined as shown below.
+
+phone <- "([2-9][0-9]{2})([- .]?)([0-9]{3})([- .])?([0-9]{4})"
+
+# The str_match function returns a matrix with the matched groups for the first match in the input strings. The first column shows the match and the next five columns show the corresponding group of the pattern.
+
+str_match(data, phone)
+
+# The str_match_all returns a list of matrices showing all the matches in the input strings as shown below.
+
+str_match_all(data, phone)
+
+# When publishing data, some of the information is redacted for public use. In such cases, the str_replace can be used as in the following example to replace the first matched phone number in each input string with the specified string.
+
+str_replace(data, phone, "XXX-XXX-XXXX")
+
+# All the matched patterns in each string can be replaced with the help of the str_replace_all function as shown below.
+
+str_replace_all(data, phone, "XXX-XXX-XXXX")
+
+# The str_remove and str_remove_all are wrappers for the str_replace and str_replace_all functions and can also be used in their place instead.
+
+#############################
+# Counting Matches in Strings
+#############################
+
+# The str_count function returns the number of matches of the pattern in the input strings. For the data used in the previous section, the str_count function returns a vector of the number of the matches as shown below.
+
+data <- c("123 Main St", "6175551234", "978-356-1234", "Work: 617-423-4567; Home: 508.555.3589; Cell: 555 777 3456")
+
+phone <- "([2-9][0-9]{2})([- .]?)([0-9]{3})([- .])?([0-9]{4})"
+
+str_count(data, phone)
+
+# The str_count function can also be used for counting the number of sentences, the number of words, or the number of characters in the input string as shown below.
+
+x <- "Hello, how are you? I am fine, thank you."
+
+str_length(x)
+
+str_count(x, boundary("sentence"))
+
+str_count(x, boundary("word"))
+
+str_count(x, boundary("character"))
+
+# If the input is a vector of strings, the str_count function returns the number of matches in each input string as shown below.
+
+y <- c("Hello, how are you? I am fine, thank you.", "Good bye!")
+
+str_length(y)
+
+str_count(y, boundary("sentence"))
+
+str_count(y, boundary("word"))
+
+str_count(y, boundary("character"))
+
+######################
+# Splitting of Strings
+######################
+
+# The str_split function splits the input string into parts over the specified pattern. Typically sentence, word, and character boundaries are useful for splitting the given string. The following examples show how two input strings are split at the sentence boundary. The first input string has two sentences, whereas the second input string has only one sentence. By default, the results are returned as a list of character vectors.
+
+x <- c("Hello, how are you? I am fine, thank you.", "Good bye!")
+
+str_split(x, boundary("sentence"))
+
+str_split(x, boundary("sentence"), simplify = T)
+
+# The input strings can be split at the word boundary as shown below.
+
+str_split(x, boundary("word"))
+
+# The number of pieces that an input string is split into can be limited by optionally providing a value for the n argument. In the following case, a maximum of 4 splits are allowed in each sentence at the word boundary.
+
+str_split(x, boundary("word"), n = 4)
+
+# The input strings can also be split at the character boundary as shown below. Each individual character will be a part of the vector of splits.
+
+str_split(x, boundary("character"))
+
+##################################
+### Section #2: Data Wrangling ###
+##################################
 
 
 
