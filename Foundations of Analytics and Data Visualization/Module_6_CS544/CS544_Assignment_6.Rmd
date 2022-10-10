@@ -86,15 +86,35 @@ hist(str_length(new_words_WO_stop_words), xlim = c(1, 15))
 
 us_daily_temp <- read.csv("/Users/davelotito/Desktop/CS544 - Foundations of Analytics and Data Visualization/Assignments/Assignment_6/usa_daily_avg_temps.csv")
 
+# a) Convert the data frame into a tibble and assign it to the variable usaDailyTemps.
 
+usaDailyTemps <- as_tibble(us_daily_temp)
 
+# b) What are the maximum temperatures recorded for each year? Show the values and also the appropriate plot for the results.
+  
+(max_temp_year <- usaDailyTemps |> group_by(year) |> summarise(max = max(avgtemp)))
 
+plot <- ggplot(max_temp_year, aes(x = year, y = max))
+  
+plot + geom_point(alpha = 0.8)
 
+# c) What are the maximum temperatures recorded for each state? Show the values and also the appropriate plot for the results.
 
+(max_temp_state <- usaDailyTemps |> group_by(state) |> summarise(max = max(avgtemp)))
 
+plot <- ggplot(max_temp_state, aes(x = state, y = max))
+  
+plot + geom_point() + theme(axis.text.x=element_text(angle=90, hjust=1))
 
+# d) Filter the Boston data from usaDailyTemps and assign it to the variable bostonDailyTemps.
 
+bostonDailyTemps <- filter(usaDailyTemps, city == "Boston")
 
+# e) What are the average monthly temperatures for Boston? Show the values and also the appropriate plot for the results. Use the bostonDailyTemps.
 
+(monthly_avg_boston <- bostonDailyTemps |> group_by(month) |> summarise(avg = mean(avgtemp)))
 
-
+plot <- ggplot(monthly_avg_boston, aes(x = month, y = avg))
+  
+plot + geom_point() + theme(axis.text.x=element_text(angle=360, hjust=1), axis.line = element_line(colour = "black", 
+                      size = 1, linetype = "solid")) + xlim("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12")
