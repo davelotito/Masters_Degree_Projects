@@ -47,5 +47,51 @@ new_words[str_detect(new_words, "^[a-zA-Z]{16}$")]
 
 # f) Show all the words in the new_words dataset that start with the letter p.
 
+new_words[str_detect(new_words, "^[p]")]
+
+# g) Show all the words in the new_words dataset that end with the letter r.
+
+new_words[str_detect(new_words, "[r]$")]
+
+# h) Show all the words in the new_words dataset that start with the letter p and end with the letter r.
+
+new_words[str_detect(new_words, "^[p]+[a-zA-Z]+[a-zA-Z]+[r]$")]
+
+# In c), you realize that the most spoken words are what are known as stopwords. In text mining, the stopwords are removed before analysis. Initialize the common English stopwords as follows:
+
+stopfile <- "http://people.bu.edu/kalathur/datasets/stopwords.txt" 
+stopwords <- scan(stopfile, what=character())
+
+# Remove the stopwords from the new_words data. Use the %in% operator. Repeat c) and d) for this dataset without the stop words.
+
+new_words_WO_stop_words <- new_words[!(new_words %in% stopwords)]
+
+names(sort(table(new_words_WO_stop_words), decreasing = T))[1:5]
+
+``` {r, echo = F}
+
+hist(str_length(new_words_WO_stop_words), xlim = c(1, 15))
+
+```
+
+#######################
+# Part2) Data Wrangling
+#######################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
