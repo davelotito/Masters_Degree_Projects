@@ -22,7 +22,7 @@ words[str_detect(words, "[:punct:]")]
 
 remove_punct <- str_replace_all(words, "[:punct:]", "")
 
-remove_empty_string <- remove_punct[remove_punct != ""]
+remove_empty_string <- remove_punct[str_detect(remove_punct, '^.+$')]
 
 # Make this the new_words dataset.
 new_words <- str_to_lower(remove_empty_string)
@@ -78,10 +78,13 @@ hist(str_length(new_words_WO_stop_words), xlim = c(1, 15))
 # Part2) Data Wrangling
 #######################
 
+# Use the tidyverse library for the following:
 
+# Download the following csv file, 
+# http://people.bu.edu/kalathur/usa_daily_avg_temps.csv
+# locally first and use read.csv to load the data into a data frame.
 
-
-
+us_daily_temp <- read.csv("/Users/davelotito/Desktop/CS544 - Foundations of Analytics and Data Visualization/Assignments/Assignment_6/usa_daily_avg_temps.csv")
 
 
 
