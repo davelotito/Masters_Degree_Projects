@@ -381,6 +381,146 @@ str_split(x, boundary("character"))
 ### Section #2: Data Wrangling ###
 ##################################
 
+# The tidyverse is a collection of R packages useful for data preparation, data cleaning, and data transformations falling under the broader scope of data wrangling. The lecture explored the tibble, dplyr, and tidyr packages from this collection. These packages can be installed individually, or as a collection. The easiest way is install the entire collection of these packages using the following statement.
+
+library(tidyverse)
+
+# The data set used in this lecture comes from the nycflights13 package which contains information about the flights departing from the three New York City area airports. The package is installed as shown below.
+
+library(nycflights13)
+
+#######################################
+### Data Frame Alternative - tibble ###
+#######################################
+
+# A tibble is an inherited version of the data frame that is more suitable and easier to handle than the data frame. A tibble with two columns of data can be created as shown below. By default, the tibble displays the first 10 rows of data and leaves a comment on how many more rows are there.
+
+a <- 1:100
+
+tibble(a, b = 2 *a)
+
+# A tibble can also refer to the new columns on the left while creating more columns on the right. In the following example, the column c refers to the new column b.
+
+tibble(a, b = 2 * a, c = b^2)
+
+# The above functionality is not possible with a data.frame for creating the same data in one step.
+
+as_tibble(iris)
+
+# The flights dataset from the nycflights13 package is a tibble with 19 columns of data. When a tibble is displayed, only the columns that fit in the window are displayed and in the comments shows the names of the rest of the columns.
+
+nycflights13::flights
+
+# The tribble function allows the tibbles to be created by specifying the data row-wise as shown below.
+
+athlete.info <- tribble(~Name, ~Salary, ~Endorsements, ~Sport, "Mayweather", 105, 0, "Boxing", "Ronaldo", 52, 28, "Soccer", "James", 19.3, 53, "Basketball", "Messi", 41.7, 23, "Soccer", "Bryant", 30.5, 31, "Basketball")
+
+athlete.info
+
+# The glimpse function provides a sneak peek of the data by printing the number of rows, the number of columns, a row of data for each column as it fits the printing area of the window.
+
+glimpse(athlete.info)
+
+glimpse(nycflights13::flights)
+
+#The pipe operator (%>%) is useful for chaining the functions. The data on the left-hand side of the pipe is passed as the first argument for the function on the right-hand side. The following example shows the summary of the data set without the pipe and with the pipe operator.
+
+summary(athlete.info)
+
+athlete.info %>% summary
+
+# The is.tibble or is_tibble functions can be used to check if the dataset is a tibble or not.
+
+is_tibble(iris)
+
+is_tibble(athlete.info)
+
+#######################################
+### Data Transformations with dplyr ###
+#######################################
+
+# The dplyr package provides the functions that are most commonly needed for data preprocessing, transformations, and manipulations. The following are some of the frequently encountered functions from this package:
+
+# filter – extract existing observations by their values 
+# arrange – reorder the rows of the data
+# select – pick existing variables by their names 
+# mutate – create new variables from existing variables 
+# summarize – used for summarizing grouped data
+
+# The filter function selects the rows from the dataset that match the specified conditions involving the variables in the data. The following example filters all rows for the month of April.
+
+filter(flights, month == 4)
+
+# The following example specifies conditions involving multiple variables. The filter results in all rows of the data set for the 10th day of April.
+
+filter(flights, month == 4, day == 10)
+
+# Multiple arguments for the filter function are interpreted as the and operator. Other Boolean operators can also be used as in the following example to filter all rows for the month of June or July.
+
+filter(flights, month == 6 | month == 7)
+
+filter(flights, month == 6 | month == 7) |> tail()
+
+# The %in% operator checks for group membership for any match in the specified values. The following example selects all rows matching the months of March, May, or July.
+
+filter(flights, month %in% c(3, 5, 7))
+
+######################
+### Arranging Rows ###
+######################
+
+# The arrange function changes the order of the data set based on the specified columns. The following example data set is used for illustrating the function.
+
+# By default, the data is arranged in ascending order of the specified column (Salary) as shown below.
+
+arrange(athlete.info, Salary)
+
+# Multiple variables can also be used for arranging the data. In the following example, the data is first arranged in ascending order of the Sport, and then by Name within the Sport.
+
+arrange(athlete.info, Sport, Name)
+
+# If the results are desired in a descending order, the desc function on the variable is used as shown below.
+
+arrange(athlete.info, desc(Salary))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
