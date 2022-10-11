@@ -483,9 +483,49 @@ arrange(athlete.info, Sport, Name)
 
 arrange(athlete.info, desc(Salary))
 
+#########################
+### Selecting Columns ###
+#########################
 
+# Typical datasets have more columns than what are required for the analysis at hand. In such cases, the datasets can be narrowed down to only the required columns using the select function as shown below. The column names are explicitly specified in the following case for the flights dataset.
 
+select(flights, carrier, flight, tailnum, origin, dest)
 
+# If the columns that are required are in consecutive columns, the expression start:end can be used to specify the column to start from and the column to end as in the following example.
+
+select(flights, carrier:dest)
+
+# The minus operator can be used to used to select all columns except the specified ones as shown below.
+
+select(flights, -(carrier:dest))
+
+# The select function can also be used to rename the variables. Only the specified columns are included in the result.
+
+select(flights, departure_time = dep_time)
+
+# If the rest of the columns should also be included as is, the rename function is used for renaming the specified columns and include the rest without any changes, as shown below.
+
+rename(flights, departure_time = dep_time)
+
+# The helper functions starts_with can be used to select all column names that start with the specified value.
+
+select(flights, starts_with("d"))
+
+# The ends_with function matches all column names that end with the specified value as shown below.
+
+select(flights, ends_with("time"))
+
+# All column names that contain the specified value can be selected as shown below.
+
+select(flights, contains("in"))
+
+# The select function used along with the everything helper function allows the specified columns to be moved to the start of the data frame followed by everything else.
+
+select(flights, flight, origin, dest, everything())
+
+############################
+### Adding New Variables ###
+############################
 
 
 
