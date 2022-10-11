@@ -75,6 +75,8 @@ Since we can see that more red colored fighters are winning fights I wanted to s
 
 ```{r, echo = FALSE}
 barplot(table(winner_title), col = c("Blue", "Red"), xlab = "Title Bout vs. Non-Title Bout", ylab = "Frequency", main = "Fights 1993-2021 by Title Bout", ylim = c(0, 6000))
+
+table(winner_title)
 ```
 # Win Streak: Blue vs. Red
 
@@ -137,7 +139,6 @@ fig
 
 ```
 
-
 ## Fighter Wins/Losses: Blue vs. Red
 
 After analyzing the fighters number of wins, number of wins in a title fight, and the ages of fighters I wanted to take a deeper diver into the overall picture of the blue vs. red wins & losses to see the bigger picture. As we can see from the box plot below that the red fighters are clearly the better fighters overall with more wins over the blue fighters. Blue fighters have less losses compared to Red Fighters, but we need to take into account that there has been less fights overall for the blue fighters as we can see from the data provided.
@@ -151,6 +152,7 @@ colSums(wins)
 # Central Limit Theorem
 
 The central limit theorem states that the distribution of sample means, taken from independent random sample sizes, follows a normal distribution even if the original population is not normally distributed. This is important because there are a lot of statistical procedures that require normality in the data set. As a result, we can apply statistical techniques that assume normality even when the population is not normal. Using the age attribute in this data set the applicability of the central limit theorem can be shown. As displayed in histograms below, the age distribution of all groups have a positive skew.
+
 
 ``` {r, echo = F}
 set.seed(9386)
@@ -187,7 +189,7 @@ For this project the ages of ufc fighters population with be analyzed. Simple ra
 This simple histogram shows the distribution of the ages of all UFC fighters since inception of the sport in 1993.
 ``` {r, echo = F}
 
-hist(ages, main = "Population of Ages", ylim = c(0, 2500))
+hist(ages, main = "Population of Ages", ylim = c(0, 2500), col = "darkorange")
 
 ```
 
@@ -206,7 +208,7 @@ sample.1 <- ages[rows, ]
 
 df <- table(sample.1)
 
-barplot(df, main = "SRSWOR", xlab = "Ages")
+barplot(df, main = "SRSWOR", xlab = "Ages", col = "cadetblue4")
 
 paste("SRSWOR Mean:", mean(df))
 paste("SRSWOR SD:", sd(df))
@@ -228,14 +230,12 @@ sample.2 <- ages[s, ]
 
 df <- table(sample.2)
 
-barplot(df, main = "Systematic Sampling", xlab = "Age")
+barplot(df, main = "Systematic Sampling", xlab = "Age", col = 'chartreuse1')
 
 paste("Systematic Sampling Mean:", mean(df))
 paste("Systematic Sampling SD:", sd(df))
 
 ```
-
-
 # Conclusion
 
 As we can see based on the data analysis, if you were to predict who was going to win a fight based on age, color of fighter (red or blue) and if it was a title bout or non title bout you can easily take a look at the charts provided and make a more informed decision on placing a bet and/or a prediction on who you think will win or lose the fight. These are just some of the many metrics that are provided in the dataset, we didnt even scratch the surface. There is many more metrics that we can leverage from this data to draw more conclusions on whether a fight will end in a knock out, submission, etc.
