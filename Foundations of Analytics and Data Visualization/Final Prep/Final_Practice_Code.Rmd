@@ -1,0 +1,119 @@
+####################################
+### Final Exam Practice Problems ###
+####################################
+
+### Module 1 Code Practice ###
+
+### Section 3.2 - Assignments
+(x <- 10)
+
+(y <- "Hello")
+
+(TRUE -> z)
+
+#### 3.3 - Data Types
+
+(x <- 7)
+
+(y <- x/2)
+
+mode(x)
+typeof(x)
+
+mode(y)
+typeof(y)
+
+# Changing values from double to integer (ex: 3.5(double) to 3(integer))
+(x <- as.integer(7))
+
+(y <- as.integer(x/2))
+
+mode(x)
+typeof(x)
+
+mode(y)
+typeof(y)
+
+# Comparing variables (logical expression)
+a <- 10
+b <- 20
+
+(x <- a >= b)
+(y <- (a > 5) & (b < 25))
+# Both these variables are logical / comparing variables
+mode(x)
+typeof(x)
+
+mode(y)
+typeof(y)
+
+# Character variables aka "strings"
+(x <- "Hello")
+(y <- as.character(123))
+
+mode(x)
+typeof(x)
+
+mode(y)
+typeof(y)
+
+(x <- "Hello")
+(y <- 123)
+# paste function to include variables into text string
+paste(x, y)
+
+paste(x, y, "Testing", sep = ",")
+
+(z <- sprintf("You want to say %s on %d", x, y))
+
+nchar(z)
+# Substring the variable
+substr(z, start = 5, stop = 21)
+# Substatute the variable with different
+sub("Hello", "Bye", z)
+
+# Complex variables
+(x <- 2 + 3i)
+
+(y <- 3 - 1i)
+
+mode(x)
+typeof(x)
+
+x + y
+
+x * y
+
+#### 3.4 - Data Type Conversions
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
