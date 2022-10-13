@@ -41,7 +41,13 @@ The following dataset is from Kaggle and contains the UFC-Fight historical data 
 # Data Prep
 
 Each row is a compilation of both fighter stats. Fighters are represented by 'red' and 'blue' (for red and blue corner). So for instance, red fighter has the complied average stats of all the fights except the current one. The stats include damage done by the red fighter on the opponent and the damage done by the opponent on the fighter (represented by 'opp' in the columns) in all the fights this particular red fighter has had, except this one as it hasn't occured yet (in the data). Same information exists for blue fighter. The target variable is 'Winner' which is the only column that tells you what happened.
+```{r, echo = F}
+library(DT)
+library(rio)
 
+
+datatable(ufc_data)
+```
 # Goal of Analysis
 
 The goal of this analysis is to understand how long fighters tend to last in the UFC, who typically wins more often(Red or Blue), ages of fighters in title bout fights, and if you were to bet on fights based on color of the fighters corner(Red or Blue) would you be more likely to win on a specific color.
