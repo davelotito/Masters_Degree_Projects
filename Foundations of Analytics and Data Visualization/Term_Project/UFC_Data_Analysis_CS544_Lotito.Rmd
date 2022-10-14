@@ -41,6 +41,7 @@ The following dataset is from Kaggle and contains the UFC-Fight historical data 
 # Data Prep
 
 Each row is a compilation of both fighter stats. Fighters are represented by 'red' and 'blue' (for red and blue corner). So for instance, red fighter has the complied average stats of all the fights except the current one. The stats include damage done by the red fighter on the opponent and the damage done by the opponent on the fighter (represented by 'opp' in the columns) in all the fights this particular red fighter has had, except this one as it hasn't occured yet (in the data). Same information exists for blue fighter. The target variable is 'Winner' which is the only column that tells you what happened.
+
 ```{r, echo = F}
 library(DT)
 library(rio)
@@ -244,4 +245,4 @@ paste("Systematic Sampling SD:", sd(df))
 ```
 # Conclusion
 
-As we can see based on the data analysis, if you were to predict who was going to win a fight based on age, color of fighter (red or blue) and if it was a title bout or non title bout you can easily take a look at the charts provided and make a more informed decision on placing a bet and/or a prediction on who you think will win or lose the fight. These are just some of the many metrics that are provided in the dataset, we didnt even scratch the surface. There is many more metrics that we can leverage from this data to draw more conclusions on whether a fight will end in a knock out, submission, etc.
+As we can see based on the data analysis, if you were to predict who was going to win a fight based on age, color of fighter (red or blue) and if it was a title bout or non title bout you can easily take a look at the charts/data provided and make a more informed decision on placing a bet and/or a prediction on who you think will win or lose the fight. These are just some of the many metrics that are provided in the dataset, we didnt even scratch the surface. There is many more metrics that we can leverage from this data to draw more conclusions on whether a fight will end in a knock out, submission, etc.
