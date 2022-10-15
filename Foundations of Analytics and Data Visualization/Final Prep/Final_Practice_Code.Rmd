@@ -409,18 +409,216 @@ subset(athlete.info, Sport == "Soccer",
        
 ####  3.21 - Modifying a Data Frame
 
+data.orig <- athlete.info
+
 athlete.info$Salary <- c(10, 20, 30, 40, 50)
 
 athlete.info["First", "Endorsements"] <- 100
+
+data.orig
 
 athlete.info
 athlete.info[1,2] <- 0
 athlete.info
 
+athlete.info$Pay <- 
+  athlete.info$Salary + athlete.info$Endorsements
+  
+  
+##############################
+### Module 2 Code Practice ###
+##############################
+
+# Functions
+
+mySquare <- function (x) {
+return (x*x)
+}
+
+mySquare(5)
+
+paste("Square of 5 is", mySquare(5))
+
+# a function with two arguments
+
+hypotenuse <- function(x, y) {
+    z_squared <- (x*x + y*y)
+    return(sqrt(z_squared))
+}
+
+hypotenuse(3, 4)
+
+#### 5.3. Control Structures
+
+my.maxmin <- function (x, y) {
+  if (x < y) {
+    return (c(y, x))
+} else {
+    return (c(x, y))
+  }
+}
+
+my.maxmin(100, 200)
+my.maxmin(100, 20)
+
+
+## Loops - for statement
+
+x <- c(10, 20, 30, 40, 50)
+
+for (i in x) {
+  cat("Square of ", i, " = ", i*i, "\n") ; i
+}
+
+
+# Squares of first n numbers
+
+n <- 10
+
+for (i in 1:n) {
+  cat("Square of ", i, " = ", i*i, "\n"); i
+}
+
+# Squares of odd numbers up to n
+
+n <- 10
+
+for (i in seq(1,n, by = 2)) {
+  cat("Square of ", i, " = ", i*i, "\n"); i
+}
+
+# Loops - while statement
+
+# Sum of first n numbers
+
+n <- 15
+sum <- 0
+i <- 1
+
+while (i <= n) {
+  sum <- sum + i
+  i <- i+1
+}
+cat("Sum of first ", n, " numbers = ", sum)
+
+# Sum of first x numbers not to exceed given limit
+limit <- 550
+sum <- 0
+i <- 0
+
+while (TRUE) {
+  i <- i+1
+  sum <- sum + i
+  if (sum >= limit) break
+}
+
+if (sum > limit) {
+  sum <- sum - i
+  i <- i-1
+}
+
+cat("Sum of first ", i, " numbers = ", sum)
+
+#### 2.2. Probability - Sample Space
+
+
+library(prob)
+
+# Quiz Question 4 on Probability:
+# When two six-faced dice are rolled, what is the probability that the sum of the rolls is less than or equal to 11?
+outcomes <- rolldie(2, makespace = T)
+outcomes
+prob(outcomes, X1 + X2 <= 11)
+
+# Quiz Question 5 on Probability:
+# When two six-faced dice are rolled, what is the probability that the sum of the rolls is at least 6?
+outcomes <- rolldie(2, makespace = T)
+outcomes
+prob(outcomes, X1 + X2 >=6)
+
+
+# Quiz Question 6 on Probability:
+# When three six-faced dice are rolled, what is the probability that each of them are greater than 2?
+outcomes <- rolldie(3, makespace = T)
+outcomes
+prob(outcomes, X1 > 2 & X2 >2 & X3 >2)
+
+#### Negative Binomial Dist ###
+
+# Suppose a student has 60% chance of scoring a perfect score in an exam with randomly selected questions. The student has to repeatedly take the exam until they achieve three perfect scores.
+
+# a) Compute and plot the probability distribution for scoring the three perfect scores (both the PMF and CDF). The student will only go for a maximum of 10 failures before giving up.
+
+n = 3
+
+p = 0.6
+
+(pmf <- dnbinom(0:10, size = n, prob = p))
+
+plot(0:10, pmf, type = "h", xlab = "x", ylab = "PMF")
+abline(h=0)
+
+(cdf <- cumsum(pmf))
+
+plot(0:10, cdf, type = "h", xlab = "x", ylab = "CDF")
+abline(h=0)
+
+#### 2.15. Negative Binomial Distribution
+
+r <- 3  # Number of successes (fixed)
+p <- 0.5
+
+# P(X = 5)   five failures before getting 3 successes
+# 2 successes in the first 7 attempts, 8th is success
+
+choose(7, 2) * (p**r) * ((1-p)**5) 
+
+dnbinom(5, size = r, prob = p)
+
+# Distribution of probabilities
+
+pmf <- dnbinom(0:20, size = r, prob = p)
+pmf
+
+#Plot PMF
+plot(0:20,pmf,type="h",
+  xlab="x",ylab="PMF", ylim = c(0, 0.2))
+abline(h=0, col="red")
+
+# Expected value   r * (1-p)/p
+
+sum(0:20 * pmf)
 
 
 
+# P(X <= 5)   at most 5 failures
 
+sum(dnbinom(0:5, size = r, prob = p))
+
+pnbinom(5, size = r, prob = p)
+
+# P(X > 5)   at least 6 failures
+
+1 - pnbinom(5, size = r, prob = p)
+
+#or
+
+pnbinom(5, size = r, prob = p, lower.tail = FALSE)
+
+
+cdf <- c(0, cumsum(pmf))
+cdf
+
+cdfplot <- stepfun(0:10, cdf)
+plot(cdfplot, verticals = FALSE, pch = 16,
+  main = "", xlab = "x", ylab = "CDF")
+
+# random numbers from the distribution
+
+rnbinom(20, size = r, prob = p)
+
+x <- rnbinom(1000, size = r, prob = p)
+plot(table(x))
 
 
 
