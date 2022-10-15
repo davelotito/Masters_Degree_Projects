@@ -222,7 +222,7 @@ paste("SRSWOR SD:", sd(df))
 ```
 
 ## Systematic Sampling
-Systematic sampling is when there are “rules” decided to pick the sample size. For example, if there were 10 houses on 4 streets. The “rule” could be that the sampling will start with the 2nd house and then every 3rd house will be chosen. There is a potential bias with this type of sampling
+Systematic sampling is when there are “rules” decided to pick the sample size. For example, if there were 10 houses on 4 streets. The “rule” could be that the sampling will start with the 2nd house and then every 3rd house will be chosen. There is a potential bias with this sampling method
 
 ``` {r, echo = F}
 set.seed(9386)
