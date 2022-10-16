@@ -620,7 +620,165 @@ rnbinom(20, size = r, prob = p)
 x <- rnbinom(1000, size = r, prob = p)
 plot(table(x))
 
+### SRSWOR #####
 
+boston <- read.csv( "https://people.bu.edu/kalathur/datasets/bostonCityEarnings.csv", colClasses = c("character", "character", "character", "integer", "character"))
+
+head(boston)
+
+
+## Find Top 5 departments ##
+top5 <- boston[order(boston$Department, decreasing = TRUE), ]["Department"]
+
+# Get freq of each department
+top5 <- data.frame(table(top5[c("Department")]))
+
+## Order top 5 deparments
+top5 <- top5[order(-top5$Freq),][1:5,]
+
+# Subset department based on number of employees
+top5department <- subset(boston, Department %in% c('Boston Police Department','Boston Fire Department','BPS Special Education', 'BPS Facility Management', 'Boston Public Library'))["Department"]
+colnames(top5department) <- "Department"
+
+``` {r, echo = F}
+set.seed(9386)
+
+srswor <- srswor(50, nrow(top5department))
+
+rows <- (1:nrow(top5department))[srswor!=0]
+rows <- rep(rows, srswor[srswor != 0])
+
+sample.1 <- top5department[rows, ]
+
+(df <- table(sample.1))
+(prop.table(df)*100)
+
+```
+
+### SYSTEMATIC SAMPLING - UNEQUAL PROBABILITIES ###
+
+``` {r, echo = F}
+library(prob)
+
+data(swissmunicipalities)
+names(swissmunicipalities)
+
+set.seed(9386)
+
+pik <- inclusionprobabilities(
+  swissmunicipalities$POPTOT, 70)
+length(pik)
+
+sum(pik)
+
+s <- UPsystematic(pik)
+
+sample.4 <- swissmunicipalities[s != 0, ]
+head(sample.4[c(2,4,14,17,22)])
+
+table(sample.4$REG)
+prop.table(sample.4$REG)
+```
+#### 3.7. Stratified Sampling
+
+``` {r, echo = F}
+
+
+set.seed(123)
+# Stratified, equal sized strata
+
+section.ids <- rep(LETTERS[1:4], each = 25)
+
+section.scores <- round(runif(100, 60, 80))
+
+data <- data.frame(
+  Section = section.ids, 
+  Score = section.scores)
+
+head(data)
+
+table(data$Section)
+
+st.1 <- strata(data, stratanames = c("Section"),
+               size = rep(3, 4), method = "srswor",
+               description = TRUE)
+
+st.1
+
+st.sample1 <- getdata(data, st.1)
+
+st.sample1
+
+
+```
+# Stratified Sampling - #2 Example
+
+``` {r, echo = F}
+set.seed(9386) 
+
+dept_ordered <- boston[order(boston$Department, decreasing = F), ]
+
+
+stratified_data = data.frame(Department = dept_ordered$Department)
+freq = table(stratified_data$Department)
+
+st.sizes = as.vector(t(round((595 * freq / sum(freq)))))
+
+stratified = strata(stratified_data, stratanames = c("Department"),
+               size = st.sizes,
+               description = T, method = "srswor")
+
+(df <- table(stratified$Department))
+(prop.table(df)*100)
+```
+
+#### StringR ###
+
+# Foucs on Regex & str_sub
+
+# substrings
+library(stringr)
+s <- "United States"
+
+str_length(s)
+
+str_sub(s, 1, 6)
+str_sub(s, end = 6)
+str_sub(s, start = 2, end = 5)
+
+str_sub(s, 8, 13)
+str_sub(s, 8)
+str_sub(s, c(1, 8), c(6, 13))
+
+str_sub(s, start = c(1, 8), end = c(6, 13))
+
+str_sub(s, c(1, 8))
+
+str_sub(s, end = c(6, 13))
+
+## Tidy Verse ###
+library(nycflights13)
+library(tidyverse)
+
+# group_by
+
+flights %>%
+  filter(arr_delay > 0) %>%
+  group_by(year, month) %>%
+  summarise(count = n(),
+            avg_delay = mean(arr_delay))
+
+flights %>%
+  filter(arr_delay > 0) %>%
+  group_by(origin) %>%
+  summarise(count = n(),
+            avg_delay = mean(arr_delay))
+
+flights %>%
+  filter(arr_delay > 0) %>%
+  group_by(origin, dest) %>%
+  summarise(count = n(),
+            avg_delay = mean(arr_delay))
 
 
 
