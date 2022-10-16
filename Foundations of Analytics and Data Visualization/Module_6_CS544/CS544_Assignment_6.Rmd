@@ -22,7 +22,7 @@ words[str_detect(words, "[:punct:]")]
 
 remove_punct <- str_replace_all(words, "[:punct:]", "")
 
-remove_empty_string <- remove_punct[str_detect(remove_punct, '^.+$')]
+(remove_empty_string <- remove_punct[str_detect(remove_punct, '^.+$')])
 
 # Make this the new_words dataset.
 new_words <- str_to_lower(remove_empty_string)
@@ -33,16 +33,16 @@ names(sort(table(new_words), decreasing = T))[1:5]
 
 
 # d) Show the frequencies of the word lengths in the new_words dataset. Plot the distribution of these frequencies.
-``` {r, echo = F}
 
 hist(str_length(new_words), xlim = c(1, 15))
 
-```
-
 # e) What are the words in the new_words dataset with the longest length?
 
-max(str_length(new_words))
-
+# Find longest length of words
+max <- max(str_length(new_words))
+# Find longest length words
+new_words[str_length(new_words) == max]
+# Use regex to find longest length
 new_words[str_detect(new_words, "^[a-zA-Z]{16}$")]
 
 # f) Show all the words in the new_words dataset that start with the letter p.
@@ -68,11 +68,7 @@ new_words_WO_stop_words <- new_words[!(new_words %in% stopwords)]
 
 names(sort(table(new_words_WO_stop_words), decreasing = T))[1:5]
 
-``` {r, echo = F}
-
 hist(str_length(new_words_WO_stop_words), xlim = c(1, 15))
-
-```
 
 #######################
 # Part2) Data Wrangling
