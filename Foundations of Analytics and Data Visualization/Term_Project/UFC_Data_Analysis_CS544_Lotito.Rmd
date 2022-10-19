@@ -40,7 +40,7 @@ The following dataset is from Kaggle and contains the UFC-Fight historical data 
 
 # Data Prep
 
-Each row is a compilation of both fighter stats. Fighters are represented by 'red' and 'blue' (for red and blue corner). So for instance, red fighter has the complied average stats of all the fights except the current one. The stats include damage done by the red fighter on the opponent and the damage done by the opponent on the fighter (represented by 'opp' in the columns) in all the fights this particular red fighter has had, except this one as it hasn't occured yet (in the data). Same information exists for blue fighter. The target variable is 'Winner' which is the only column that tells you what happened.
+Each row is a compilation of both fighter stats. Fighters are represented by 'red' and 'blue' (for red and blue corner). The stats include damage done by the red fighter on the opponent and the damage done by the opponent on the fighter (represented by 'opp' in the columns) in all the fights this particular red fighter has had, except this one as it hasn't occurred yet (in the data). Same information exists for blue fighter. The target variable is 'Winner' which is the only column that tells you what happened.
 
 ```{r, echo = F}
 library(DT)
@@ -57,7 +57,7 @@ Although MMA is a demanding sport, in order to rise to the top the best fighters
 
 # Wins by Color
 
-We want to understand if a specific color gives any indicator if a fighter is more likely to win a fight. In the below bar plot we are showing the frequency of wins for Blue vs. Red fighter color.
+First, we want to understand if a specific color gives any indicator if a fighter is more likely to win a fight. In the below bar plot we are showing the frequency of wins for Blue vs. Red fighter color.
 
 ``` {r, echo = F}
 plot_ly(
@@ -87,7 +87,7 @@ table(winner_title)
 ```
 # Win Streak: Blue vs. Red
 
-Now that we know that red fighters tend to win more often, both in title-fights and non-title fights I wanted to analyze what the winning streak looks like for both red and blue fighters. The analysis tells us that for both red fighters tend to have longer winning streaks vs. blue fighters. This makes sense as we saw from the other analysis we did on wins. The distributions are similar, but we can clearly see that red fighters tend to have longer winning streaks vs. blue fighters. Both plots are right skewed as evident from the plots provided.
+Now that we know that red fighters tend to win more often, both in title-fights and non-title fights, I wanted to analyze what the winning streak looks like for both red and blue fighters. The analysis tells us that red fighters tend to have longer winning streaks vs. blue fighters. This makes sense as we saw from the other analysis we did on wins. The distributions are similar, but we can clearly see that red fighters tend to have longer winning streaks vs. blue fighters. Both plots are right skewed as evident from the plots provided.
 
 ``` {r, echo = FALSE}
 
@@ -106,7 +106,9 @@ summary(win_streak_red)
 # Distribution of Data
 ## Fighter Ages: Blue vs. Red
 
-How long do fighters last in the UFC? Whats the average age of fighters? What do the outliers tell us? These are all questions that I wanted to analyze. As we can see from the analysis in the scatter plot that the majority of the fights are in their early 20s to late 30s indicating that as the fighters age they are less and less likely to continue fighting, likely due to the wear and tear on the body. We do have some outliers, of course, who fight well into their 40s and even 50s. The average age for the fighters overall is ~30. This makes sense as most professional athletes peak in their early to mid 30s.
+How long do fighters last in the UFC? Whats the average age of fighters? What do the outliers tell us?
+
+These are all questions that I wanted to analyze. As we can see from the analysis in the scatter plot that the majority of the fights are in their early 20s to late 30s indicating that as the fighters age they are less and less likely to continue fighting, likely due to the wear and tear on the body. We do have some outliers, of course, who fight well into their 40s and even 50s. The average age for the fighters overall is ~30. This makes sense as most professional athletes peak in their early to mid 30s.
 
 ```{r, echo = FALSE}
 ages <- ufc_data[c("B_age", "R_age")]
@@ -119,7 +121,9 @@ summary(ages)
 
 ## Ages of Fighters in Title Bout
 
-Now that we know the average age of fighters in the UFC being ~29.5, I wanted to dive deeper into these age groups to see out of the population what is the ages of fighters that are fighting for a title. To do this, I filtered the data on title_bout == True and pulled in both the ages of the blue fighters and red fighters. Below is the the results. The average is slightly lower at ~29.25, but a negligible difference. This histogram also tells us that as the fighters gain more experience in the sport they are more likely to be in a title bout, but even with it tappering off at ~33 years old there is again another spike around 35 years old inferring to us that there is more older fighters that hold a title and are holding it longer or fighters are given a chance to fighter for a title as they get more established in their career before they retire.
+Now that we know the average age of fighters in the UFC being ~29.5, I wanted to dive deeper into these age groups to see out of the population what is the ages of fighters that are fighting for a title. To do this, I filtered the data on title_bout == True and pulled in both the ages of the blue fighters and red fighters. Below is the the results. The average is slightly lower at ~29.25, but a negligible difference. 
+
+This histogram also tells us that as the fighters gain more experience in the sport they are more likely to be in a title bout, but even with it tapering off at ~33 years old there is again another spike around 35 years old inferring to us that there is more older fighters that hold a title and are holding it longer or fighters are given a chance to fighter for a title as they get more established in their career before they retire.
 
 ``` {r, echo = F}
 title_bouts <- ufc_data[ufc_data$title_bout == "True", ]
@@ -158,7 +162,9 @@ colSums(wins)
 ```
 # Central Limit Theorem
 
-The central limit theorem states that the distribution of sample means, taken from independent random sample sizes, follows a normal distribution even if the original population is not normally distributed. This is important because there are a lot of statistical procedures that require normality in the data set. As a result, we can apply statistical techniques that assume normality even when the population is not normal. Using the age attribute in this data set the applicability of the central limit theorem can be shown. As displayed in histograms below, the age distribution of all groups have a positive skew.
+The central limit theorem states that the distribution of sample means, taken from independent random sample sizes, follows a normal distribution even if the original population is not normally distributed.
+
+This is important because there are a lot of statistical procedures that require normality in the data set. As a result, we can apply statistical techniques that assume normality even when the population is not normal. Using the age attribute in this data set the applicability of the central limit theorem can be shown. As displayed in histograms below, the age distribution of all groups have a positive skew.
 
 
 ``` {r, echo = F}
@@ -188,9 +194,15 @@ hist(xbar, prob = TRUE, breaks = 15, main = paste("Sample Size =", size))
 
 # Sampling
 
-Sampling is a technique to select a representative portion of the population to perform different studies on. There are many different sampling techniques that can be leveraged in analytics including simple random sampling, systematic sampling, and stratified sampling. Simple random sampling is a basic sampling technique where individual subjects are selected from a larger group. In this case, every sample has the same chance of getting picked. Systematic sampling is a method where samples are selected via a fixed periodic interval. The interval is calculated by dividing the whole population sample by the desired sample size. The first sample is decided randomly within the first interval. Lastly, stratified sampling takes into the account that there is heterogeneity in a population. The population is subdivided into sub populations and the same percentage of individuals is selected from each sub population to make up the sample set. When looking at a normal distribution, the sample mean can be used as an estimate for the population mean. Given a certain confidence level, a confidence interval is defined. The confidence interval is range of values which contains the population mean with the given confidence level.
+Sampling is a technique to select a representative portion of the population to perform different studies on. There are many different sampling techniques that can be leveraged in analytics including simple random sampling, systematic sampling, and stratified sampling. 
 
-For this project the ages of ufc fighters population with be analyzed. Simple random sampling without replacement & systematic sampling will be utilized as sampling methods.
+Simple random sampling is a basic sampling technique where individual subjects are selected from a larger group. In this case, every sample has the same chance of getting picked. 
+
+Systematic sampling is a method where samples are selected via a fixed periodic interval. The interval is calculated by dividing the whole population sample by the desired sample size. The first sample is decided randomly within the first interval. 
+
+Lastly, stratified sampling takes into the account that there is heterogeneity in a population. The population is subdivided into sub populations and the same percentage of individuals is selected from each sub population to make up the sample set. When looking at a normal distribution, the sample mean can be used as an estimate for the population mean. Given a certain confidence level, a confidence interval is defined. The confidence interval is range of values which contains the population mean with the given confidence level.
+
+For this project the age of the UFC fighters population will be analyzed. Simple random sampling without replacement & systematic sampling will be utilized as sampling methods.
 
 ## Population of Ages
 This simple histogram shows the distribution of the ages of all UFC fighters since inception of the sport in 1993.
@@ -248,4 +260,4 @@ paste("Systematic Sampling SD:", sd(sample.2))
 ```
 # Conclusion
 
-As we can see based on the data analysis, if you were to predict who was going to win a fight based on age, color of fighter (red or blue) and if it was a title bout or non title bout you can easily take a look at the charts/data provided and make a more informed decision on placing a bet and/or a prediction on who you think will win or lose the fight. These are just some of the many metrics that are provided in the dataset, we didnt even scratch the surface. There is many more metrics that we can leverage from this data to draw more conclusions on whether a fight will end in a knock out, submission, etc.
+As we can see based on the data analysis, if you were to predict who was going to win a fight based on age, color of fighter (red or blue) and if it was a title bout or non title bout you can easily take a look at the charts/data provided and make a more informed decision on placing a bet and/or a prediction on who you think will win or lose the fight. These are just some of the many metrics that are provided in the data set, we didn't even scratch the surface. There is many more metrics that we can leverage from this data to draw more conclusions on whether a fight will end in a knock out, submission, etc.
