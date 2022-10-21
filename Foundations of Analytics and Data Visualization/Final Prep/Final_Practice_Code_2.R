@@ -11,6 +11,7 @@ boston <- read.csv( "https://people.bu.edu/kalathur/datasets/bostonCityEarnings.
 
 head(boston)
 
+### SRSWOR Sample ###
 (boston_dep <- as.data.frame(boston$Department))
 
 srswor <- srswor(50, nrow(boston_dep))
@@ -32,6 +33,49 @@ sample <- boston[s != 0, ]
 
 table(sample$Earnings)
 prop.table(boston$Earnings)
+
+## STRATIFIED Sample ###
+
+set.seed(123)
+# Stratified, equal sized strata
+
+
+head(data)
+
+freq <- table(boston$ZipCode)
+
+section.ids <- rep(LETTERS[1:4], each = 25)
+
+section.scores <- round(runif(100, 60, 80))
+
+strata_data <- data.frame(
+  Section = section.ids, 
+  Score = section.scores)
+
+st.1 <- strata(strata_data, stratanames = c("Section"),
+               size = rep(2,10), method = "srswor",
+               description = TRUE)
+
+st.1
+
+st.sample1 <- getdata(data, st.1)
+
+st.sample1
+
+
+?strata()
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
