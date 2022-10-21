@@ -65,13 +65,29 @@ st.sample1
 
 ?strata()
 
+my_function <- function(x) {
+  x <- c(20, 30, 40, 50)
+  sum <- 0
+  for(i in x)
+    sum <- 10*x+1
+  return(sum)
+}
+
+my_function(10)
+
+my_function <- function(x) {
+  return (x * 10)
+}
+
+my_function(5)
 
 
 
+n = 100
 
+p = 0.5
 
-
-
+qnbinom(seq(0, 1, by = 0.01), size = n, prob = p)
 
 
 
