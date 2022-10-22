@@ -6,6 +6,13 @@ my_function <- function(x){
 }
 my_function(10)
 
+my_function <- function(x,y){
+  if (x > y)
+    print("Greater")
+  else
+    print("not greater")
+}
+my_function(30, 20)
 
 boston <- read.csv( "https://people.bu.edu/kalathur/datasets/bostonCityEarnings.csv", colClasses = c("character", "character", "character", "integer", "character"))
 
