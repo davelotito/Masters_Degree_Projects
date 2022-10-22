@@ -89,8 +89,18 @@ p = 0.5
 
 qnbinom(seq(0, 1, by = 0.01), size = n, prob = p)
 
+x <- "Quiz_2"
 
+x[str_detect(x, "^[u]")]
 
+str_sub(x, 5, end = c(6))
+
+library(nycflights13)
+library(tidyverse)
+library(stringr)
+library(prob)
+head(flights)
+flights |> group_by(dep_time) |> arrange(distinct(flights))
 
 
 
