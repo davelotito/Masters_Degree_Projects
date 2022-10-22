@@ -662,7 +662,7 @@ library(prob)
 
 data(swissmunicipalities)
 names(swissmunicipalities)
-
+swissmunicipalities
 set.seed(9386)
 
 pik <- inclusionprobabilities(
@@ -761,7 +761,7 @@ str_sub(s, c(1, 8))
 
 str_sub(s, end = c(6, 13))
 
-s[str_detect(s, "^[S]")]
+x[str_detect(x, "^[a]+[a-z]+[e]$")]
 
 ?regex()
 
@@ -770,6 +770,8 @@ library(nycflights13)
 library(tidyverse)
 
 # group_by
+
+?str_sub()
 
 flights %>%
   filter(arr_delay > 0) %>%
@@ -865,6 +867,32 @@ my_function_2 <- function(n){
     return(sum)
 }
 my_function_2(50)
+
+
+scores <- c(58, 46, 50, 90, 42, 52, 62, 44, 96, 92, 54, 82)
+
+(n <- length(scores))
+
+(f_s <- scores[1:2])
+
+scores[c(1,n)]
+
+(scores_matrix <- matrix(scores, nrow=2, byrow = T))
+
+scores_matrix[, c(1, ncol(scores_matrix))]
+(named_matrix <- scores_matrix)
+(size <- dim(named_matrix))
+
+(col_names <- paste0("Student_", seq(size[2])))
+
+(row_names <- paste0("Quiz_", seq(size[1])))
+
+(dimnames(named_matrix) <- list(row_names, col_names))
+named_matrix
+
+
+
+
 
 
 
