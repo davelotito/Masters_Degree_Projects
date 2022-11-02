@@ -19,16 +19,48 @@ pnorm(284, mean, sd) - pnorm(248, mean,sd)
 
 
 
+# Question #3
+# The number of customers entering a local restaurant is shown below.
+# What is the relative frequency of customers entering at 9pm
 
+# Step #1: Add up all the frequencies which == 350
+# Step #2 Divide population of interest by the total number
 
+# So our answer is 
+70/350 # 20%
 
+# Question # 4
+# What is the mean of the numbers below
+numbers <- c(34 , 10 , 2 , 52 , 67 , 13)
 
+mean(numbers)
+
+# Question #5
+# What is the median of the numbers below
+
+numbers <- c(71 , 95 , 4 , 16 , 54 , 100)
+median(numbers)
+
+# Question #6
+# Which of the following are the best measures for describing the center if the
+# distribution is skewed?
+
+# Answer: The median since it ISN'T influenced by outliers
+
+# Question #9
+# Assume that the number of days from conception to birth is normally distributed with
+# a mean of 278 days and a SD of 6 days. What % of pregnancies last more than 40 weeks(280 days)
+
+# So our answer is 
+(value <- (280-278)/6) #0.3
 
 
 # Question #10 Quiz
-#Assume that the number of da􏰁s from conception to birth is normally 
+#Assume that the number of days from conception to birth is normally 
 #distributed with a mean of 252 days and a standard deviation of 6 days. 
 #What percentage of pregnancies last more than 39 weeks (273 days)?
+
+# So our answer is 
 value <- (252-273)/6
 pnorm(value) * 100
 
