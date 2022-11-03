@@ -41,7 +41,7 @@ sd(c.difficile)
 # single number summary of the center of the distribution?
 
 # The median would be the best as its not influenced by outliers and will give you the center of the
-# distriution
+# distribution
 median(c.difficile)
 
 # 4) Assume that the literature on this topic suggests that the distribution 
@@ -61,5 +61,5 @@ pnorm(10, mean=5, sd=3) * 100
 # If the published data are consistent with the truth, what is the probability 
 # that the sample mean in his sample will be greater than 6 days? 
 
-pnorm(6, mean=5, sd=3/sqrt(35))
+pnorm(6, mean=5, sd=3/sqrt(35), lower.tail=F)
 
