@@ -52,7 +52,9 @@ median(numbers)
 # a mean of 278 days and a SD of 6 days. What % of pregnancies last more than 40 weeks(280 days)
 
 # So our answer is 
-(value <- (280-278)/6) #0.3
+(value <- (280-278)/6) #0.33
+# or
+pnorm(280, mean=278, sd=6, lower.tail = F) #0.36
 
 
 # Question #10 Quiz
