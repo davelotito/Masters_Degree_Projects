@@ -44,6 +44,22 @@ sd(c.difficile)
 # distriution
 median(c.difficile)
 
+# 4) Assume that the literature on this topic suggests that the distribution 
+# of days of hospital stay are normally distributed with a mean of 5 
+# and a standard deviation of 3.  
+# Use R to determine the probabilities below based on the normal distribution described above 
+# (you should not be using the data set given on the following page):
 
+# (a) What percentage of patients are in the hospital for less than 10 days? 
 
+pnorm(10, mean=5, sd=3) * 100
+
+# (b) Recent publications have indicated that hypervirulent strains of C. Difficile are on the rise.  
+# Such strains are associated with poor outcomes, including extended hospital stays.   
+# An investigator is interested in showing that the average hospital stay duration have increased versus published literature.  
+# He has a sample of 35 patients from his hospital.  
+# If the published data are consistent with the truth, what is the probability 
+# that the sample mean in his sample will be greater than 6 days? 
+
+pnorm(6, mean=5, sd=3/sqrt(35))
 
