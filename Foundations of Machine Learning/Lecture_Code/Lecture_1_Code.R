@@ -63,6 +63,8 @@ median(numbers)
 # So our answer is 
 value <- (252-273)/6
 pnorm(value) * 100
+# or
+pnorm(273, mean=252, sd=6, lower.tail = FALSE)
 
 # Question #11 Quiz
 # Assume that the number of days from conception to birth is normally distributed with a
@@ -77,6 +79,8 @@ pnorm(value) * 100
 
 # So our answer is 
 0.8413 - 0.1587
+# or
+pnorm(275, mean=266, sd=9) - (1 - pnorm(275, mean=266, sd=9))
 
 # Question #12 Quiz
 # The heights of women aged 20 to 29 aapprox follow a normal distribution with 
@@ -89,6 +93,8 @@ pnorm(value) * 100
 
 # So our answer is 
 0.9772 - 0.0228
+# or
+pnorm(67.66, mean=64, sd=1.83) - (1 - pnorm(67.66, mean=64, sd=1.83))
 
 # Question #13
 # A variable is normally distributed. The proportion of observations that are GREATER than a is 3%.
@@ -125,4 +131,6 @@ pnorm(4.1983, mean=5.1816, sd=0.6832) * 100
 # Find the probability that the sample mean is less than 878 if a sample size of 97
 # is taken from a population with a mean of 1191 and a standard deviation of 307.
 pnorm(878, mean=1191, sd=307/sqrt(97))
+
+
 
