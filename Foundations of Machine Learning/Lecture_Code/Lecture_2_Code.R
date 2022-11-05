@@ -60,7 +60,11 @@ margin <- qt(0.95, df=n-1)*s/sqrt(n)
 # How many callers must they sample to get their 95%
 # confidence interval to have the desired width?
 
-(me <- (1.960*15/2)*2)^2
+(me <- (1.960*15/1.0)^2)
+
+# Since we can’t have exactly 864.36 callers (there is no such thing as 36
+# hundredths of a caller), we need to round up to 865
+# In calculations involving sample size we always round up (instead of down).
 
 
 
