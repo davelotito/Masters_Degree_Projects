@@ -31,14 +31,14 @@ pnorm(284, mean, sd) - pnorm(248, mean,sd)
 
 # Question # 4
 # What is the mean of the numbers below
-numbers <- c(34 , 10 , 2 , 52 , 67 , 13)
+numbers <- c(11 , 47 , 61 , 53 , 52 , 16)
 
 mean(numbers)
 
 # Question #5
 # What is the median of the numbers below
 
-numbers <- c(71 , 95 , 4 , 16 , 54 , 100)
+numbers <- c(73 , 37 , 14 , 90 , 42 , 29)
 median(numbers)
 
 # Question #6
@@ -52,9 +52,9 @@ median(numbers)
 # a mean of 278 days and a SD of 6 days. What % of pregnancies last more than 40 weeks(280 days)
 
 # So our answer is 
-(value <- (280-278)/6) #0.33
+(value <- (245-284)/4) #0.33
 # or
-pnorm(280, mean=278, sd=6, lower.tail = F) #0.36
+pnorm(245, mean=284, sd=4, lower.tail = F) #0.36
 
 
 # Question #10 Quiz
@@ -63,18 +63,18 @@ pnorm(280, mean=278, sd=6, lower.tail = F) #0.36
 #What percentage of pregnancies last more than 39 weeks (273 days)?
 
 # So our answer is 
-value <- (252-273)/6
+value <- (280-294)/7
 pnorm(value) * 100
 # or
-pnorm(273, mean=252, sd=6, lower.tail = FALSE)
+pnorm(294, mean=280, sd=7, lower.tail = FALSE)
 
 # Question #11 Quiz
 # Assume that the number of days from conception to birth is normally distributed with a
 # mean of 266 days and a standard deviation of 9 days. 
 # What is the probability that my pregnancy will be between 257 and 275 days? 
 
-(257-266)/9
-(275-266)/9
+(251-257)/6
+(263-257)/6
 # Now pull up the z-score table on Google and find -1 and 1 respectively.
 # 1.0 == .8413
 # -1.0 == .1587
@@ -82,7 +82,7 @@ pnorm(273, mean=252, sd=6, lower.tail = FALSE)
 # So our answer is 
 0.8413 - 0.1587
 # or
-pnorm(275, mean=266, sd=9) - (1 - pnorm(275, mean=266, sd=9))
+pnorm(263, mean=257, sd=6) - (1 - pnorm(263, mean=257, sd=6))
 
 # Question #12 Quiz
 # The heights of women aged 20 to 29 aapprox follow a normal distribution with 
@@ -90,13 +90,13 @@ pnorm(275, mean=266, sd=9) - (1 - pnorm(275, mean=266, sd=9))
 #What percent of young women are between 60.34 and 67.66 inches?
 
 # Answer this the exact same as above question
-(60.34-64)/1.83
-(67.66-64)/1.83
+(value1 <- (55.41-57)/0.53)
+(value2 <- (58.59-57)/0.53)
 
 # So our answer is 
-0.9772 - 0.0228
+0.0013 - 0.9987
 # or
-pnorm(67.66, mean=64, sd=1.83) - (1 - pnorm(67.66, mean=64, sd=1.83))
+pnorm(58.59, mean=57, sd=0.53) - (1 - pnorm(58.59, mean=57, sd=0.53))
 
 # Question #13
 # A variable is normally distributed. The proportion of observations that are GREATER than a is 3%.
@@ -125,14 +125,14 @@ prob/2
 # Let's assume that the distribution of gas on a given day in a town is normally 
 # distributed with mean of $5.1816 with a standard deviation of $0.6832. What proportion
 # of gas stations are charging less than $4.1983?
-pnorm(4.1983, mean=5.1816, sd=0.6832) * 100
+pnorm(3.2338, mean=3.5108, sd=0.2975) * 100
 
 
 
 # Question #20 Quiz
 # Find the probability that the sample mean is less than 878 if a sample size of 97
 # is taken from a population with a mean of 1191 and a standard deviation of 307.
-pnorm(878, mean=1191, sd=307/sqrt(97))
+pnorm(835, mean=1321, sd=370/sqrt(91))
 
 
 
