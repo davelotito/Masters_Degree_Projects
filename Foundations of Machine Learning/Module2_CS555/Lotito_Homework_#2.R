@@ -15,6 +15,10 @@ hist(cal_info$Participant, main = "Histogram of Participants", col = blues9)
 hist(cal_info$Non_Participants, main= "Histogram of Non-Participants", col = blues9)
 
 # The shape of the two distributions are not normal distributions, we can see
-# That these two distributions are no similar as the calories for non-participant spiked
+# That these two distributions are not similar as the calories for non-participant spiked
 # between 300-500 calories indicating that non-participants are likely to have more calories
-# vs. the participants in the study.
+# vs. the participants in the study. We can see that the participants had a lot of calories between
+# 200-300 calories and then again at 400-500 calories. From our initial summary we can see that the sum of 
+# total calories for participant vs. non-participant shows  us that Non_Participants consumed less overall calories
+# but we also had less observations with 3 missing.
+
