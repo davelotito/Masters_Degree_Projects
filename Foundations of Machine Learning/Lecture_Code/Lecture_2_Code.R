@@ -66,7 +66,70 @@ margin <- qt(0.95, df=n-1)*s/sqrt(n)
 # hundredths of a caller), we need to round up to 865
 # In calculations involving sample size we always round up (instead of down).
 
+library(dplyr)
 
+summary(airquality)
+
+attach(airquality)
+
+mean(Temp) #77.88235
+
+tapply(airquality$Temp, airquality$Month, sd)
+
+# Z test with hypotheses of temp is 82 degrees
+# H0 : Temp = 82
+# H1 : Temp != 82 - two sided
+# If H1 temp is > 82 - one sided - right side
+
+(z <- (mean(airquality$Temp) - 82) / (sd(airquality$Temp)/sqrt(nrow(airquality))))
+
+# P Value
+pnorm(z) # left side area (probability of 77.8235 being close to 82)
+1 - pnorm(z) # right side
+2*pnorm(z) # two sided
+
+# Critical value - 95% Confidence Interval, two sided
+qnorm(0.025)
+
+# Critical value - 95% Confidence Interval, one sided
+qnorm(0.05)
+
+# 95% Confidence Interval
+(lowerCI <- mean(airquality$Temp) - qnorm(0.025)*sd(airquality$Temp)/sqrt(nrow(airquality)))
+
+(higherCI <- mean(airquality$Temp) + qnorm(0.025)*sd(airquality$Temp)/sqrt(nrow(airquality)))
+# With 95% confidence actual avg temp is between 79.39 & 76.38, so we would reject the null
+# hypothosis that avg temp is = to 82
+
+# T-test
+# Scientist would like to test if Great white shark avg length is 20ft or smaller?
+# The confidence level is 90%
+# H0: length <= 20
+# H1: length >20
+
+greatWhiteSharkLength <- c(18.1, 23.4, 23.8, 24.1, 22.5, 19, 25.4, 23.1, 16.5, 26.7)
+length(greatWhiteSharkLength)
+nSamples <- length(greatWhiteSharkLength)
+mean(greatWhiteSharkLength)
+
+(criticalValue <- qt(0.9, df = nSamples-1))
+
+(sd <- sd(greatWhiteSharkLength))
+
+# T-test is larger than critical value of 1.38, this means its outside.
+# This means we reject null hypothesis, 22.26(the mean) is outside of the 90% CI
+# Its far from 20 so we reject.
+(tTest <- (mean(greatWhiteSharkLength) - 20) / (sd/sqrt(nSamples)))
+
+# Calculating t-stat from probabilities
+
+# If P-Value is small, we reject the null hypothesis
+(pValue <- 1 - pt(tTest, df = nSamples-1))
+# Check to see if our pValue is smaller than the critical value, if smaller we reject null.
+pValue < criticalValue
+
+# t.test function - R built in function
+t.test(greatWhiteSharkLength, mu=20, alternative = 'greater', conf.level = 0.9)
 
 
 
