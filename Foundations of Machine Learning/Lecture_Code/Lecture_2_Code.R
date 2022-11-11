@@ -132,6 +132,11 @@ pValue < criticalValue
 t.test(greatWhiteSharkLength, mu=20, alternative = 'greater', conf.level = 0.9)
 
 
+(lowerCI <- 38 - qnorm(0.025)*sd(15)/sqrt(9))
+
+(38 - qnorm(0.0025)) - 1.096815 * sqrt(15^2/8 + 10^2/10)
+
+
 
 
 
@@ -271,9 +276,13 @@ t <- 0.18 * 2
 
 # Question #17
 
-#################################
-### NEED TO WORK ON THIS ONE ###
-#################################
+# For this question we want to know if t-test is DIFFERENT from $153
+# So when we look at the possible answers we know we need < 153 or > 153
+# So we cant have any values that fall within the 153 range
+
+# That leaves us with 3 answers: 115 to 120, 120 to 152, and 155 to 175
+
+# The other two answers, 140 to 160 fall within 153 & 150 to 160 fall within 153 as well.
 
 
 # Question #18
