@@ -136,6 +136,48 @@ t.test(greatWhiteSharkLength, mu=20, alternative = 'greater', conf.level = 0.9)
 
 (38 - qnorm(0.0025)) - 1.096815 * sqrt(15^2/8 + 10^2/10)
 
+#############################################
+### YouTube Video on t-test and p values ###
+#############################################
+
+library(tidyverse)
+library(patchwork)
+library(gapminder)
+
+
+View(gapminder)
+# Single Sample t-test #
+gapminder %>%
+  filter(continent == 'Africa') %>%
+  select(lifeExp) %>%
+  t.test(mu = 50)
+
+## The results show that we have a p-value that is extremely low at 0.002038
+# Which is < 0.05 so we reject the null hypthosis that the avg age in africa is 50
+
+t_test <- gapminder %>%
+  filter(continent == 'Africa') %>%
+  select(lifeExp) %>%
+  t.test(mu = 50)
+
+# Two sided t-test for difference in means
+# Question: Is the life exp mean different from europe
+# Again here with the very small p value we can reject the null hypothesis 
+
+gapminder %>%
+  filter(continent %in% c("Africa", "Europe")) %>%
+  t.test(lifeExp ~ continent, data = ., alternative = "two.sided")
+
+# One sided test for difference in means
+# Conf.level default is 0.95, but we are stating it here to show how it works
+# We fail to reject the null hypothesis as the p value is > 0.05
+
+gapminder %>%
+  filter(country %in% c("Ireland", "Switzerland")) %>%
+  t.test(lifeExp ~ country, data = ., alternative = "less", conf.level = 0.95)
+
+
+
 
 
 
