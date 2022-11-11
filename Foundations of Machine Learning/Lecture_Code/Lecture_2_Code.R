@@ -270,9 +270,9 @@ n <- 67
 # They find that the sample mean is 95.8mg. Calculate the z statistic.
 
 # Answer #1 (close to 3.3901)
-one <- 95.8+1.645*7/sqrt(39)
+one <- (95.8+1.5123)*7/sqrt(39)
 
-two <- 95.8-1.645*7/sqrt(39)
+two <- (95.8-1.5123)*7/sqrt(39)
 one-two
 
 # Answer #2
@@ -295,7 +295,7 @@ final - 1.003817
 # They find that the sample mean is 76.5 mg. What is the p-value associated with this test?
 
 # Answer
-(p_value=pt(q=-1.96, df=3, lower.tail = TRUE))
+(p_value = pt(q=-1.96, df=3, lower.tail = TRUE))
 # or use the below link and divide the outcome by 2
 # https://digitalfirst.bfwpub.com/stats_applet/stats_applet_12_pvalue.html 
 
@@ -304,6 +304,8 @@ final - 1.003817
 # Use R to find the t distribution critical value associated with a probability of 0.94 
 # to its left and 34 degrees of freedom.
 qt(0.94, df=34)
+
+
 
 
 # Question #14
