@@ -198,7 +198,7 @@ gapminder %>%
 # was calculated to be z = 1.369. Calculate the associated p-value
 
 #Answer
-2 * pnorm(q=1.369, lower.tail=F)
+2 * pnorm(q=1.491, lower.tail=F)
 
 # Question #3
 
@@ -207,7 +207,7 @@ gapminder %>%
 # was calculated to be z = 1.296. Calculate the associated p-value
 
 #Answer
-pnorm(q=1.296, lower.tail=F)
+pnorm(q=1.416, lower.tail=F)
 
 # Question #4
 
@@ -228,24 +228,24 @@ pnorm(q=1.296, lower.tail=F)
 # for the population mean of rainfall last month in the country
 
 #Answer #1
-x.bar <- 5.6
+x.bar <- 6.1
 z <- 2 * pnorm(0.475, lower.tail = T)
-sd <- 1
-n <- 67
+sd <- 1.12
+n <- 34
 # Calculate lower confidence interval.
 (lower.interval <- x.bar - z * (sd / sqrt(n)))
 # Calculate upper confidence interval.
 (upper.interval <- x.bar + z * (sd / sqrt(n)))
 
 #Answer #2
-x.bar <- 5.6
+x.bar <- 6.1
 z <- 1.960
-sd <- 1
-n <- 67
+sd <- 1.12
+n <- 34
 # Calculate lower confidence interval.
-(lower.interval <- x.bar - z * (sd / sqrt(n)) + 0.08333333333)
+(lower.interval <- x.bar - z * (sd / sqrt(n)))
 # Calculate upper confidence interval.
-(upper.interval <- x.bar + z * (sd / sqrt(n)) - 0.08333333333)
+(upper.interval <- x.bar + z * (sd / sqrt(n)))
 
 # Question #6
 
@@ -255,7 +255,7 @@ n <- 67
 # Hint: Take a look at the formula for the confidence interval
 
 # Answer
-(69+92)/2
+(65+96)/2
 
 # Question #9
 
@@ -270,17 +270,17 @@ n <- 67
 # They find that the sample mean is 95.8mg. Calculate the z statistic.
 
 # Answer #1 (close to 3.3901)
-one <- (95.8+1.5123)*7/sqrt(39)
+one <- (93.61+1.5123)*10/sqrt(44)
 
-two <- (95.8-1.5123)*7/sqrt(39)
+two <- (93.61-1.5123)*10/sqrt(44)
 one-two
 
 # Answer #2
-one <- 95.8+1.96*7/sqrt(39)
+one <- 93.61+1.96*10/sqrt(44)
 
-two <- 95.8-1.96*7/sqrt(39)
+two <- 93.61-1.96*10/sqrt(44)
 final <- one-two 
-final - 1.003817
+final
 
 # Question #10
 
@@ -303,7 +303,7 @@ final - 1.003817
 # Question #13
 # Use R to find the t distribution critical value associated with a probability of 0.94 
 # to its left and 34 degrees of freedom.
-qt(0.94, df=34)
+qt(0.82, df=25)
 
 
 
@@ -336,7 +336,7 @@ t <- 0.18 * 2
 # H0: = 98
 # H1: < 98
 # What is the value of the test statistic
-(t <- (103.55 - 98)/(7/sqrt(29)))
+(t <- (93.68 - 90)/(5/sqrt(27)))
 
 
 # Question #19
