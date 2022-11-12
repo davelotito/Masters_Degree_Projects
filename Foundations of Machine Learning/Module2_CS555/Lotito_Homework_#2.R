@@ -13,11 +13,13 @@ Non_Participants <- c(614.61,503.46,425.22,688.77,184,299.73,350.65,394.94,261.5
                      139.69,462.78,179.59,301.75,436.58,371.39,
                      469.02,378.09,287.31,448.55,332.64,403.98)
 
-
 summary(Participants)
+
+sd(Participants)
 
 summary(Non_Participants)
 
+sd(Non_Participants)
 
 hist(Participants, main = "Histogram of Participants", col = blues9)
 hist(Non_Participants, main= "Histogram of Non-Participants", col = blues9)
