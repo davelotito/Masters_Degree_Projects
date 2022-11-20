@@ -233,31 +233,13 @@ pnorm(1.35)
 # 67 instruments that measure rainfall were placed throughout the county randomly. 
 # The sample mean from the instruments was 5.6 inches. Calculate a 95% confidence interval
 # for the population mean of rainfall last month in the country
-sqrt(67)
-# Actual Answer
 
-6.1 - 1.96 *(1.12/sqrt(67))
-6.1 + 1.96 *(1.12)/8.185353
+# Answer
 
-#Answer #1
-x.bar <- 6.1
-z <- 2 * pnorm(0.475, lower.tail = T)
-sd <- 1.12
-n <- 34
-# Calculate lower confidence interval.
-(lower.interval <- x.bar - z * (sd / sqrt(n)))
-# Calculate upper confidence interval.
-(upper.interval <- x.bar + z * (sd / sqrt(n)))
+5.6 - 1.96 *(1.00/sqrt(67))
+5.6 + 1.96 *(1.00/sqrt(67))
 
-#Answer #2
-x.bar <- 6.1
-z <- 1.960
-sd <- 1.12
-n <- 34
-# Calculate lower confidence interval.
-(lower.interval <- x.bar - z * (sd / sqrt(n)))
-# Calculate upper confidence interval.
-(upper.interval <- x.bar + z * (sd / sqrt(n)))
+
 
 # Question #6
 
