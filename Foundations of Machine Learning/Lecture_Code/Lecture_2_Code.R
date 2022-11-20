@@ -199,6 +199,8 @@ gapminder %>%
 
 #Answer
 2 * pnorm(q=1.491, lower.tail=F)
+# or
+pnorm(-1.491)*2
 
 # Question #3
 
@@ -208,6 +210,8 @@ gapminder %>%
 
 #Answer
 pnorm(q=1.416, lower.tail=F)
+# or
+1 - pnorm(1.416)
 
 # Question #4
 
@@ -218,6 +222,9 @@ pnorm(q=1.416, lower.tail=F)
 #Answer
 (pnorm(q=1.35, lower.tail=F) / 2) + pnorm(q=1.35, lower.tail=T)
 
+# Actual Answer
+pnorm(1.35)
+
 # Question #5
 
 # We are interested in estimating the mean amount of rain last month in our county. 
@@ -226,6 +233,11 @@ pnorm(q=1.416, lower.tail=F)
 # 67 instruments that measure rainfall were placed throughout the county randomly. 
 # The sample mean from the instruments was 5.6 inches. Calculate a 95% confidence interval
 # for the population mean of rainfall last month in the country
+sqrt(67)
+# Actual Answer
+
+6.1 - 1.96 *(1.12/sqrt(67))
+6.1 + 1.96 *(1.12)/8.185353
 
 #Answer #1
 x.bar <- 6.1
@@ -269,18 +281,8 @@ n <- 34
 # and would like to use a significance level of 0.05
 # They find that the sample mean is 95.8mg. Calculate the z statistic.
 
-# Answer #1 (close to 3.3901)
-one <- (93.61+1.5123)*10/sqrt(44)
-
-two <- (93.61-1.5123)*10/sqrt(44)
-one-two
-
-# Answer #2
-one <- 93.61+1.96*10/sqrt(44)
-
-two <- 93.61-1.96*10/sqrt(44)
-final <- one-two 
-final
+# Answer #1
+(93.61 - 92)/(10/sqrt(44))
 
 # Question #10
 
@@ -295,14 +297,18 @@ final
 # They find that the sample mean is 76.5 mg. What is the p-value associated with this test?
 
 # Answer
-(p_value = pt(q=-1.96, df=3, lower.tail = TRUE))
-# or use the below link and divide the outcome by 2
-# https://digitalfirst.bfwpub.com/stats_applet/stats_applet_12_pvalue.html 
+(75.83 - 74)/(5/sqrt(56)) # Gives us the Z score of 2.74 then we * that value by 2
+# Final Answer from Z-table
+0.0031*2
+
+# Question #12
+# Go to t-table find DF = 19 since we take 20-1 and then find 0.025 for the upper tail
+# This gives us 2.093
 
 
 # Question #13
-# Use R to find the t distribution critical value associated with a probability of 0.94 
-# to its left and 34 degrees of freedom.
+# Use R to find the t distribution critical value associated with a probability of 0.82 
+# to its left and 25 degrees of freedom.
 qt(0.82, df=25)
 
 
@@ -343,8 +349,6 @@ t <- 0.18 * 2
 
 # Since 9 is the smallest number of (9 & 11) we use df = 8 for a 90% confidence.
 # When we look on the chart we get a value of 1.860
-# But that's not the answer on the quiz.. we get 1.876
-# Take the number above 1.895 + 1.876 / 2 == 1.8775
 
 
 # Question #20
