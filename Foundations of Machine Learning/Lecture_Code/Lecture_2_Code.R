@@ -287,6 +287,8 @@ pnorm(1.35)
 # Go to t-table find DF = 19 since we take 20-1 and then find 0.025 for the upper tail
 # This gives us 2.093
 
+qt(.975, 19)
+
 
 # Question #13
 # Use R to find the t distribution critical value associated with a probability of 0.82 
