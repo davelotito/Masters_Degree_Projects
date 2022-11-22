@@ -37,7 +37,7 @@ beta.0 <- y.bar - (beta.1 * x.bar)
 beta.0
 
 #setting up linear model to put in regression line
-my.model <- lm(data$Total.Mercury.in.mg.g ~ data$Number.of.meals.with.fish)
+(my.model <- lm(data$Total.Mercury.in.mg.g ~ data$Number.of.meals.with.fish))
 abline(my.model, col = "red")
 
 # (5) Calculate the ANOVA table AND the table which gives the standard error of  .  
@@ -48,10 +48,7 @@ anova(my.model)
 summary(my.model)
 
 #calculate the F-distribution with 1, 98 degrees of freedom and associated with alpha = 0.10
-qf(.90, df1=1, df2 = 98)
+qf(.95, df1=1, df2 = 98)
 
-
-
-
-
+confint(my.model, level=0.90)
 
