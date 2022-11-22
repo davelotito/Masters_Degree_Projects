@@ -55,7 +55,7 @@ which(cooks.distance(score.education) > (4/nrow(data)))
 # Formally test (using the 5-step procedure) whether the set of these predictors are associated with prestige score 
 # at the α = 0.05 level (Hint: You should be performing the global test).
 
-m <- lm(formula = Prestige.Score ~ (Education.Level..years. + Income.... +  Percent.of.Workforce.that.are.Women), data=data)
+(m <- lm(formula = Prestige.Score ~ (Education.Level..years. + Income.... +  Percent.of.Workforce.that.are.Women), data=data))
 
 qf(.95, df1 = 3, df2 = 98)
 
