@@ -57,22 +57,42 @@ which(cooks.distance(score.education) > (4/nrow(data)))
 
 (m <- lm(formula = Prestige.Score ~ (Education.Level..years. + Income.... +  Percent.of.Workforce.that.are.Women), data=data))
 
+anova(m)
+
 qf(.95, df1 = 3, df2 = 98)
 
-summary(m)
+modelSum <- summary(m)
+
+(F_stat <- modelSum$fstatistic[1])
+
 
 # (4) If the overall model was significant, summarize the information about the contribution of each variable separately at the same 
 # significance level as used for the overall model (no need to do a formal 5-step procedure for each one, just comment on the results of the tests).  
 # Provide interpretations for any estimates (of the slopes) that are significant.   
 # Calculate 95% confidence intervals for any estimates that are significant
+(m1 <- lm(formula = Prestige.Score ~ Education.Level..years., data=data))
+(m2 <- lm(formula = Prestige.Score ~ Income...., data=data))
+(m3 <- lm(formula = Prestige.Score ~ Percent.of.Workforce.that.are.Women, data=data))
+summary(m1)
+qf(.95, df1 = 1, df2 = 100)
+summary(m2)
+summary(m3)
 
+qf(.95, df1 = 3, df2 = 98)
 
 
 
 # (5) Generate a residual plot showing the fitted values from the regression against the residuals.  
 # Is the fit of the model reasonable? Are there any outliers or influence points?  
 
+#plot residual vs. fitted value
 
+resid(m)
+plot(fitted(m), resid(m), axes = TRUE, frame.plot=TRUE, xlab="Fitted Values", ylab= "Residual", main = "Whole Model Residual by Fitted")
+abline(h=0)
 
-
+outlier_iqr(Income....)
+outlier_iqr(Percent.of.Workforce.that.are.Women)
+outlier_iqr(Education.Level..years.)
+which(cooks.distance(m) > (4/nrow(data)))
 
