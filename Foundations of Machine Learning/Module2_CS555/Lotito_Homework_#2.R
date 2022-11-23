@@ -15,9 +15,13 @@ Non_Participants <- c(614.61,503.46,425.22,688.77,184,299.73,350.65,394.94,261.5
 
 summary(Participants)
 
+length(Participants)
+
 sd(Participants)
 
 summary(Non_Participants)
+
+length(Non_Participants)
 
 sd(Non_Participants)
 
