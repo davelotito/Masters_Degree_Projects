@@ -7,8 +7,11 @@ cor(data1)
 pairs(data1)
 
 
+(m <- lm(salary1 ~ age + height))
 
-m <- lm(salary1 ~ age + height)
+anova(m)
+
+cor(age, height)
 
 summary(m)
 
@@ -18,6 +21,8 @@ fitted(m)
 
 
 
+# Calculate t value
+(test <- abs(qt(0.025, 21)))
 
 ##########
 # Quiz #4
