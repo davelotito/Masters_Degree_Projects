@@ -7,8 +7,6 @@ heart_data <- read.csv('heart.csv', header = T)
 
 View(heart_data)
 
-attach(heart_data)
-
 hist(Age)
 
 ## We want to understand if the mean age is equal to 50
@@ -17,56 +15,74 @@ hist(Age)
 
 sd(Age)
 
-z.test(Age, mu=50, alternative = 'two.sided')
 
 (z <- (mean(Age) - 50) / (sd(Age)/sqrt(nrow(heart_data))))
 
 2*pnorm(-abs(z))
 
 
-(m <- lm(Age ~ RestingBP, data=heart_data))
+cor(heart_data$Age, heart_data$RestingBP)
 
-quartiles <- quantile(Age, probs=c(.25, .75), na.rm = FALSE)
-IQR <- IQR(Age)
+r <- c(0.2543994)
+#beta_1 calculation
+s.x <- c(sd(heart_data$Age))
+s.y <- c(sd(heart_data$RestingBP))
+beta.1 <- r * (s.y/s.x)
+beta.1
 
-Lower <- quartiles[1] - 1.5*IQR
-Upper <- quartiles[2] + 1.5*IQR 
+#beta_0 calculation
+x.bar <- c(mean(heart_data$Age))
+y.bar <- c(mean(heart_data$RestingBP))
+beta.0 <- y.bar - (beta.1 * x.bar)
+beta.0
 
-Age <- subset(Age, Age > Lower & Age < Upper)
-
-length(data_no_outlier)
-
-plot(Age ~ RestingBP, main = "Scatterplot of Age vs. Resting Blood Pressure", xlab= "Resting Blood Pressure Level",
-     ylab = "Age", xlim = c(65, 200), ylim = c(25, 80), pch=1, col='blue')
+plot(heart_data$RestingBP ~ heart_data$Age, main = "Scatterplot of Age & Resting Blood Pressure", xlab= "Age",
+     ylab = "Resting Blood Pressure Level", xlim = c(25, 80), ylim = c(50, 225), pch=1, col='blue')
 abline(m)
 anova(m)
 
-cor(Age, HeartDisease)
+(my.model <- lm(heart_data$RestingBP ~ heart_data$Age))
+abline(my.model, col = "red")
 
-cor(Age, FastingBS)
+(residual <- resid(my.model))
+hist(residual, main= "Histogram of Residuals for RestingBP on Age")
 
-cor(Age, Cholesterol)
+anova(my.model)
 
-cor(Age, RestingBP)
+summary(my.model)
 
-cor(Age, RestingBP)
+qf(.90, df1=1, df2 = 916)
 
-
-
-
-
-
+(F_Statistic <- 20342.7/320.9)
 
 
+confint(my.model, level=0.90)
 
 
+# Multiple linear regression
+
+(m2 <- lm(formula = heart_data$RestingBP ~ (heart_data$Age + heart_data$MaxHR + 
+                                 heart_data$Cholesterol), data = heart_data))
+
+qf(.95, df1=3, df2 = 915)
+
+anova(m2)
+
+summary(m2)
+
+modelsum <- summary(m2)
+
+#GLobal F-Stat
+(F_stat <- modelSum$fstatistic[1])
 
 
+residual_2 <- resid(m2)
+hist(residual_2, main= "Histogram of Residuals for the Regression of Model")
+plot(fitted(m2), resid(m2), axes = TRUE, frame.plot=TRUE, xlab="Fitted Values", ylab= "Residual", main = "Whole Model Residual by Fitted", col = "Blue")
 
+abline(h=0, col="Red")
 
-
-
-
+which(cooks.distance(m2) > (4/nrow(heart_data)))
 
 
 
