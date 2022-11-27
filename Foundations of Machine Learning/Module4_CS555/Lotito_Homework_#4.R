@@ -24,7 +24,7 @@ cor(Education.Level..years., Prestige.Score)
 # Are there any outliers or influence points?  
 # If so, identify them by ID and comment on the effect of each on the regression. 
 
-score.education <- lm(Prestige.Score ~ Education.Level..years.)
+(score.education <- lm(Prestige.Score ~ Education.Level..years.))
 score.education
 
 summary(score.education)
@@ -32,6 +32,8 @@ summary(score.education)
 Residual <- resid(score.education)
 plot(Education.Level..years., Residual, main = "Residual Plot for the Regression of Prestige Score on Education")
 abline(0,0)
+
+hist(Residual, main= "Histogram of Residuals for the Regression of Prestige Score on Education")
 
 # Outliers 
 outlier_iqr <- function(x){
@@ -61,7 +63,7 @@ anova(m)
 
 qf(.95, df1 = 3, df2 = 98)
 
-modelSum <- summary(m)
+(modelSum <- summary(m))
 
 (F_stat <- modelSum$fstatistic[1])
 
@@ -87,12 +89,16 @@ qf(.95, df1 = 3, df2 = 98)
 
 #plot residual vs. fitted value
 
-resid(m)
+resid <- resid(m)
+hist(resid, main= "Histogram of Residuals for the Regression of Model")
 plot(fitted(m), resid(m), axes = TRUE, frame.plot=TRUE, xlab="Fitted Values", ylab= "Residual", main = "Whole Model Residual by Fitted")
 abline(h=0)
+
+hist(Residual, main= "Histogram of Residuals for the Regression of Prestige Score on Education")
 
 outlier_iqr(Income....)
 outlier_iqr(Percent.of.Workforce.that.are.Women)
 outlier_iqr(Education.Level..years.)
 which(cooks.distance(m) > (4/nrow(data)))
+
 
