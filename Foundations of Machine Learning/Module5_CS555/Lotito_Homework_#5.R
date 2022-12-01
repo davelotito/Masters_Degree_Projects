@@ -35,34 +35,57 @@ par(mfrow = c(1, 1))
 # If the results of the overall model are significant, perform the appropriate 
 # pairwise comparisons using Tukey’s procedure to adjust for multiple comparisons and summarize these results.
 
-#check to see if the variable group is a factor variable.
+# check to see if the variable group is a factor variable.
 is.factor(group)
 
 #Get test statistic
 qf(.95, df1=3, df2=42)
 
 #Compute one way ANOVA test
-m <- aov(iq~group, data=students)
+(m <- aov(iq~group, data=students))
+
 summary(m)
 
 #Tukeys Test of Honest Significance
-TukeyHSD(m)
 
 emm_options(contrasts=c("contr.treatment", "contr.poly"))
 
 emmeans(m, specs = "group", contr="pairwise", adjust='tukey')
 
+# (3)	Create an appropriate number of dummy variables for student group and re-run the one-way ANOVA 
+# using the lm function with the newly created dummy variables.  
+# Set chemistry students as the reference group.  
+# Confirm the results are the same (specifically point out test statistics, p-values, etc. that show the results are equivalent).  
+# What is the interpretation of the beta estimates from the regression model? 
 
+students$g0 <- ifelse(group=='Chemistry student', 1, 0) #don't need to create, but did for consistency
+students$g1 <- ifelse(group=='Math student', 1, 0)
+students$g2 <- ifelse(group=='Physics student', 1, 0)
+(model_1 <- aov(lm(iq ~ students$g2 + students$g1)))
+(model_2 <- aov(lm(iq ~ students$g1 + students$g0)))
 
+lm(iq ~ students$g2 + students$g1)
+lm(iq ~ students$g1 + students$g0)
 
+summary(lm(iq ~ students$g1 + students$g0))
+summary(lm(iq ~ students$g2 + students$g1))
 
+summary(model_1)
 
+summary(model_2)
 
+# (4)	Re-do the one-way ANOVA adjusting for age (ANCOVA).  
+# Focus on the output relating to the comparisons of test score by student type.  
+# Explain how this analysis differs from the analysis in step 2 above 
+# (not the results but how does this analysis differ in terms of the questions it answers as opposed to the one above).  
+# Did you obtain different results?  
+# Summarize briefly (no need to go through the 5 –step procedure here).   
+# Lastly, present the least square means and interpret these.  
 
+(model_3 <- Anova(lm(iq~group + age), type=3))
+(model_3 <- aov(iq ~ group + age))
 
-
-
-
+lsmeans(model_3, ~group)
 
 
 
