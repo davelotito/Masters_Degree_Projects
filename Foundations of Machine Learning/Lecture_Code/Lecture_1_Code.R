@@ -66,7 +66,7 @@ pnorm(245, mean=284, sd=4, lower.tail = F) #0.36
 value <- (280-294)/7
 pnorm(value) * 100
 # or
-pnorm(294, mean=280, sd=7, lower.tail = FALSE)
+pnorm(294, mean=280, sd=7, lower.tail = FALSE)*100
 
 # Question #11 Quiz
 # Assume that the number of days from conception to birth is normally distributed with a
