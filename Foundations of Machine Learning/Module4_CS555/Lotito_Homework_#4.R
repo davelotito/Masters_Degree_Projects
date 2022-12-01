@@ -72,6 +72,10 @@ qf(.95, df1 = 3, df2 = 98)
 # significance level as used for the overall model (no need to do a formal 5-step procedure for each one, just comment on the results of the tests).  
 # Provide interpretations for any estimates (of the slopes) that are significant.   
 # Calculate 95% confidence intervals for any estimates that are significant
+
+# used to calculate confidence interval bands
+confint(m)
+
 (m1 <- lm(formula = Prestige.Score ~ Education.Level..years., data=data))
 (m2 <- lm(formula = Prestige.Score ~ Income...., data=data))
 (m3 <- lm(formula = Prestige.Score ~ Percent.of.Workforce.that.are.Women, data=data))
