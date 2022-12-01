@@ -20,11 +20,12 @@
 MSB <- 195
 MSW <- 333.33
 
-
-(F <- MSB/MSW)
+# F = MSB/MSW
 
 
 # State the decision rule
+
+(test_f_stat <- qf(.99, df1=2, df2=12)) # alpha of 0.01
 
 # Reject H0 if F ≥ 6.926608. Otherwise, do not reject
 
@@ -32,7 +33,7 @@ MSW <- 333.33
 # Compute the test statistic
 
 # Test Statistic - F Value
-(test_f_stat <- qf(.99, df1=2, df2=12)) # alpha of 0.01
+(F <- MSB/MSW)
 
 F >= test_f_stat
 
@@ -70,7 +71,7 @@ F >= test_f_stat
 
 # State the decision rule
 
-# Two tailed T t-test
+# Two tailed t-test
 (a = 0.05/2)
 
 # Find T
@@ -85,6 +86,24 @@ F >= test_f_stat
 
 # Conclusion: If TRUE then we reject H0 else accept H1 the alternative 
 t >= test_stat
+
+
+# Reject H0 since 5 > 2.178813. We have significant evidence at the alpha 0.05 level that μCallaway ≠ μNike
+
+(Upper <- (285 - 260)+2.18*sqrt(62.5 * (1/5 + 1/5)))
+
+(Lower <- (285 - 260)+2.18*sqrt(62.5 * (1/5 + 1/5)))
+
+# We are 95% confident that the true increase in distance for Callaway is between 14.1 yards & 35.9 yards
+
+
+
+
+
+
+
+
+
 
 # Family Wise Error Rate (FWER)
 
@@ -103,8 +122,8 @@ num_tests <- 10
 (FWER <- abs(1 - (1 - bonferoni_corrected_alpha)^num_tests))
 
 
-
-
+t.test(Participants,conf.level=0.90)
+t.test(97.5, 12)
 
 
 
