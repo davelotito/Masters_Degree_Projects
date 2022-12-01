@@ -11,6 +11,7 @@ students <- read.csv("Assignment5_Data.csv", header = T)
 
 attach(students)
 
+nrow(students)
 
 # (1)	How many students are in each group?  
 # Summarize the data relating to both test score and age by the student group (separately).  
@@ -70,6 +71,10 @@ lm(iq ~ students$g1 + students$g0)
 summary(lm(iq ~ students$g1 + students$g0))
 summary(lm(iq ~ students$g2 + students$g1))
 
+summary(lm(formula = iq ~ students$g1 + students$g0, data = students))
+
+summary(lm(formula = iq ~ students$g2 + students$g1, data = students))
+
 summary(model_1)
 
 summary(model_2)
@@ -83,7 +88,8 @@ summary(model_2)
 # Lastly, present the least square means and interpret these.  
 
 (model_3 <- Anova(lm(iq~group + age), type=3))
-(model_3 <- aov(iq ~ group + age))
+
+my.model<-lm(iq ~ group + age,  data = students)
 
 lsmeans(model_3, ~group)
 
