@@ -40,7 +40,7 @@ par(mfrow = c(1, 1))
 is.factor(group)
 
 #Get test statistic
-qf(.95, df1=3, df2=42)
+qf(.95, df1=2, df2=42)
 
 #Compute one way ANOVA test
 (m <- aov(iq~group, data=students))
@@ -62,22 +62,16 @@ emmeans(m, specs = "group", contr="pairwise", adjust='tukey')
 students$g0 <- ifelse(group=='Chemistry student', 1, 0) #don't need to create, but did for consistency
 students$g1 <- ifelse(group=='Math student', 1, 0)
 students$g2 <- ifelse(group=='Physics student', 1, 0)
-(model_1 <- aov(lm(iq ~ students$g2 + students$g1)))
-(model_2 <- aov(lm(iq ~ students$g1 + students$g0)))
+(model_1 <- aov(lm(iq ~ students$g1 + students$g2)))
 
-lm(iq ~ students$g2 + students$g1)
-lm(iq ~ students$g1 + students$g0)
 
-summary(lm(iq ~ students$g1 + students$g0))
-summary(lm(iq ~ students$g2 + students$g1))
+summary(lm(iq ~ group, data=students))
+summary(lm(iq ~ students$g1 + students$g2))
 
-summary(lm(formula = iq ~ students$g1 + students$g0, data = students))
 
 summary(lm(formula = iq ~ students$g2 + students$g1, data = students))
 
-summary(model_1)
 
-summary(model_2)
 
 # (4)	Re-do the one-way ANOVA adjusting for age (ANCOVA).  
 # Focus on the output relating to the comparisons of test score by student type.  
@@ -92,7 +86,6 @@ summary(model_2)
 my.model<-lm(iq ~ group + age,  data = students)
 
 lsmeans(model_3, ~group)
-
 
 
 
