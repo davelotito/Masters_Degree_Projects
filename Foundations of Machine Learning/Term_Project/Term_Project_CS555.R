@@ -7,6 +7,8 @@ heart_data <- read.csv('heart.csv', header = T)
 
 View(heart_data)
 
+
+
 hist(Age)
 
 ## We want to understand if the mean age is equal to 50
@@ -64,7 +66,7 @@ confint(my.model, level=0.90)
 (m2 <- lm(formula = heart_data$RestingBP ~ (heart_data$Age + heart_data$MaxHR + 
                                  heart_data$Cholesterol), data = heart_data))
 
-qf(.95, df1=3, df2 = 915)
+qf(.95, df1=3, df2 = 914)
 
 anova(m2)
 
