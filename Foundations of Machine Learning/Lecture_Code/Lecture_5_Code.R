@@ -72,10 +72,16 @@ F >= test_f_stat
 # State the decision rule
 
 # Two tailed t-test
-(a = 0.05/2)
 
 # Find T
+(a = 0.05/2)
 (test_stat <- abs(qt(a, df=12)))
+
+# OR
+
+# Find T
+(alpha <- 0.05)
+(t.critical <- qt(1-(alpha/2), df=12))
 
 
 # Decision Rule: Reject H0 if t ≥ 2.18 or if t ≤ −2.179
@@ -83,6 +89,9 @@ F >= test_f_stat
 # Compute Test Statistic
 
 (t <- (285 - 260)/sqrt(62.5 * (1/5 + 1/5)))
+
+pairwise.t.test(distance, brand, p.adj="none")
+
 
 # Conclusion: If TRUE then we reject H0 else accept H1 the alternative 
 t >= test_stat
@@ -95,13 +104,6 @@ t >= test_stat
 (Lower <- (285 - 260)+2.18*sqrt(62.5 * (1/5 + 1/5)))
 
 # We are 95% confident that the true increase in distance for Callaway is between 14.1 yards & 35.9 yards
-
-
-
-
-
-
-
 
 
 
@@ -124,6 +126,21 @@ num_tests <- 10
 
 t.test(Participants,conf.level=0.90)
 t.test(97.5, 12)
+
+
+
+
+### ### ### ### ### ### 
+### QUIZ 5 PROBLEMS ###
+### ### ### ### ### ### 
+
+
+qf(.95, df1 = 8, df2 = 227)
+
+
+
+9*(9-1)/2
+
 
 
 

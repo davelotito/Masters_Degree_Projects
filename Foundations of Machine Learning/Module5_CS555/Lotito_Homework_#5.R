@@ -39,6 +39,8 @@ par(mfrow = c(1, 1))
 # check to see if the variable group is a factor variable.
 is.factor(group)
 
+group <- factor(group)
+
 #Get test statistic
 qf(.95, df1=2, df2=42)
 
