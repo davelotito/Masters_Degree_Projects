@@ -85,8 +85,7 @@ summary(lm(formula = iq ~ students$g2 + students$g1, data = students))
 
 my.model<-lm(iq ~ group + age,  data = students)
 
-lsmeans(model_3, ~group)
-
+lsmeans(my.model, ~group)
 
 
 
