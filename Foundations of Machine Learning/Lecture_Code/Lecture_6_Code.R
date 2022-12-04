@@ -26,6 +26,20 @@
 ### QUIZ #6 ######
 ##################
 
+# Question #1
+
+# A study of stroke patients who survived 6 months after the stroke found that 6/45 men and 
+# 22/63 women lived in an institution (e.g., nursing home or assisted living facility). 
+# What is the risk difference of living in an institution between men and women 
+# (using men as the reference group)?
+
+men_dif <- 6/45
+women_dif <- 22/63
+
+(women - men)*100
+
+
+
 # Question #2
 
 #A study of stroke patients who survived 6 months after the stroke found that 6/45 men and 
