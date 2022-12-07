@@ -78,10 +78,37 @@ summary(m)
 
 
 exp(cbind(OR = coef(m),
-          confint.default(m)))
+          confint.default(m, level = 0.95)))
 
 body.temp$prob_temp <- predict(m, type='response')
 g <- roc(body.temp$temp_level ~ body.temp$prob_temp)
 g
 
+# (5) Perform multiple logistic regression predicting body temperature level from sex and heart rate.  
+# Briefly summarize the output from this model (no need to go through all 5 steps).  
+# Give the odds ratio for sex. Also, report the odds ratio for heart rate (for a 10-beat increase).  
+# What is the c-statistic of this model?  
 
+library(aod)
+
+m1 <- glm(body.temp$temp_level~sex + body.temp$Heart.rate, family = binomial)
+summary(m1)
+
+wald.test(b=coef(m1), Sigma=vcov(m1), Terms = 2:3)
+
+exp(cbind(OR = coef(m1),
+          confint.default(m1, level = 0.95)))
+
+exp(cbind(OR = coef(m1)*10,
+          confint.default(m1, level = 0.95)*10))
+
+exp(coef(m1)[3]*10)
+
+roc(body.temp$temp_level~sex+body.temp$Heart.rate)
+
+
+# (6) Which model fit the data better?  Support your response with evidence from your output.  
+# Present the ROC curve for the model you choose.
+plot(g, main="Roc Curve", col = 'Blue')
+
+?plot
