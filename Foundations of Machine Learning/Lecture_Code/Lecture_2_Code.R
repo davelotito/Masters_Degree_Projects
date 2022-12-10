@@ -228,17 +228,15 @@ pnorm(1.35)
 # Question #5
 
 # We are interested in estimating the mean amount of rain last month in our county. 
-# It is known that the population standard deviation is 
-# 1 inches generally for the month of interest. 
-# 67 instruments that measure rainfall were placed throughout the county randomly. 
-# The sample mean from the instruments was 5.6 inches. Calculate a 95% confidence interval
-# for the population mean of rainfall last month in the country
+# It is known that the population standard deviation is 1.12 inches generally for the month of interest. 
+# 34 instruments that measure rainfall were placed throughout the county randomly. 
+# The sample mean from the instruments was 6.1 inches. 
+# Calculate a 95% confidence interval for the population mean of rainfall last month in the county.
 
 # Answer
 
-5.6 - 1.96 *(1.00/sqrt(67))
-5.6 + 1.96 *(1.00/sqrt(67))
-
+6.1 - 1.96 *(1.12/sqrt(34))
+6.1 + 1.96 *(1.12/sqrt(34))
 
 
 # Question #6
