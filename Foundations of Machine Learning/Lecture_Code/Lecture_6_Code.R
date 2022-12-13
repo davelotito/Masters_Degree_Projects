@@ -37,10 +37,10 @@ conf_99 <- 2.576
 # What is the risk difference of living in an institution between men and women 
 # (using men as the reference group)?
 
-men_dif <- 6/45
-women_dif <- 22/63
+(men_dif <- 10/47)
+(women_dif <- 24/51)
 
-(women - men)*100
+(women_dif - men_dif)*100
 
 
 
@@ -51,8 +51,8 @@ women_dif <- 22/63
 # What is the odds ratio of living in an institution between men and women 
 # (using men as the reference group)?
 
-women <- 22/63
-men <- 6/45
+women <- 20/58
+men <- 8/50
 
 (women/(1-women)) / (men/(1-men))
 
@@ -65,7 +65,7 @@ men <- 6/45
 # (using men as the reference group)?
 
 
-(22/63) / (6/45)
+(11/56) / (2/47)
 
 
 # Question #4
@@ -76,8 +76,8 @@ men <- 6/45
 # where p1 is the proportion of men living in an institution after a stroke, and p2 for women?
 
 
-x <-(22+6)/(63+45)
-(z <- ((22/63)-(6/45)) / (sqrt((x*(1-x)*((1/63)+(1/45))))))
+x <-(22+6)/(51+50)
+(z <- ((22/51)-(6/50)) / (sqrt((x*(1-x)*((1/51)+(1/50))))))
 
 # Question #5
 
@@ -101,7 +101,7 @@ p2 <- (6/45)
 # (1 = yes, 0 = no) are shown below. Use the output to calculate the odds ratio for 
 # recurrent stroke and/or death for those who had a cerebral embolism versus those who did not?
 
-exp(1.87)
+exp(2.2)
 
 # Question #8
 
@@ -112,7 +112,7 @@ exp(1.87)
 # What is the risk of recurrent stroke/death for a patient without a cerebral 
 # embolism who is 60 years of age?
 
-exp(-15.32+0.18*60)
+exp(-16.3+0.2*54) / (1 + exp(-16.3+0.2*54))
 
 # Question #9
 
@@ -124,7 +124,7 @@ exp(-15.32+0.18*60)
 #  odds ratio comparing the odds of recurrent stroke/death for a patient who is 65 versus 64, 
 # controlling for cerebral embolism.
 
-exp(0.18)*(65-64)
+exp(0.23)*(52-51)
 
 # Question #10
 
@@ -135,7 +135,7 @@ exp(0.18)*(65-64)
 # Calculate the odds ratio comparing the odds of recurrent stroke/death for 
 # a patient who is 65 versus 55, controlling for cerebral embolism.
 
-b1 <- 0.18*(65-55)
+b1 <- 0.28*(67-38)
 
 exp(b1)
 
@@ -148,8 +148,8 @@ exp(b1)
 # comparing the odds of recurrent stroke/death for patients with a cerebral 
 # embolism versus those without, controlling for age.
 
-exp(2.07-1.960*0.68)
-exp(2.07+1.960*0.68)
+exp(-0.4627-1.960*0.4329)
+exp(-0.4627+1.960*0.4329)
 
 
 
@@ -163,8 +163,8 @@ exp(2.07+1.960*0.68)
 # Construct a 2 by 2 table of these results to help you calculate 
 # the sensitivity of the model using this cutoff.
 
-abnormality_1 <- 14
-abnormality_2 <- 6
+abnormality_1 <- 23
+abnormality_2 <- 19
 
 total <- abnormality_1 + abnormality_2
 
@@ -173,6 +173,13 @@ total <- abnormality_1 + abnormality_2
 
 
 
+abnormality_1 <- 14
+abnormality_2 <- 6
+
+total <- abnormality_1 + abnormality_2
+
+
+(abnormality_1 / total)*100
 
 
 
