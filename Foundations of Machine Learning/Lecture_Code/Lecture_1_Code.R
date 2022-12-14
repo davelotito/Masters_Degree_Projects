@@ -52,7 +52,7 @@ median(numbers)
 # a mean of 278 days and a SD of 6 days. What % of pregnancies last more than 40 weeks(280 days)
 
 # So our answer is 
-(value <- (245-284)/4) #0.33
+(value <- (245-284)/4) 
 # or
 pnorm(245, mean=284, sd=4, lower.tail = F) #0.36
 
@@ -79,6 +79,8 @@ pnorm(294, mean=280, sd=7, lower.tail = FALSE)*100
 # 1.0 == .8413
 # -1.0 == .1587
 
+pnorm(1) - pnorm(-1)
+
 # So our answer is 
 0.8413 - 0.1587
 # or
@@ -93,9 +95,10 @@ pnorm(263, mean=257, sd=6) - (1 - pnorm(263, mean=257, sd=6))
 (value1 <- (55.41-57)/0.53)
 (value2 <- (58.59-57)/0.53)
 
-# So our answer is 
-0.0013 - 0.9987
+pnorm(3) - pnorm(-3)
+
 # or
+
 pnorm(58.59, mean=57, sd=0.53) - (1 - pnorm(58.59, mean=57, sd=0.53))
 
 # Question #13
@@ -110,7 +113,7 @@ pnorm(58.59, mean=57, sd=0.53) - (1 - pnorm(58.59, mean=57, sd=0.53))
 # If the variable below is normally distributed with a mean of 0 and a SD of 1
 # and the proportion of observations that are GREATER than a is 3%. Find the value of a
 
-qnorm(0.03, mean = 0, sd = 1)
+qnorm(0.97, mean = 0, sd = 1)
 
 # Question #15
 # x is normally distributed. The probability that X is between -t and t is 88%. Find the probability
@@ -132,7 +135,6 @@ pnorm(3.2338, mean=3.5108, sd=0.2975) * 100
 # Question #20 Quiz
 # Find the probability that the sample mean is less than 878 if a sample size of 97
 # is taken from a population with a mean of 1191 and a standard deviation of 307.
-pnorm(835, mean=1321, sd=370/sqrt(91))
-
+pnorm(835, mean=1321, sd=370/sqrt(91), lower.tail=T)
 
 

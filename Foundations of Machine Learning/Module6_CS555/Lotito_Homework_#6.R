@@ -58,7 +58,6 @@ test.stat
 prop.test(x = temp.gender[1,], n=colSums(temp.gender), correct=FALSE, alternative ='two.sided' )
 
 
-prop.test(x = temp.gender[1,], n=colSums(temp.gender), correct=FALSE, alternative ='two.sided' )
 
 # (4) Perform a logistic regression with sex as the only explanatory variable. 
 # Formally test (at the alpha=0.05 level) 
@@ -68,7 +67,7 @@ prop.test(x = temp.gender[1,], n=colSums(temp.gender), correct=FALSE, alternativ
 # Additionally, include the odds ratio for sex and the associated 95% 
 # confidence interval in your summary, and interpret the value of the odds ratio.  
 # Lastly, what is the c-statistic for this model? 
-
+library(ROCR)
 #create dummy variables
 body.temp$men_dummy <- ifelse(sex== 1,1,0)
 body.temp$women_dummy <- ifelse(sex== 2, 1, 0)
@@ -76,7 +75,7 @@ body.temp$women_dummy <- ifelse(sex== 2, 1, 0)
 m <- glm(body.temp$temp_level ~ body.temp$sex, family=binomial )
 summary(m)
 
-
+library(pROC)
 exp(cbind(OR = coef(m),
           confint.default(m, level = 0.95)))
 
@@ -91,7 +90,7 @@ g
 
 library(aod)
 
-m1 <- glm(body.temp$temp_level~sex + body.temp$Heart.rate, family = binomial)
+m1 <- glm(body.temp$temp_level ~ body.temp$sex + body.temp$Heart.rate, family = binomial)
 summary(m1)
 
 wald.test(b=coef(m1), Sigma=vcov(m1), Terms = 2:3)
@@ -104,8 +103,10 @@ exp(cbind(OR = coef(m1)*10,
 
 exp(coef(m1)[3]*10)
 
-roc(body.temp$temp_level~sex+body.temp$Heart.rate)
+body.temp$prob.temp <- predict(m, type='response')
 
+g2 <- roc(body.temp$temp_level ~body.temp$prob.temp)
+g2
 
 # (6) Which model fit the data better?  Support your response with evidence from your output.  
 # Present the ROC curve for the model you choose.
