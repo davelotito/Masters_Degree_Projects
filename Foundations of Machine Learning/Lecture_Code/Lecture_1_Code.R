@@ -97,9 +97,16 @@ pnorm(263, mean=257, sd=6) - (1 - pnorm(263, mean=257, sd=6))
 
 pnorm(3) - pnorm(-3)
 
+(value1 <- (134-128)/11.16)
+(value2 <- (138-128)/11.16)
+
+pnorm(0.5376344) - pnorm(0.8960573)
+
 # or
 
 pnorm(58.59, mean=57, sd=0.53) - (1 - pnorm(58.59, mean=57, sd=0.53))
+
+pnorm(138, mean=128, sd=11.16) - (1 - pnorm(134, mean=128, sd=11.16))
 
 # Question #13
 # A variable is normally distributed. The proportion of observations that are GREATER than a is 3%.
@@ -136,5 +143,8 @@ pnorm(3.2338, mean=3.5108, sd=0.2975) * 100
 # Find the probability that the sample mean is less than 878 if a sample size of 97
 # is taken from a population with a mean of 1191 and a standard deviation of 307.
 pnorm(835, mean=1321, sd=370/sqrt(91), lower.tail=T)
+
+pnorm(126, mean=121, sd=47/sqrt(85), lower.tail=F)
+
 
 
